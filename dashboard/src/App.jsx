@@ -1,11 +1,12 @@
-import { useState } from "react";
+import { BrowserRouter } from "react-router-dom";
+import Dashboard from "./components/Dashboard";
 import "./App.css";
 
 function App() {
   return (
-    <>
-      <h1>encuentraprecio.com</h1>
-    </>
+    <BrowserRouter>
+      <Dashboard />
+    </BrowserRouter>
   );
 }
 
