@@ -14,3 +14,7 @@ https://forms.gle/A1JGhJkZJFTwG6DYA
 Gerardo Zorzoni
 https://github.com/GeraZorzoni
 https://www.linkedin.com/in/gerardozorzoni/
+
+Beatriz Londero
+https://github.com/beatrizlondero
+www.linkedin.com/in/beatriz-londero
