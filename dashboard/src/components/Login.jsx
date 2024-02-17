@@ -1,4 +1,5 @@
 import { useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
 
 export default function Login() {
   const { register, handleSubmit } = useForm();
@@ -15,6 +16,7 @@ export default function Login() {
         <input type='password' placeholder='Ingresa tu password' {...register("password")} />
         <button type='submit'>Enviar</button>
       </form>
+      <Link to='/'>Volver a inicio</Link>
     </div>
   );
 }
