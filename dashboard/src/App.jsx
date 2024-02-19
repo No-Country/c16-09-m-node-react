@@ -3,6 +3,7 @@ import Dashboard from "./components/Dashboard";
 import Login from "./components/Login";
 import "./App.css";
 import UserRegister from "./components/UserRegister";
+import CommerceRegister from "./components/CommerceRegister";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
           <Route path='/' element={<Dashboard />} />
           <Route path='/login' element={<Login />} />
           <Route path='/registrousuario' element={<UserRegister />} />
+          <Route path='/registrocomercio' element={<CommerceRegister />} />
         </Routes>
       </BrowserRouter>
     </div>
