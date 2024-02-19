@@ -18,3 +18,7 @@ https://www.linkedin.com/in/gerardozorzoni/
 Daniel Rojas
 https://github.com/danielrojas76
 https://www.linkedin.com/in/daniel-rojas-51356919b/
+
+Santiago Soto
+https://github.com/SH-ur
+https://www.linkedin.com/in/santiago-soto-43ab99260/
