@@ -14,3 +14,7 @@ https://forms.gle/A1JGhJkZJFTwG6DYA
 Gerardo Zorzoni
 https://github.com/GeraZorzoni
 https://www.linkedin.com/in/gerardozorzoni/
+
+Daniel Rojas
+https://github.com/danielrojas76
+https://www.linkedin.com/in/daniel-rojas-51356919b/
