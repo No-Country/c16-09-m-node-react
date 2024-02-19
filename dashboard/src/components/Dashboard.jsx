@@ -3,7 +3,9 @@ import { Link } from "react-router-dom";
 function Dashboard() {
   return (
     <>
-      <button> Registro Comercio</button>
+      <button>
+        <Link to='/registrocomercio'>Registro Comercio</Link>
+      </button>
       <button>
         <Link to='/registrousuario'>Registro Usuario</Link>
       </button>
