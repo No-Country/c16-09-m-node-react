@@ -4,7 +4,9 @@ function Dashboard() {
   return (
     <>
       <button> Registro Comercio</button>
-      <button> Registro Usuario</button>
+      <button>
+        <Link to='/registrousuario'>Registro Usuario</Link>
+      </button>
       <button>
         <Link to='/login'>Ingresa a tu cuenta</Link>
       </button>
