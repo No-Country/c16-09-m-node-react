@@ -12,7 +12,7 @@ module.exports= (sequelize)=> {
             allowNull: false,
         },
         price:{
-            type: DataTypes.DECIMAL(2, 10),
+            type: DataTypes.DECIMAL(10, 2),
             allowNull: false,
             defaultValue: 0.5
         },
@@ -26,7 +26,7 @@ module.exports= (sequelize)=> {
             allowNull: true,
             defaultValue: 'Informacion no suministrada por el comercio'
         },
-        oferta: {
+        offers: {
             type: DataTypes.BOOLEAN,
             defaultValue: false,
             allowNull: true,
