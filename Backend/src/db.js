@@ -12,7 +12,7 @@ const { Users, Products, Commerce, Rating, Pay } = sequelize.models;
 
 //Ok mi gente, aqui empieza lo bueno: Las relaciones entre tablas!
 Users.hasMany(Products, {as: 'products', foreignKey: "usersId"});
-
+Products.belongsTo(Users, {as: 'users', foreignKey: 'usersId'})
 Products.belongsToMany(Commerce, {through: 'commerce_products'});
 Commerce.belongsToMany(Products, {through: 'commerce_products'});
 

@@ -13,6 +13,28 @@ module.exports = (sequelize) => {
         type: Datatypes.STRING,
         allowNull: false,
       },
+      lastName:{
+        type:Datatypes.STRING,
+        allowNull:false
+      },
+      DNI:{
+        type: Datatypes.INTEGER,
+        allowNull: false
+      },
+      dateOfBirth:{
+        type:Datatypes.DATEONLY,
+        allowNull: false,
+      },
+      location:{
+        type: Datatypes.STRING,
+        allowNull: false,
+        defaultValue: 'Provincia'
+      },
+      phone_number: {
+        type: Datatypes.STRING,
+        allowNull: false,
+        defaultValue: 'Información no disponible'
+      },
       loggedIn: {
         type: Datatypes.BOOLEAN,
         defaultValue: false,
@@ -22,6 +44,10 @@ module.exports = (sequelize) => {
         type: Datatypes.ENUM("passerby", "Admin", "CompanyRepresentative"),
         defaultValue: "passerby",
         allowNull: true,
+      },
+      password: {
+        type: Datatypes.STRING,
+        allowNull: false
       },
       mail: {
         type: Datatypes.STRING,
