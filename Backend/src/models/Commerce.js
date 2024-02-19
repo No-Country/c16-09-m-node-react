@@ -1,4 +1,4 @@
-const {Datatypes, UUIDV4} = require('sequelize');
+const {DataTypes, UUIDV4} = require('sequelize');
 
 module.exports = (sequelize) => {
     sequelize.define('Commerce', {
@@ -8,34 +8,34 @@ module.exports = (sequelize) => {
             primaryKey: true,
           },
         business_name: {
-            type: Datatypes.STRING,
+            type: DataTypes.STRING,
             allowNull: false
         },
         address: {
-            type: Datatypes.STRING,
+            type: DataTypes.STRING,
             allowNull: false
         },
         phone_number: {
-            type: Datatypes.INTEGER,
+            type: DataTypes.INTEGER,
             allowNull: true
         },
         mail:{
-            type:Datatypes.STRING,
+            type:DataTypes.STRING,
             allowNull: false
         },
         location:{
             //A futuro podemos colocarle ENUM mejor pero necesitamos la info
-            type: Datatypes.STRING,
+            type: DataTypes.STRING,
             allowNull: false,
             defaultValue: 'Bahía Blanca'
         },
         province:{
-            type: Datatypes.STRING,
+            type: DataTypes.STRING,
             allowNull: false,
             defaultValue: 'Buenos Aires'
         },
         password: {
-            type: Datatypes.STRING,
+            type: DataTypes.STRING,
             allowNull: false
         }
     }, {

@@ -1,56 +1,56 @@
-const { Datatypes, UUIDV4 } = require("sequelize");
+const { DataTypes, UUIDV4 } = require("sequelize");
 
 module.exports = (sequelize) => {
   sequelize.define(
     "Users",
     {
       id: {
-        type: Datatypes.UUID,
+        type: DataTypes.UUID,
         defaultValue: UUIDV4,
         primaryKey: true,
       },
       name: {
-        type: Datatypes.STRING,
+        type: DataTypes.STRING,
         allowNull: false,
       },
       lastName:{
-        type:Datatypes.STRING,
+        type:DataTypes.STRING,
         allowNull:false
       },
       DNI:{
-        type: Datatypes.INTEGER,
+        type: DataTypes.INTEGER,
         allowNull: false
       },
       dateOfBirth:{
-        type:Datatypes.DATEONLY,
+        type:DataTypes.DATEONLY,
         allowNull: false,
       },
       location:{
-        type: Datatypes.STRING,
+        type: DataTypes.STRING,
         allowNull: false,
         defaultValue: 'Provincia'
       },
       phone_number: {
-        type: Datatypes.STRING,
+        type: DataTypes.STRING,
         allowNull: false,
         defaultValue: 'Información no disponible'
       },
       loggedIn: {
-        type: Datatypes.BOOLEAN,
+        type: DataTypes.BOOLEAN,
         defaultValue: false,
         allowNull: true,
       },
       rol: {
-        type: Datatypes.ENUM("passerby", "Admin", "CompanyRepresentative"),
+        type: DataTypes.ENUM("passerby", "Admin", "CompanyRepresentative"),
         defaultValue: "passerby",
         allowNull: true,
       },
       password: {
-        type: Datatypes.STRING,
+        type: DataTypes.STRING,
         allowNull: false
       },
       mail: {
-        type: Datatypes.STRING,
+        type: DataTypes.STRING,
         allowNull: true,
       },
     },
