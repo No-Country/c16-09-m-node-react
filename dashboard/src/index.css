@@ -1,5 +1,5 @@
 :root {
-  font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
   line-height: 1.5;
   font-weight: 600;
 
@@ -18,7 +18,6 @@ a {
   /* color: #edeced; */
   color: black;
   text-decoration: inherit;
-  
 }
 a:hover {
   color: #eb7;
@@ -32,7 +31,7 @@ body {
   justify-content: center;
   margin: 0;
   width: 100vw;
- 
+
   background-color: #1a1a1a;
 }
 
@@ -42,14 +41,13 @@ h1 {
   color: #edeced;
 }
 
-h2{
+h2 {
   color: #f05a38;
   font-size: 2.2em;
 }
 .div h2 {
   text-align: center;
 }
-
 
 button {
   margin: 20px;
@@ -71,33 +69,31 @@ button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
-input{
+input {
   width: 100%;
   padding: 5px;
 }
-form{
+form {
   width: 90%;
 }
 
-
-label{
+label {
   /* color: #edeced; */
   color: #1a1a1a;
   text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
   margin: 5px;
   padding: 1px;
-  width:100%;
+  width: 100%;
   font-weight: 1000;
   font-size: 18px;
 }
-#termsCheckbox{
+#termsCheckbox {
   width: 22px;
   display: flex;
 }
-.form-container{
+.form-container {
   max-width: 80rem;
   margin: 0 auto;
-
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -109,13 +105,12 @@ label{
   height: 90%;
   width: 50%;
   background-color: rgba(255, 255, 255, 0.4);
-
 }
-.title{
+.title {
   color: #f05a38;
   background-color: rgba(255, 255, 255, 0.4);
 }
-p{
+p {
   color: #1a1a1a;
   font-size: 18px;
   display: flex;
@@ -124,37 +119,37 @@ p{
   background-color: rgba(255, 255, 255, 0.4);
   margin: 5%;
 }
-.parrafo{
+.parrafo {
   width: 70%;
   height: 20%;
 }
-.form-group{
+.form-group {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
 }
-.form-group h2{
+.form-group h2 {
   font-weight: 900;
   text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
 }
-.page-commerce{
+.page-commerce {
   background-position: center center;
   /* background-repeat: no-repeat; */
   background-image: url("./images/load-2060616_1280.jpg");
   background-size: cover;
 }
-.page-usuarios{
+.page-usuarios {
   background-position: center center;
   /* background-repeat: no-repeat; */
   background-image: url("./images/shop-4527402_1280.jpg");
   background-size: cover;
 }
-header{
+header {
   display: flex;
   flex-direction: row;
   height: 15%;
 }
-.dashboard{
+.dashboard {
   display: grid;
 
   background-position: center center;
@@ -163,7 +158,6 @@ header{
   background-size: cover;
   justify-items: center;
   height: fit-content;
-  
 }
 @media (prefers-color-scheme: light) {
   :root {

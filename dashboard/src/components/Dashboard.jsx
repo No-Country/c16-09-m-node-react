@@ -24,7 +24,7 @@ function Dashboard() {
           </p>
         </div>
         <form>
-          <input type='search' placeholder='Search' />
+          <input type='search' placeholder='Busca el producto para comparar precios' />
           <button type='submit'>Search</button>
         </form>
       </div>
