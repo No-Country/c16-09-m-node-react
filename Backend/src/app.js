@@ -2,6 +2,8 @@ require("dotenv").config({ path: ".env" });
 const express = require("express");
 const morgan = require("morgan");
 const cors = require("cors");
+const swaggerUi = require("swagger-ui-express");
+const swaggerJSDoc = require("swagger-jsdoc");
 
 const server = express();
 
@@ -23,7 +25,29 @@ server.use((req, res, next) => {
 
 const userRoutes = require("./routes/users");
 
-server.use("/api/user", userRoutes);
+server.use("/user", userRoutes);
+
+// Configurar Swagger
+const swaggerOptions = {
+  swaggerDefinition: {
+    openapi: "3.0.0",
+    info: {
+      title: "Documentación de la API",
+      version: "1.0.0",
+      description: "Una descripción de la API.",
+    },
+    servers: [
+      {
+        url: "http://localhost:8000/",
+        description: "Servidor de desarrollo",
+      },
+    ],
+  },
+  apis: ["./routes/users.js", "./controllers/userController.js"],
+};
+const swaggerSpec = swaggerJSDoc(swaggerOptions);
+server.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+
 
 server.use((err, req, res, next) => {
   const status = err.status || 500;
