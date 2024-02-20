@@ -24,15 +24,12 @@ module.exports = (sequelize) => {
             allowNull: false
         },
         location:{
-            //A futuro podemos colocarle ENUM mejor pero necesitamos la info
             type: DataTypes.STRING,
             allowNull: false,
-            defaultValue: 'Bahía Blanca'
         },
         province:{
             type: DataTypes.STRING,
             allowNull: false,
-            defaultValue: 'Buenos Aires'
         },
         password: {
             type: DataTypes.STRING,

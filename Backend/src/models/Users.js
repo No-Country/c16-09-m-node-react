@@ -17,7 +17,7 @@ module.exports = (sequelize) => {
         type:DataTypes.STRING,
         allowNull:false
       },
-      DNI:{
+      dni:{
         type: DataTypes.INTEGER,
         allowNull: false
       },
@@ -25,12 +25,15 @@ module.exports = (sequelize) => {
         type:DataTypes.DATEONLY,
         allowNull: false,
       },
+      province:{
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
       location:{
         type: DataTypes.STRING,
         allowNull: false,
-        defaultValue: 'Provincia'
       },
-      phone_number: {
+      phoneNumber: {
         type: DataTypes.STRING,
         allowNull: false,
         defaultValue: 'Información no disponible'
@@ -41,8 +44,7 @@ module.exports = (sequelize) => {
         allowNull: true,
       },
       rol: {
-        type: DataTypes.ENUM("passerby", "Admin", "CompanyRepresentative"),
-        defaultValue: "passerby",
+        type: DataTypes.ENUM('user', 'admin'),
         allowNull: true,
       },
       password: {
