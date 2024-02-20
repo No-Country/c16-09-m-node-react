@@ -47,44 +47,53 @@ export default function CommerceRegister() {
   };
 
   return (
-    <>
+    <body className="page-commerce">
      
         <div className="form-container">
-          <h2>Datos del Comercio</h2>
           <form onSubmit={handleSubmit}>
+          <div className="form-group">
+            <h2>Datos del Comercio</h2>
+          </div>
             <div className="form-group">
-              <label>Nombre del Comercio:</label>
-              <input
-                type="text"
-                name="shopName"
-                value={formData.shopName}
-                onChange={handleChange}
-                required
-              />
+              <label>Nombre del Comercio:
+
+                <input
+                  type="text"
+                  name="shopName"
+                  value={formData.shopName}
+                  onChange={handleChange}
+                  required
+                />
+              </label>
             </div>
             <div className="form-group">
-              <label>Domicilio:</label>
-              <input
-                type="text"
-                name="address"
-                value={formData.address}
-                onChange={handleChange}
-                placeholder="Calle y número"
-                required
-              />
+              <label>Domicilio:
+
+                <input
+                  type="text"
+                  name="address"
+                  value={formData.address}
+                  onChange={handleChange}
+                  placeholder="Calle y número"
+                  required
+                />
+              </label>
             </div>
             <div className="form-group">
-              <label>Provincia:</label>
-              <input
-                type="text"
-                name="province"
-                value={formData.province}
-                onChange={handleChange}
-                required
-              />
+              <label>Provincia:
+
+                <input
+                  type="text"
+                  name="province"
+                  value={formData.province}
+                  onChange={handleChange}
+                  required
+                />
+              </label>
             </div>
             <div className="form-group">
-              <label>Localidad:</label>
+              <label>Localidad:
+
               <input
                 type="text"
                 name="city"
@@ -92,49 +101,57 @@ export default function CommerceRegister() {
                 onChange={handleChange}
                 required
               />
+              </label>
             </div>
 
             <div className="form-group">
-              <label>Email:</label>
-              <input
-                type="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                required
-              />
+              <label>Email:
+
+                <input
+                  type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  required
+                />
+              </label>
             </div>
             <div className="form-group">
-              <label>Password:</label>
-              <input
-                type="password"
-                name="password"
-                value={formData.password}
-                onChange={handleChange}
-                pattern="(?=.*\d)(?=.*[A-Z]).{8,}"
-                title="Password debe contener al menos 8 caracteres incluyendo un número y una mayúscula"
-                required
-              />
+              <label>Password:
+
+                <input
+                  type="password"
+                  name="password"
+                  value={formData.password}
+                  onChange={handleChange}
+                  pattern="(?=.*\d)(?=.*[A-Z]).{8,}"
+                  title="Password debe contener al menos 8 caracteres incluyendo un número y una mayúscula"
+                  required
+                />
+              </label>
             </div>
             <div className="form-group">
-              <label>Confirmar Password:</label>
-              <input
-                type="password"
-                name="confirmPassword"
-                value={formData.confirmPassword}
-                onChange={handleChange}
-                required
-              />
+              <label>Confirmar Password:
+
+                <input
+                  type="password"
+                  name="confirmPassword"
+                  value={formData.confirmPassword}
+                  onChange={handleChange}
+                  required
+                />
+              </label>
             </div>
             <div className="form-group">
-              <input
-                type="checkbox"
-                id="termsCheckbox"
-                checked={termsAccepted}
-                onChange={handleCheckboxChange}
-              />
               <label htmlFor="termsCheckbox">
                 Acepto los términos y condiciones
+
+                <input
+                  type="checkbox"
+                  id="termsCheckbox"
+                  checked={termsAccepted}
+                  onChange={handleCheckboxChange}
+                />
               </label>
             </div>
 
@@ -146,6 +163,6 @@ export default function CommerceRegister() {
             </div>
           </form>
         </div>
-    </>
+    </body>
   );
 }
