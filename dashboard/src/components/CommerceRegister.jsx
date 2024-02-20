@@ -10,7 +10,7 @@ export default function CommerceRegister() {
     email: "",
     password: "",
   });
-  const [termsAccepted, setTermsAccepted] = useState(false);
+  const [termsAccepted, setTermsAccepted] = useState(false); //para aceptar terminos y condiciones
 
   const handleChange = (e) => {
     const { name, value } = e.target;
