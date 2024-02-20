@@ -13,7 +13,7 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      lastName:{
+      last_name:{
         type:DataTypes.STRING,
         allowNull:false
       },
@@ -21,7 +21,7 @@ module.exports = (sequelize) => {
         type: DataTypes.INTEGER,
         allowNull: false
       },
-      dateOfBirth:{
+      date_of_birth:{
         type:DataTypes.DATEONLY,
         allowNull: false,
       },
@@ -33,12 +33,12 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      phoneNumber: {
+      phone_number: {
         type: DataTypes.STRING,
         allowNull: false,
         defaultValue: 'Información no disponible'
       },
-      loggedIn: {
+      logged_in: {
         type: DataTypes.BOOLEAN,
         defaultValue: false,
         allowNull: true,
