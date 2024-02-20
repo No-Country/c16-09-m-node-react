@@ -18,3 +18,39 @@ https://www.linkedin.com/in/gerardozorzoni/
 Daniel Rojas
 https://github.com/danielrojas76
 https://www.linkedin.com/in/daniel-rojas-51356919b/
+
+### Backend
+
+### Instalar paquetes
+
+```shell
+npm i
+```
+
+### Configurar archivo .env
+
+```js
+DB_USER=
+DB_PASS=
+DB_NAME=
+```
+
+### Setup sequelize
+
+Agregar base de datos (usando migration)
+
+```shell
+npx sequelize-cli db:migrate
+```
+
+### Start the app
+
+Igresa a la carpeta /src y ejecuta el comando
+
+```shell
+/backend/src
+```
+
+```shell
+npx nodemon app
+```
