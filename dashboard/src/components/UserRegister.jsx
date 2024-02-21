@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 const UserRegister = () => {
   const [usuario, setUsuario] = useState({
@@ -137,6 +138,7 @@ const UserRegister = () => {
             </button>
           </div>
         </form>
+        <Link to='/'>Volver a inicio</Link>
       </div>
     </div>
   );
