@@ -29,7 +29,7 @@ module.exports = (sequelize, DataTypes) => {
       },
       rol: DataTypes.ENUM("user", "admin"),
       password: DataTypes.STRING,
-      mail: DataTypes.STRING,
+      email: DataTypes.STRING,
     },
     {
       sequelize,

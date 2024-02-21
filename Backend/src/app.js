@@ -1,4 +1,4 @@
-require("dotenv").config({ path: ".env" });
+require("dotenv").config({ path: "../.env" });
 const express = require("express");
 const morgan = require("morgan");
 const cors = require("cors");
@@ -24,8 +24,10 @@ server.use((req, res, next) => {
 });
 
 const userRoutes = require("./routes/users");
+const commerceRoutes = require("./routes/commerce");
 
 server.use("/user", userRoutes);
+server.use("/commerce", commerceRoutes);
 
 // Configurar Swagger
 const swaggerOptions = {
@@ -43,7 +45,7 @@ const swaggerOptions = {
       },
     ],
   },
-  apis: ["./routes/users.js", "./controllers/userController.js"],
+  apis: ["./routes/users.js", "./controllers/userController.js", "./routes/commerce.js", "./controllers/commerceLoginController.js"],
 };
 const swaggerSpec = swaggerJSDoc(swaggerOptions);
 server.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));

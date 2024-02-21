@@ -1,4 +1,7 @@
 Proyecto No-Country
+encuentraprecio.com
+Es una pagina que tiene el objetivo de encontrar los productos mas baratos en tu zona.
+Mediante la comparacion de los productos que van ofreciendo los comercios registrados
 
 Repositorio GIT
 https://github.com/No-Country/c16-09-m-node-react.git
@@ -22,3 +25,4 @@ https://www.linkedin.com/in/daniel-rojas-51356919b/
 Santiago Soto
 https://github.com/SH-ur
 https://www.linkedin.com/in/santiago-soto-43ab99260/
+http://localhost:8000/api-docs/
