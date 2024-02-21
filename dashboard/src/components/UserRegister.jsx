@@ -29,43 +29,45 @@ const UserRegister = () => {
   };
 
   return (
-    <div className='registros'>
-      <h1>Registro de Usuario</h1>
-      <form onSubmit={handleSubmit}>
-        {/* Campos de entrada */}
-        <div className='registro'>
-          <label>Nombre:
-            <input type="text" name="nombre" value={usuario.nombre} onChange={handleChange} />
-          </label>
-          <label>Apellido:
-            <input type="text" name="apellido" value={usuario.apellido} onChange={handleChange} />
-          </label>
-          <label>Contraseña:
-            <input type="text" name="contraseña" value={usuario.contraseña} onChange={handleChange} />
-          </label>
-          <br />
-          <label>Número de documento:
-            <input type="Number" name="dni" value={usuario.dni} onChange={handleChange} />
-          </label>
-          <label>Email:
-            <input type="text" name="email" value={usuario.email} onChange={handleChange} />
-          </label>
-          <label>Telefono:
-            <input type="number" name="nombre" value={usuario.telefono} onChange={handleChange} />
-          </label>
-          <label>Localidad:
-            <input type="text" name="localidad" value={usuario.localidad} onChange={handleChange} />
-          </label>
-          <label>Provincia:
-            <input type="text" name="provincia" value={usuario.provincia} onChange={handleChange} />
-          </label>
-        </div>
-        {/* Botones de registro y cancelar */}
-        <br />
-        <button type="submit">Registrar</button>
-        <button type="button" onClick={handleCancelar}>Cancelar</button>
-      </form>
-    </div>
+    <body className="page-usuarios">
+      <div className="form-container">
+        <form onSubmit={handleSubmit}>
+        <h2>Registro de Usuario</h2>
+          {/* Campos de entrada */}
+          <div className='form-group'>
+            <label>Nombre:
+              <input type="text" name="nombre" value={usuario.nombre} onChange={handleChange} />
+            </label>
+            <label>Apellido:
+              <input type="text" name="apellido" value={usuario.apellido} onChange={handleChange} />
+            </label>
+            <label>Contraseña:
+              <input type="text" name="contraseña" value={usuario.contraseña} onChange={handleChange} />
+            </label>
+            
+            <label>Número de documento:
+              <input type="Number" name="dni" value={usuario.dni} onChange={handleChange} />
+            </label>
+            <label>Email:
+              <input type="text" name="email" value={usuario.email} onChange={handleChange} />
+            </label>
+            <label>Telefono:
+              <input type="number" name="nombre" value={usuario.telefono} onChange={handleChange} />
+            </label>
+            <label>Localidad:
+              <input type="text" name="localidad" value={usuario.localidad} onChange={handleChange} />
+            </label>
+            <label>Provincia:
+              <input type="text" name="provincia" value={usuario.provincia} onChange={handleChange} />
+            </label>
+            <button type="submit">Registrar</button>
+            <button type="button" onClick={handleCancelar}>Cancelar</button>
+          </div>
+          {/* Botones de registro y cancelar */}
+          {/* <br /> */}
+        </form>
+      </div>
+    </body>
   );
 };
 

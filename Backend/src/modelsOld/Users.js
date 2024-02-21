@@ -13,36 +13,38 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      lastName:{
+      last_name:{
         type:DataTypes.STRING,
         allowNull:false
       },
-      DNI:{
+      dni:{
         type: DataTypes.INTEGER,
         allowNull: false
       },
-      dateOfBirth:{
+      date_of_birth:{
         type:DataTypes.DATEONLY,
+        allowNull: false,
+      },
+      province:{
+        type: DataTypes.STRING,
         allowNull: false,
       },
       location:{
         type: DataTypes.STRING,
         allowNull: false,
-        defaultValue: 'Provincia'
       },
       phone_number: {
         type: DataTypes.STRING,
         allowNull: false,
         defaultValue: 'Información no disponible'
       },
-      loggedIn: {
+      logged_in: {
         type: DataTypes.BOOLEAN,
         defaultValue: false,
         allowNull: true,
       },
       rol: {
-        type: DataTypes.ENUM("passerby", "Admin", "CompanyRepresentative"),
-        defaultValue: "passerby",
+        type: DataTypes.ENUM('user', 'admin'),
         allowNull: true,
       },
       password: {
