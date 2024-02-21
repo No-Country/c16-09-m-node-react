@@ -106,8 +106,6 @@ const UserRegister = () => {
               Cancelar
             </button>
           </div>
-          {/* Botones de registro y cancelar */}
-          {/* <br /> */}
         </form>
       </div>
     </body>
