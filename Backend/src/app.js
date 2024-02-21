@@ -1,13 +1,12 @@
-//De aquí en adelante para la configuración del proyecto
-//O, mejor dicho, Conexión y Middlewares
-
+require("dotenv").config({ path: ".env" });
 const express = require("express");
 const morgan = require("morgan");
 const cors = require("cors");
-
-require("./db.js");
+const swaggerUi = require("swagger-ui-express");
+const swaggerJSDoc = require("swagger-jsdoc");
 
 const server = express();
+
 server.use(express.urlencoded({ extended: true, limit: "50mb" }));
 server.use(express.json({ limit: "50mb" }));
 server.use(morgan("dev"));
@@ -24,11 +23,41 @@ server.use((req, res, next) => {
   next();
 });
 
+const userRoutes = require("./routes/users");
+
+server.use("/user", userRoutes);
+
+// Configurar Swagger
+const swaggerOptions = {
+  swaggerDefinition: {
+    openapi: "3.0.0",
+    info: {
+      title: "Documentación de la API",
+      version: "1.0.0",
+      description: "Una descripción de la API.",
+    },
+    servers: [
+      {
+        url: "http://localhost:8000/",
+        description: "Servidor de desarrollo",
+      },
+    ],
+  },
+  apis: ["./routes/users.js", "./controllers/userController.js"],
+};
+const swaggerSpec = swaggerJSDoc(swaggerOptions);
+server.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+
+
 server.use((err, req, res, next) => {
   const status = err.status || 500;
   const message = err.message || err;
   console.error(err);
   res.status(status).send(message);
+});
+
+server.listen(process.env.PORT || 8000, () => {
+  console.log(`Listening on port ${process.env.PORT || 8000}`);
 });
 
 module.exports = server;
