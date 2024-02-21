@@ -14,7 +14,7 @@ const UserRegister = () => {
 
   const [provincias, setProvincias] = useState([]);
   const [selectedProvincia, setSelectedProvincia] = useState("");
-  const [localidades, setLocalidades] = useState("");
+  const [localidades, setLocalidades] = useState([]);
   const [selectedLocalidad, setSelectedLocalidad] = useState("");
 
   const handleChange = (e) => {
@@ -34,20 +34,27 @@ const UserRegister = () => {
   };
 
   const handleProvinciaChange = async (e) => {
-    setSelectedProvincia(e.target.value);
-    // setUsuario({ ...usuario, provincia: e.target.value });
+    const provincia = e.target.value;
     setSelectedProvincia(provincia);
 
     try {
-      const response = await fetch(`https://apis.datos.gob.ar/georef/api/localidades?provincia=${provincia}`);
+      const response = await fetch(
+        `https://apis.datos.gob.ar/georef/api/localidades?provincia=${provincia}&orden=id&aplanar=true&campos=estandar&max=530`
+      );
       if (!response.ok) {
         throw new Error("Error al obtener las localidades");
       }
       const data = await response.json();
       setLocalidades(data.localidades);
+      setUsuario({ ...usuario, provincia: provincia });
     } catch (error) {
       console.log("Error al obtener las localidades:", error);
     }
+  };
+
+  const handleLocalidadChange = (e) => {
+    setSelectedLocalidad(e.target.value);
+    setUsuario({ ...usuario, localidad: e.target.value });
   };
 
   useEffect(() => {
@@ -69,7 +76,7 @@ const UserRegister = () => {
   }, []);
 
   return (
-    <body className='page-usuarios'>
+    <div className='page-usuarios'>
       <div className='form-container'>
         <form onSubmit={handleSubmit}>
           <h2>Registro de Usuario</h2>
@@ -102,7 +109,16 @@ const UserRegister = () => {
             </label>
             <label>
               Localidad:
-              <input type='text' name='localidad' value={usuario.localidad} onChange={handleChange} />
+              <select name='localidad' value={selectedLocalidad} onChange={handleLocalidadChange}>
+                <option value=''>Selecciona una localidad</option>
+                {localidades.map((localidad) => {
+                  return (
+                    <option key={localidad.id} value={localidad.nombre}>
+                      {localidad.nombre}
+                    </option>
+                  );
+                })}
+              </select>
             </label>
             <label>
               Provincia:
@@ -122,7 +138,7 @@ const UserRegister = () => {
           </div>
         </form>
       </div>
-    </body>
+    </div>
   );
 };
 
