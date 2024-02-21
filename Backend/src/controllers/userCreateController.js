@@ -25,7 +25,7 @@ const createUser = {
         location,
         province,
         phone_number,
-        mail,
+        email,
         password,
         logged_in,
         date_of_birth,
@@ -36,7 +36,7 @@ const createUser = {
           message: `I'm sorry, whith half of the information we can't continue. Have a nice day!`,
         };
 
-      const verify = await db.User.findOne({ where: { mail: mail } });
+      const verify = await db.User.findOne({ where: { email: email } });
 
       if (verify != null)
         return { message: "Well, there is an user with the same email" };
@@ -50,10 +50,9 @@ const createUser = {
         date_of_birth,
         province,
         phone_number,
-        mail,
+        email,
         password,
         logged_in,
-        mail,
       });
 
       if (userCreation != null || userCreation != undefined)

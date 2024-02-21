@@ -29,30 +29,41 @@ const userCreateController = require("../controllers/userCreateController");
  *   post:
  *     summary: Registrar datos de usuario
  *     tags: [Users]
- * requestBody:
- * required: true
- * content:
- * application/json:
- * schema:
- * type: object
- * properties:
- * Name: string
- * last_name: string
- * dni: integer
- * date_of_birth: dateonly
- * mail: string
- * location: string
- * province: string
- * logged_in: boolean
- * password: string
- * phone_number: string
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               Name:
+ *                 type: string
+ *               last_name:
+ *                 type: string
+ *               dni:
+ *                 type: integer
+ *               date_of_birth:
+ *                 type: string
+ *                 format: date
+ *               email:
+ *                 type: string
+ *               location:
+ *                 type: string
+ *               province:
+ *                 type: string
+ *               logged_in:
+ *                 type: boolean
+ *               password:
+ *                 type: string
+ *               phone_number:
+ *                 type: string
  *     responses:
  *       200:
  *         description: Un objeto el usuario creado
  *       500:
  *         description: Error del servidor
- * 400:
- * description: Error al procesar datos o usuario ya registrado previamente
+ *       400:
+ *         description: Error al procesar datos o usuario ya registrado previamente
  */
 
 router
