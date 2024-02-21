@@ -4,6 +4,7 @@ import Login from "./components/Login";
 import LoginCommerce from "./components/LoginCommerce";
 import UserRegister from "./components/UserRegister";
 import CommerceRegister from "./components/CommerceRegister";
+import AdminPanel from "./components/AdminPanel";
 import "./App.css";
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
           <Route path='/logincomercio' exact element={<LoginCommerce />} />
           <Route path='/registrousuario' element={<UserRegister />} />
           <Route path='/registrocomercio' element={<CommerceRegister />} />
+          <Route path='/panelcontrol' element={<AdminPanel />} />
         </Routes>
       </BrowserRouter>
     </div>

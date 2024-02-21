@@ -16,7 +16,9 @@ function Dashboard() {
         <button>
           <Link to='/logincomercio'>Ingresa a tu Comercio</Link>
         </button>
-        <button>Panel de Control Admin</button>
+        <button>
+          <Link to='/panelcontrol'>Panel de Control Admin</Link>
+        </button>
       </header>
       <div className='dashboard'>
         <h1 className='title'>encuentraprecio.com</h1>
