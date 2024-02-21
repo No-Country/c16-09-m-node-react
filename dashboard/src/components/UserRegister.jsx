@@ -14,6 +14,8 @@ const UserRegister = () => {
 
   const [provincias, setProvincias] = useState([]);
   const [selectedProvincia, setSelectedProvincia] = useState("");
+  const [localidades, setLocalidades] = useState("");
+  const [selectedLocalidad, setSelectedLocalidad] = useState("");
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -29,6 +31,23 @@ const UserRegister = () => {
   const handleCancelar = () => {
     // Aquí puedes implementar la lógica de cancelación o redirección
     console.log("Registro cancelado");
+  };
+
+  const handleProvinciaChange = async (e) => {
+    setSelectedProvincia(e.target.value);
+    // setUsuario({ ...usuario, provincia: e.target.value });
+    setSelectedProvincia(provincia);
+
+    try {
+      const response = await fetch(`https://apis.datos.gob.ar/georef/api/localidades?provincia=${provincia}`);
+      if (!response.ok) {
+        throw new Error("Error al obtener las localidades");
+      }
+      const data = await response.json();
+      setLocalidades(data.localidades);
+    } catch (error) {
+      console.log("Error al obtener las localidades:", error);
+    }
   };
 
   useEffect(() => {
@@ -48,11 +67,6 @@ const UserRegister = () => {
 
     obtenerProvincias();
   }, []);
-
-  const handleProvinciaChange = (e) => {
-    setSelectedProvincia(e.target.value);
-    setUsuario({ ...usuario, provincia: e.target.value });
-  };
 
   return (
     <body className='page-usuarios'>
