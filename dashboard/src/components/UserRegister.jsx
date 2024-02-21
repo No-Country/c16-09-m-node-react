@@ -92,7 +92,6 @@ const UserRegister = () => {
             </label>
             <label>
               Provincia:
-              {/* <input type='text' name='provincia' value={usuario.provincia} onChange={handleChange} /> */}
               <select name='provincia' value={selectedProvincia} onChange={handleProvinciaChange}>
                 <option value=''>Selecciona una provincia</option>
                 {provincias.map((provincia) => (
