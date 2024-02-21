@@ -20,7 +20,7 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: true,
       },
-      mail: {
+      email: {
         type: Sequelize.STRING,
         allowNull: false,
       },

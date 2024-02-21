@@ -36,7 +36,7 @@ const userCreateController = require("../controllers/userCreateController");
  *           schema:
  *             type: object
  *             properties:
- *               name:
+ *               Name:
  *                 type: string
  *               last_name:
  *                 type: string
@@ -45,7 +45,7 @@ const userCreateController = require("../controllers/userCreateController");
  *               date_of_birth:
  *                 type: string
  *                 format: date
- *               mail:
+ *               email:
  *                 type: string
  *               location:
  *                 type: string
