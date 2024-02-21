@@ -54,3 +54,5 @@ Igresa a la carpeta /src y ejecuta el comando
 ```shell
 npx nodemon app
 ```
+
+http://localhost:8000/api-docs/
