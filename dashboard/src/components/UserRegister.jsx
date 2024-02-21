@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
 
 const UserRegister = () => {
   const [usuario, setUsuario] = useState({
@@ -11,6 +11,9 @@ const UserRegister = () => {
     telefono: "",
     contraseña: "",
   });
+
+  const [provincias, setProvincias] = useState([]);
+  const [selectedProvincia, setSelectedProvincia] = useState("");
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -26,6 +29,29 @@ const UserRegister = () => {
   const handleCancelar = () => {
     // Aquí puedes implementar la lógica de cancelación o redirección
     console.log("Registro cancelado");
+  };
+
+  useEffect(() => {
+    // Función para obtener las provincias de la API
+    const obtenerProvincias = async () => {
+      try {
+        const response = await fetch("https://apis.datos.gob.ar/georef/api/provincias");
+        if (!response.ok) {
+          throw new Error("Error al obtener las provincias");
+        }
+        const data = await response.json();
+        setProvincias(data.provincias);
+      } catch (error) {
+        console.error("Error al obtener las provincias:", error);
+      }
+    };
+
+    obtenerProvincias();
+  }, []);
+
+  const handleProvinciaChange = (e) => {
+    setSelectedProvincia(e.target.value);
+    setUsuario({ ...usuario, provincia: e.target.value });
   };
 
   return (
@@ -66,7 +92,15 @@ const UserRegister = () => {
             </label>
             <label>
               Provincia:
-              <input type='text' name='provincia' value={usuario.provincia} onChange={handleChange} />
+              {/* <input type='text' name='provincia' value={usuario.provincia} onChange={handleChange} /> */}
+              <select name='provincia' value={selectedProvincia} onChange={handleProvinciaChange}>
+                <option value=''>Selecciona una provincia</option>
+                {provincias.map((provincia) => (
+                  <option key={provincia.id} value={provincia.nombre}>
+                    {provincia.nombre}
+                  </option>
+                ))}
+              </select>
             </label>
             <button type='submit'>Registrar</button>
             <button type='button' onClick={handleCancelar}>
