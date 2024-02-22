@@ -1,8 +1,9 @@
 import { Link } from "react-router-dom";
+import "./NavBarButtonsMain.css";
 
 export default function NavBarButtonsMain() {
   return (
-    <div>
+    <div className='button-container'>
       <button>
         <Link to='/registrocomercio'>Registro Comercio</Link>
       </button>
