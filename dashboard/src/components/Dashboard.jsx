@@ -6,11 +6,12 @@ import NavBarButtonsMain from "./NavBarButtonsMain";
 function Dashboard() {
   return (
     <>
+      <h1 className='title'>encuentraprecio.com</h1>
+      <h2>Las mejores ofertas están a solo un clic de distancia!</h2>
       <header>
         <NavBarButtonsMain />
       </header>
       <div className='dashboard'>
-        <h1 className='title'>encuentraprecio.com</h1>
         <div className='parrafo'>
           <p>
             Únete a nosotros en encuentraprecio.com para una revolución en las compras localizadas. Pequeños negocios,
