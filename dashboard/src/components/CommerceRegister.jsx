@@ -44,7 +44,7 @@ export default function CommerceRegister() {
   };
 
   return (
-    <div className='page-commerce'>
+    <body className='page-commerce'>
       <div className='form-container'>
         <form onSubmit={handleSubmit}>
           <div className='form-group'>
@@ -127,6 +127,6 @@ export default function CommerceRegister() {
           </div>
         </form>
       </div>
-    </div>
+    </body>
   );
 }
