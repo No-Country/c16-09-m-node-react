@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import NavBarCategory from "./NavBarCategory";
 
 function Dashboard() {
   return (
@@ -34,6 +35,7 @@ function Dashboard() {
           <button type='submit'>Buscar Productos</button>
         </form>
       </div>
+      <NavBarCategory />
     </>
   );
 }
