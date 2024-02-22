@@ -59,3 +59,5 @@ npx nodemon app
 ```
 
 http://localhost:8000/api-docs/
+npx sequelize db:migrate:undo:all
+npx sequelize db:migrate
