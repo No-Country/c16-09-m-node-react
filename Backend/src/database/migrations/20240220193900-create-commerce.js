@@ -9,7 +9,7 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      Name: {
+      name: {
         type: Sequelize.STRING,
       },
       address: {
@@ -35,16 +35,6 @@ module.exports = {
       password: {
         type: Sequelize.STRING,
         allowNull: false,
-      },
-      userId: {
-        type: Sequelize.INTEGER(11),
-        allowNull: false,
-        references: {
-          model: {
-            tableName: "users",
-          },
-          key: "id",
-        },
       },
       createdAt: {
         allowNull: false,

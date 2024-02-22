@@ -26,3 +26,5 @@ Santiago Soto
 https://github.com/SH-ur
 https://www.linkedin.com/in/santiago-soto-43ab99260/
 http://localhost:8000/api-docs/
+npx sequelize db:migrate:undo:all
+npx sequelize db:migrate

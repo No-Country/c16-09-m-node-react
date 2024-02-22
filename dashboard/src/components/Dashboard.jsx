@@ -1,27 +1,17 @@
-import { Link } from "react-router-dom";
+import NavBarCategory from "./NavBarCategory";
+import ProductsOnSale from "./ProductsOnSale";
+import ProductsMostViewed from "./ProductsMostViewed";
+import NavBarButtonsMain from "./NavBarButtonsMain";
 
 function Dashboard() {
   return (
     <>
+      <h1 className='title'>encuentraprecio.com</h1>
+      <h2>Las mejores ofertas están a solo un clic de distancia!</h2>
       <header>
-        <button>
-          <Link to='/registrocomercio'>Registro Comercio</Link>
-        </button>
-        <button>
-          <Link to='/registrousuario'>Registro Usuario</Link>
-        </button>
-        <button>
-          <Link to='/login'>Ingresa a tu cuenta</Link>
-        </button>
-        <button>
-          <Link to='/logincomercio'>Ingresa a tu Comercio</Link>
-        </button>
-        <button>
-          <Link to='/panelcontrol'>Panel de Control Admin</Link>
-        </button>
+        <NavBarButtonsMain />
       </header>
       <div className='dashboard'>
-        <h1 className='title'>encuentraprecio.com</h1>
         <div className='parrafo'>
           <p>
             Únete a nosotros en encuentraprecio.com para una revolución en las compras localizadas. Pequeños negocios,
@@ -29,11 +19,15 @@ function Dashboard() {
             mejores ofertas están a solo un clic de distancia!
           </p>
         </div>
+        <NavBarCategory />
         <form>
           <input type='search' placeholder='Busca el producto para comparar precios' />
           <button type='submit'>Buscar Productos</button>
         </form>
       </div>
+
+      <ProductsOnSale />
+      <ProductsMostViewed />
     </>
   );
 }
