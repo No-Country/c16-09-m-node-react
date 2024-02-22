@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 import NavBarCategory from "./NavBarCategory";
+import SalesProducts from "./SalesProducts";
+import MostViewedProducts from "./MostViewedProducts";
 
 function Dashboard() {
   return (
@@ -30,12 +32,15 @@ function Dashboard() {
             mejores ofertas están a solo un clic de distancia!
           </p>
         </div>
+        <NavBarCategory />
         <form>
           <input type='search' placeholder='Busca el producto para comparar precios' />
           <button type='submit'>Buscar Productos</button>
         </form>
       </div>
-      <NavBarCategory />
+
+      <SalesProducts />
+      <MostViewedProducts />
     </>
   );
 }
