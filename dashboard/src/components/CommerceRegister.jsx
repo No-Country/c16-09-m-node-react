@@ -12,6 +12,11 @@ export default function CommerceRegister() {
   });
   const [termsAccepted, setTermsAccepted] = useState(false); //para aceptar terminos y condiciones
 
+  const [provincias, setProvincias] = useState([]);
+  const [selectedProvincia, setSelectedProvincia] = useState("");
+  const [localidades, setLocalidades] = useState([]);
+  const [selectedLocalidad, setSelectedLocalidad] = useState("");
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -43,6 +48,48 @@ export default function CommerceRegister() {
     });
   };
 
+  const handleProvinciaChange = async (e) => {
+    const provincia = e.target.value;
+    setSelectedProvincia(provincia);
+
+    try {
+      const response = await fetch(
+        `https://apis.datos.gob.ar/georef/api/localidades?provincia=${provincia}&orden=id&aplanar=true&campos=estandar&max=530`
+      );
+      if (!response.ok) {
+        throw new Error("Error al obtener las localidades");
+      }
+      const data = await response.json();
+      setLocalidades(data.localidades);
+      setUsuario({ ...usuario, provincia: provincia });
+    } catch (error) {
+      console.log("Error al obtener las localidades:", error);
+    }
+  };
+
+  const handleLocalidadChange = (e) => {
+    setSelectedLocalidad(e.target.value);
+    setUsuario({ ...usuario, localidad: e.target.value });
+  };
+
+  useEffect(() => {
+    // Función para obtener las provincias de la API
+    const obtenerProvincias = async () => {
+      try {
+        const response = await fetch("https://apis.datos.gob.ar/georef/api/provincias");
+        if (!response.ok) {
+          throw new Error("Error al obtener las provincias");
+        }
+        const data = await response.json();
+        setProvincias(data.provincias);
+      } catch (error) {
+        console.error("Error al obtener las provincias:", error);
+      }
+    };
+
+    obtenerProvincias();
+  }, []);
+
   return (
     <body className='page-commerce'>
       <div className='form-container'>
@@ -72,13 +119,29 @@ export default function CommerceRegister() {
           <div className='form-group'>
             <label>
               Provincia:
-              <input type='text' name='province' value={formData.province} onChange={handleChange} required />
+              <select name='provincia' value={selectedProvincia} onChange={handleProvinciaChange} required>
+                <option value=''>Selecciona una provincia</option>
+                {provincias.map((provincia) => (
+                  <option key={provincia.id} value={provincia.nombre}>
+                    {provincia.nombre}
+                  </option>
+                ))}
+              </select>
             </label>
           </div>
           <div className='form-group'>
             <label>
               Localidad:
-              <input type='text' name='city' value={formData.city} onChange={handleChange} required />
+              <select name='localidad' value={selectedLocalidad} onChange={handleLocalidadChange} required>
+                <option value=''>Selecciona una localidad</option>
+                {localidades.map((localidad) => {
+                  return (
+                    <option key={localidad.id} value={localidad.nombre}>
+                      {localidad.nombre}
+                    </option>
+                  );
+                })}
+              </select>
             </label>
           </div>
 
