@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 export default function CommerceRegister() {
@@ -126,6 +126,7 @@ export default function CommerceRegister() {
             <button type='button'>Salir</button>
           </div>
         </form>
+        <Link to='/'>Volver a inicio</Link>
       </div>
     </body>
   );
