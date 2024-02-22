@@ -1,27 +1,13 @@
-import { Link } from "react-router-dom";
 import NavBarCategory from "./NavBarCategory";
 import SalesProducts from "./SalesProducts";
 import MostViewedProducts from "./MostViewedProducts";
+import NavBarButtonsMain from "./NavBarButtonsMain";
 
 function Dashboard() {
   return (
     <>
       <header>
-        <button>
-          <Link to='/registrocomercio'>Registro Comercio</Link>
-        </button>
-        <button>
-          <Link to='/registrousuario'>Registro Usuario</Link>
-        </button>
-        <button>
-          <Link to='/login'>Ingresa a tu cuenta</Link>
-        </button>
-        <button>
-          <Link to='/logincomercio'>Ingresa a tu Comercio</Link>
-        </button>
-        <button>
-          <Link to='/panelcontrol'>Panel de Control Admin</Link>
-        </button>
+        <NavBarButtonsMain />
       </header>
       <div className='dashboard'>
         <h1 className='title'>encuentraprecio.com</h1>
