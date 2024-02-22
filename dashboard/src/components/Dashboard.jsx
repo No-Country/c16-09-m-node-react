@@ -1,6 +1,6 @@
 import NavBarCategory from "./NavBarCategory";
-import SalesProducts from "./SalesProducts";
-import MostViewedProducts from "./MostViewedProducts";
+import ProductsOnSale from "./ProductsOnSale";
+import ProductsMostViewed from "./ProductsMostViewed";
 import NavBarButtonsMain from "./NavBarButtonsMain";
 
 function Dashboard() {
@@ -26,8 +26,8 @@ function Dashboard() {
         </form>
       </div>
 
-      <SalesProducts />
-      <MostViewedProducts />
+      <ProductsOnSale />
+      <ProductsMostViewed />
     </>
   );
 }
