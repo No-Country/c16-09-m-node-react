@@ -1,11 +1,13 @@
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Login() {
   const { register, handleSubmit } = useForm();
-
+  const navigate= useNavigate();
   const enviar = (data) => {
     console.log("enviado", data);
+    navigate("/logincomercio/comercio");
+    // window.location.href = "/logincomercio/comercio";
   };
 
   return (

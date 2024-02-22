@@ -6,6 +6,7 @@ import UserRegister from "./components/UserRegister";
 import CommerceRegister from "./components/CommerceRegister";
 import AdminPanel from "./components/AdminPanel";
 import "./App.css";
+import CommerceView from "./components/CommerceView";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Route path='/' exact element={<Dashboard />} />
           <Route path='/login' exact element={<Login />} />
           <Route path='/logincomercio' exact element={<LoginCommerce />} />
+          <Route path='/logincomercio/comercio' exact element={<CommerceView />} />
           <Route path='/registrousuario' element={<UserRegister />} />
           <Route path='/registrocomercio' element={<CommerceRegister />} />
           <Route path='/panelcontrol' element={<AdminPanel />} />

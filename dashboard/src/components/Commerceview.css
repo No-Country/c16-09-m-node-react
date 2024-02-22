@@ -1,0 +1,224 @@
+:root {
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    line-height: 1.5;
+    font-weight: 600;
+  
+    color-scheme: light dark;
+    color: rgba(255, 255, 255, 0.87);
+    background-color: #242424;
+  
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  a {
+    font-weight: 500;
+    /* color: #edeced; */
+    color: black;
+    text-decoration: inherit;
+    
+  }
+  a:hover {
+    color: #eb7;
+  }
+  
+  body {
+    height: 100vh;
+    color: #495057;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    width: 100vw;
+   
+    background-color: #1a1a1a;
+  }
+  
+  h1 {
+    font-size: 3.2em;
+    
+  }
+  
+  h2{
+    color: #f05a38;
+    font-size: 2.2em;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+  }
+  #nombre-comercio{
+    background-color: rgba(255, 255, 255, 0.4);
+  }
+  select{
+    font-size: 1.1em;
+    width: 28em;
+  }
+  .input-producto{
+    width: 40em;
+    margin-left: 1em;
+  }
+  .form-container-producto{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    margin: 2%;
+  }
+  .h3{
+    align-self: center;
+    font-size: 1.4em;
+    margin: 0%;
+  }
+  
+  .div h2 {
+    text-align: center;
+  }
+  
+  
+  button {
+    margin: 1.3em;
+    border-radius:0.5em;
+    border: 0.06em solid transparent;
+    padding: 0.6em 1.2em;
+    font-size: 1em;
+    font-weight: 500;
+    font-family: inherit;
+    background-color: #eb7f67;
+    color: black;
+    cursor: pointer;
+    transition: border-color 0.25s;
+  }
+  button:hover {
+    border-color: #eb7f;
+  }
+  button:focus,
+  button:focus-visible {
+    outline: 4px auto -webkit-focus-ring-color;
+  }
+  input{
+    width: 100%;
+    padding: 0.3em;
+  }
+  form{
+    width: 90%;
+  }
+  
+  
+  label{
+    text-align: center;
+  }
+  #termsCheckbox{
+    width: 1.4em;
+    display: flex;
+  }
+  /* .form-container{
+    max-width: 80rem;
+    margin: 0 auto;
+  
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4.8rem;
+  
+    height: 90%;
+    width: 50%;
+    background-color: rgba(45, 43, 43, 0.8);
+  
+  } */
+  .commerce{
+    display: flex;
+    flex-direction: column;
+    background-position: center center;
+    /* background-repeat: no-repeat; */
+    background-size: cover;
+    background-image: url("../images/fruit-436476_1280.jpg");
+  }
+  .commerce-view{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    width: 80%;
+    height: 50%;
+  }
+  .side-bar{
+    grid-column: 1;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-left: 2%;
+  }
+  .right-section{
+    grid-column: 2 / 4;
+    width: 100%;
+    border: 2px white solid;
+    margin: 2%;
+    width: 90%;
+    height: 90%;
+    background-color: rgba(255, 255, 255, 0.8);
+  }
+  .title-commerce{
+    color: #f05a38;
+    background-color: rgba(255, 255, 255, 0.4);
+  }
+  button{
+    font-weight: 900;
+  }
+  p{
+    color: #1a1a1a;
+    font-size: 18px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.4);
+    margin: 5%;
+  }
+  .parrafo{
+    width: 70%;
+    height: 20%;
+  }
+  .form-group{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+  }
+  .form-group h2{
+    font-weight: 900;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+  }
+  table{
+    text-indent:0.1em;
+    border-spacing: 5px;
+    font-size: 1.15em;
+    width: 100%;
+}
+th{
+    border: #213547 solid 1px;
+    font-size: 1.2em;
+    align-content: center;
+}
+td{
+    border: #213547 solid 1px;
+}
+  .btn-borrar{
+    background-color:#c5c7c9;
+    padding: 0%;
+    margin: 0%;
+    border: none;
+  }
+
+  #header-commerce{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 25%;
+  }
+  
+  @media (prefers-color-scheme: light) {
+    :root {
+      color: #213547;
+      background-color: #ffffff;
+    }
+    a:hover {
+      color: #747bff;
+    }
+    
+  }
+  
