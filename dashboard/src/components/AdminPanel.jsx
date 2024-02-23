@@ -10,7 +10,6 @@ const AdminPanel = () => {
       <button>
         <Link to='/logincomercio/comercio'>Mi Comercio</Link>
       </button>
-
       <Link to='/'>Volver a inicio</Link>
     </div>
   );
