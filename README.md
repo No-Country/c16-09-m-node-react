@@ -44,5 +44,8 @@ npx sequelize-cli db:seed:all
 /src ingresas el comando:
 npx nodemon app
 
+/poblar de datos
+npx sequelize-cli db:seed:all
+
 npx sequelize db:migrate:undo:all
 npx sequelize db:migrate
