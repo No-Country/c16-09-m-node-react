@@ -3,14 +3,15 @@ import { Link } from "react-router-dom";
 
 const UserRegister = () => {
   const [usuario, setUsuario] = useState({
-    nombre: "",
-    apellido: "",
+    name: "",
+    last_name: "",
     dni: "",
-    localidad: "",
-    provincia: "",
+    date_of_birth: "",
+    location: "",
+    province: "",
     email: "",
-    telefono: "",
-    contraseña: "",
+    phone_number: "",
+    password: "",
   });
 
   const [provincias, setProvincias] = useState([]);
@@ -85,32 +86,34 @@ const UserRegister = () => {
           <div className='form-group'>
             <label>
               Nombre:
-              <input type='text' name='nombre' value={usuario.nombre} onChange={handleChange} />
+              <input type='text' name='name' value={usuario.name} onChange={handleChange} />
             </label>
             <label>
               Apellido:
-              <input type='text' name='apellido' value={usuario.apellido} onChange={handleChange} />
+              <input type='text' name='last_name' value={usuario.last_name} onChange={handleChange} />
             </label>
-            <label>
-              Contraseña:
-              <input type='text' name='contraseña' value={usuario.contraseña} onChange={handleChange} />
-            </label>
-
             <label>
               Número de documento:
               <input type='Number' name='dni' value={usuario.dni} onChange={handleChange} />
             </label>
             <label>
-              Email:
-              <input type='text' name='email' value={usuario.email} onChange={handleChange} />
+              Fecha Nacimiento:
+              <input type='date' name='date_of_birth' value={usuario.date_of_birth} onChange={handleChange} />
             </label>
             <label>
-              Telefono:
-              <input type='number' name='nombre' value={usuario.telefono} onChange={handleChange} />
+              Provincia:
+              <select name='province' value={selectedProvincia} onChange={handleProvinciaChange}>
+                <option value=''>Selecciona una provincia</option>
+                {provincias.map((provincia) => (
+                  <option key={provincia.id} value={provincia.nombre}>
+                    {provincia.nombre}
+                  </option>
+                ))}
+              </select>
             </label>
             <label>
               Localidad:
-              <select name='localidad' value={selectedLocalidad} onChange={handleLocalidadChange}>
+              <select name='location' value={selectedLocalidad} onChange={handleLocalidadChange}>
                 <option value=''>Selecciona una localidad</option>
                 {localidades.map((localidad) => {
                   return (
@@ -122,15 +125,20 @@ const UserRegister = () => {
               </select>
             </label>
             <label>
-              Provincia:
-              <select name='provincia' value={selectedProvincia} onChange={handleProvinciaChange}>
-                <option value=''>Selecciona una provincia</option>
-                {provincias.map((provincia) => (
-                  <option key={provincia.id} value={provincia.nombre}>
-                    {provincia.nombre}
-                  </option>
-                ))}
-              </select>
+              Telefono:
+              <input type='number' name='phone_number' value={usuario.telefono} onChange={handleChange} />
+            </label>
+            <label>
+              Contraseña:
+              <input type='text' name='password' value={usuario.contraseña} onChange={handleChange} />
+            </label>
+            <label>
+              Email:
+              <input type='text' name='email' value={usuario.email} onChange={handleChange} />
+            </label>
+            <label>
+              Telefono:
+              <input type='number' name='phone_number' value={usuario.phone_number} onChange={handleChange} />
             </label>
             <button type='submit'>Registrar</button>
             <button type='button' onClick={handleCancelar}>
