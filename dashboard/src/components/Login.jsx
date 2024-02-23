@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 
 export default function Login() {
   const { register, handleSubmit } = useForm();
@@ -14,16 +14,46 @@ export default function Login() {
       const timeout = setTimeout(() => {
         localStorage.removeItem("loggedIn");
         setLoggedIn(false);
-      }, 3600000);
+      }, 600000);
+      // Limpia el temporizador cuando el componente se desmonta o cuando loggedIn cambia a false
       return () => {
         clearTimeout(timeout);
       };
     }
   }, []);
 
-  const enviar = (data) => {
-    console.log("enviado", data);
+  const enviar = async (data) => {
+    // hacer test de api
+    try {
+      const response = await fetch("http://localhost:8000/users/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (!Response.ok) {
+        throw new Error("Error al iniciar la sesion");
+      }
+
+      localStorage.setItem("loggedIn", "true");
+      setLoggedIn(true);
+
+      const timeout = setTimeout(() => {
+        localStorage.removeItem("loggedIn");
+        setLoggedIn(false);
+      }, 600000);
+
+      return () => clearTimeout(timeout);
+    } catch (error) {
+      console.log("Error al iniciar la sesion: ", error.message);
+    }
   };
+
+  if (loggedIn) {
+    return <Redirect to='/' />;
+  }
 
   return (
     <div className=''>
