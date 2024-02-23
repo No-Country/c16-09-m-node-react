@@ -1,5 +1,7 @@
 import { useState } from "react";
 import "./Commerceview.css";
+import { Link } from "react-router-dom";
+
 
 function FormAddProduct() {
   const [formDataProduct, setFormDataProduct] = useState({
@@ -31,7 +33,7 @@ function FormAddProduct() {
       <h3 className="h3">Alta de Producto</h3>
       <div className="form-group">
         <label htmlFor="rubro">Rubro:</label>
-        <select id="rubro" className="input-producto">
+        <select id="rubro" >
           <option value="lacteos">Lácteos</option>
           <option value="bebidas">Bebidas</option>
           <option value="limpieza">Limpieza</option>
@@ -115,7 +117,7 @@ function FormEditProduct() {
       <h3 className="h3">Modificacion de Producto</h3>
       <div className="form-group">
         <label htmlFor="rubro">Seleccione producto:</label>
-        <select id="rubro" className="input-producto">
+        <select id="rubro">
           <option value="cargar productos base">cargar productos base</option>
           <option value="cargar productos base">cargar productos base</option>
           <option value="cargar productos base">cargar productos base</option>
@@ -183,7 +185,6 @@ function FormEditProduct() {
 function FormDeleteProduct() {
   return (
     <>
-      <h1>Listado de productos</h1>
       <table>
         <thead>
           <tr>
@@ -191,7 +192,9 @@ function FormDeleteProduct() {
             <th>Nombre</th>
             <th>Presentación</th>
             <th>Marca</th>
+            <th>Precio</th>
             <th>Borrar</th>
+            <th>Editar</th>
           </tr>
         </thead>
         <tbody>
@@ -199,6 +202,14 @@ function FormDeleteProduct() {
                 <td>Lacteo</td>
                 <td>Leche larga vida</td>
                 <td>Litro</td>
+                <td>La Lacteo</td>
+                <td>850</td>
+                <td><button className="btn-borrar" onClick={() => handleEliminarProducto(producto.id)}>
+                    <label>❌</label>
+                </button></td>
+                <td><button className="btn-borrar" onClick={() => handleEditarProducto(producto.id)}>
+                    <label>✏️</label>
+                </button></td>
           {/* {productos.map((producto) => (
             <tr key={producto.id}>
               <td>{producto.rubro}</td>
@@ -212,16 +223,13 @@ function FormDeleteProduct() {
                 
               </td> */}
             </tr>
-          ))}{" "}
+          {/* ))}{" "} */}
           
         </tbody>
       </table>
     </>
   );
 }
-// function ProductList() {
-//   return;
-// }
 
 //funcion principal
 function CommerceView() {
@@ -231,12 +239,10 @@ function CommerceView() {
     switch (mostrar) {
       case "newproduct":
         return <FormAddProduct />;
-      case "edit":
-        return <FormEditProduct />;
+    
       case "delete":
         return <FormDeleteProduct />;
-      //   case "list":
-      //     return <ProductList />;
+      
       default:
         return <p>Aguardando seleccione opcion</p>;
     }
@@ -246,22 +252,16 @@ function CommerceView() {
     setMostrar("newproduct");
   }
 
-  function handleViewEditProduct() {
-    setMostrar("edit");
-  }
+
 
   function handleViewDeleteProduct() {
     setMostrar("delete");
   }
 
-  //   function handleViewListProducts() {
-  //     setMostrar("list");
-  //   }
-
   return (
     <body className="commerce">
       <header id="header-commerce">
-        <h1 className="title">encuentraprecio.com</h1>
+        <h1 className="title-commerce">encuentraprecio.com</h1>
         <div>
           <h2 id="nombre-comercio">NOMBRE COMERCIO</h2>
         </div>
@@ -271,15 +271,11 @@ function CommerceView() {
           <button type="button" onClick={handleViewNewProduct}>
             Alta Producto
           </button>
-          <button type="button" onClick={handleViewEditProduct}>
-            Modificar Producto
-          </button>
+         
           <button type="button" onClick={handleViewDeleteProduct}>
-            Baja Producto
+            Modificacion o Baja Producto
           </button>
-          {/* <button type="button" onClick={handleViewListProducts}>
-            Listar Productos
-          </button> */}
+          <button type='button'><Link to='/'>Salir</Link></button>
         </div>
         <div className="right-section">{Vistas({ mostrar })}</div>
       </main>
