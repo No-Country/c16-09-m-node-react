@@ -1,8 +1,25 @@
+import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 
 export default function Login() {
   const { register, handleSubmit } = useForm();
+  const [loggedIn, setLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const isLoggedIn = localStorage.getItem("loggedIn");
+    if (isLoggedIn === "true") {
+      setLoggedIn(true);
+
+      const timeout = setTimeout(() => {
+        localStorage.removeItem("loggedIn");
+        setLoggedIn(false);
+      }, 3600000);
+      return () => {
+        clearTimeout(timeout);
+      };
+    }
+  }, []);
 
   const enviar = (data) => {
     console.log("enviado", data);
