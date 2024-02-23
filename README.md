@@ -25,6 +25,24 @@ https://www.linkedin.com/in/daniel-rojas-51356919b/
 Santiago Soto
 https://github.com/SH-ur
 https://www.linkedin.com/in/santiago-soto-43ab99260/
+
+---
+
+DB
+
 http://localhost:8000/api-docs/
+
+Para eliminarla:
+npx sequelize-cli db:migrate:undo
+
+Para crearla:
+npx sequelize-cli db:migrate
+
+Para usar las seeds:
+npx sequelize-cli db:seed:all
+
+/src ingresas el comando:
+npx nodemon app
+
 npx sequelize db:migrate:undo:all
 npx sequelize db:migrate
