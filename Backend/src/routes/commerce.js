@@ -66,6 +66,9 @@ const commerceController = require('../controllers/commerceController')
  */
 
 router.post('/login', commerceLogIn);
-router.post("/register", commerceController.register);
+router.post("/register", commerceController.register)
+.get('/list', commerceController.read)
+.get(`/profile/:id`, commerceController.byId)
+.delete('/delete/:id', commerceController.softDelete)
 
 module.exports= router;
