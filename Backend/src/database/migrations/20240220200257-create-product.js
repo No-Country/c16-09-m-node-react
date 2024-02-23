@@ -47,6 +47,16 @@ module.exports = {
           key: "id",
         },
       },
+      categoryId:{
+        type: Sequelize.UUID,
+        allowNull: true,
+        references: {
+          model: {
+            tableName: "Categories",
+          },
+          key: "id",
+        },
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
