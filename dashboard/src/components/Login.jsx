@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { Link, Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 
 export default function Login() {
   const { register, handleSubmit } = useForm();
@@ -25,7 +26,7 @@ export default function Login() {
   const enviar = async (data) => {
     // hacer test de api
     try {
-      const response = await fetch("http://localhost:8000/users/login", {
+      const response = await fetch("http://localhost:8000/user/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

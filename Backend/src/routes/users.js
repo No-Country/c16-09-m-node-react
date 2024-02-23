@@ -67,31 +67,31 @@ const userCreateController = require("../controllers/userCreateController");
  */
 
 /**
-   * @swagger
-   * /user/login:
-   *   post:
-   *     summary: Iniciar sesión de usuario
-   *     tags: [Users]
-   *     requestBody:
-   *       required: true
-   *       content:
-   *         application/json:
-   *           schema:
-   *             type: object
-   *             properties:
-   *               email:
-   *                 type: string
-   *               password:
-   *                 type: string
-   *     responses:
-   *       '200':
-   *         description: Inicio de sesión exitoso
-   *       '404':
-   *         description: Usuario no encontrado o credenciales inválidas
-   *       '500':
-   *         description: Error interno del servidor
-   */
-router.get("/users", userController.index)
+ * @swagger
+ * /user/login:
+ *   post:
+ *     summary: Iniciar sesión de usuario
+ *     tags: [Users]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               email:
+ *                 type: string
+ *               password:
+ *                 type: string
+ *     responses:
+ *       '200':
+ *         description: Inicio de sesión exitoso
+ *       '404':
+ *         description: Usuario no encontrado o credenciales inválidas
+ *       '500':
+ *         description: Error interno del servidor
+ */
+router.get("/users", userController.index);
 router.post("/login", userController.login);
 router.post("/register", userCreateController);
 
