@@ -33,9 +33,13 @@ module.exports = {
         defaultValue: false,
         allowNull: true,
       },
+      image:{
+        type: Sequelize.STRING,
+        allowNull: false
+      },
       comerceId: {
         type: Sequelize.INTEGER(11),
-        allowNull: false,
+        allowNull: true,
         references: {
           model: {
             tableName: "Commerces",
