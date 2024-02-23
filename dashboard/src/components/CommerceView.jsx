@@ -31,7 +31,7 @@ function FormAddProduct() {
       <h3 className="h3">Alta de Producto</h3>
       <div className="form-group">
         <label htmlFor="rubro">Rubro:</label>
-        <select id="rubro" >
+        <select id="rubro" className="input-producto">
           <option value="lacteos">Lácteos</option>
           <option value="bebidas">Bebidas</option>
           <option value="limpieza">Limpieza</option>
@@ -115,7 +115,7 @@ function FormEditProduct() {
       <h3 className="h3">Modificacion de Producto</h3>
       <div className="form-group">
         <label htmlFor="rubro">Seleccione producto:</label>
-        <select id="rubro">
+        <select id="rubro" className="input-producto">
           <option value="cargar productos base">cargar productos base</option>
           <option value="cargar productos base">cargar productos base</option>
           <option value="cargar productos base">cargar productos base</option>
@@ -183,6 +183,7 @@ function FormEditProduct() {
 function FormDeleteProduct() {
   return (
     <>
+      <h1>Listado de productos</h1>
       <table>
         <thead>
           <tr>
@@ -190,7 +191,6 @@ function FormDeleteProduct() {
             <th>Nombre</th>
             <th>Presentación</th>
             <th>Marca</th>
-            <th>Precio</th>
             <th>Borrar</th>
           </tr>
         </thead>
@@ -199,12 +199,6 @@ function FormDeleteProduct() {
                 <td>Lacteo</td>
                 <td>Leche larga vida</td>
                 <td>Litro</td>
-                <td>La Lacteo</td>
-                <td>850</td>
-                <td><button className="btn-borrar" onClick={() => handleEliminarProducto(producto.id)}>
-                    <label>❌</label>
-                  {/* <i className="fa fa-trash"></i> */}
-                </button></td>
           {/* {productos.map((producto) => (
             <tr key={producto.id}>
               <td>{producto.rubro}</td>
@@ -218,7 +212,7 @@ function FormDeleteProduct() {
                 
               </td> */}
             </tr>
-          {/* ))}{" "} */}
+          ))}{" "}
           
         </tbody>
       </table>
@@ -267,7 +261,7 @@ function CommerceView() {
   return (
     <body className="commerce">
       <header id="header-commerce">
-        <h1 className="title-commerce">encuentraprecio.com</h1>
+        <h1 className="title">encuentraprecio.com</h1>
         <div>
           <h2 id="nombre-comercio">NOMBRE COMERCIO</h2>
         </div>
