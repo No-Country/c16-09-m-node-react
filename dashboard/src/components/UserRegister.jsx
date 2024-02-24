@@ -42,11 +42,12 @@ const UserRegister = () => {
       // Con Registro exitoso implementar redirección a la imagen de perfil, dejo redireccion a la vista inicio
       setUserRegisterOk(true);
 
-      useEffect(() => {
-        if (userRegisterOk) {
-          window.location.href = "/";
-        }
-      }, [userRegisterOk]);
+      // analizar error de este hook
+      // useEffect(() => {
+      //   if (userRegisterOk) {
+      //     window.location.href = "/";
+      //   }
+      // }, [userRegisterOk]);
 
       // Hacer test del proceso de registro y redireccion
     } catch (error) {
@@ -149,10 +150,6 @@ const UserRegister = () => {
               </select>
             </label>
             <label>
-              Telefono:
-              <input type='number' name='phone_number' value={usuario.telefono} onChange={handleChange} />
-            </label>
-            <label>
               Contraseña:
               <input type='text' name='password' value={usuario.contraseña} onChange={handleChange} />
             </label>
@@ -162,7 +159,7 @@ const UserRegister = () => {
             </label>
             <label>
               Telefono:
-              <input type='number' name='phone_number' value={usuario.phone_number} onChange={handleChange} />
+              <input type='text' name='phone_number' value={usuario.phone_number} onChange={handleChange} />
             </label>
             <button type='submit'>Registrar</button>
             <button type='button' onClick={handleCancelar}>
