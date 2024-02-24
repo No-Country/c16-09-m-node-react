@@ -7,8 +7,8 @@ const UserRegister = () => {
     last_name: "",
     dni: "",
     date_of_birth: "",
-    location: "",
     province: "",
+    location: "",
     email: "",
     phone_number: "",
     password: "",
@@ -24,10 +24,24 @@ const UserRegister = () => {
     setUsuario({ ...usuario, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Aquí puedes realizar la lógica de registro (enviar datos al servidor, etc.)
-    console.log("Datos a enviar:", usuario);
+    try {
+      const response = await fetch("http://localhost:8000/user/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "aplication/json",
+        },
+        body: JSON.stringify(usuario),
+      });
+
+      if (!response.ok) {
+        throw new Error(" Error al registra el usuario");
+      }
+      // Con Registro exitoso implementar redirección a la imagen de perfil, dejo redireccion a la vista inicio
+    } catch (error) {
+      console.log("Error al registrar usuario", error);
+    }
   };
 
   const handleCancelar = () => {
