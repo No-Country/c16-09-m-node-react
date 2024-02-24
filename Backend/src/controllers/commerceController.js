@@ -27,7 +27,7 @@ const controller = {
       try {
         const DBCommerce = await db.Commerce.findAll();
 
-        if(DBCommerce.lenght > 0 || DBCommerce != null) res.status(200).json(DBCommerce)
+        if(DBCommerce.length > 0 || DBCommerce != null) res.status(200).json(DBCommerce)
 else res.status(400).json({message: 'Sorry, the information came empty'});
       } catch (error) {
         res.status(400).json(error.message)

@@ -37,12 +37,22 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false
       },
-      comerceId: {
+      commerceId: {
         type: Sequelize.INTEGER(11),
         allowNull: true,
         references: {
           model: {
             tableName: "Commerces",
+          },
+          key: "id",
+        },
+      },
+      categoryId:{
+        type: Sequelize.UUID,
+        allowNull: true,
+        references: {
+          model: {
+            tableName: "Categories",
           },
           key: "id",
         },
