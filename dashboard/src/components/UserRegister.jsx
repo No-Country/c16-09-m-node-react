@@ -18,6 +18,7 @@ const UserRegister = () => {
   const [selectedProvincia, setSelectedProvincia] = useState("");
   const [localidades, setLocalidades] = useState([]);
   const [selectedLocalidad, setSelectedLocalidad] = useState("");
+  const [userRegisterOk, setUserRegisterOk] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -39,6 +40,15 @@ const UserRegister = () => {
         throw new Error(" Error al registra el usuario");
       }
       // Con Registro exitoso implementar redirección a la imagen de perfil, dejo redireccion a la vista inicio
+      setUserRegisterOk(true);
+
+      useEffect(() => {
+        if (userRegisterOk) {
+          window.location.href = "/";
+        }
+      }, [userRegisterOk]);
+
+      // Hacer test del proceso de registro y redireccion
     } catch (error) {
       console.log("Error al registrar usuario", error);
     }
