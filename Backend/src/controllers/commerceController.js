@@ -43,7 +43,7 @@ else res.status(400).json({message: 'Sorry, the information came empty'});
           if(searchById != null) res.status(200).json(searchById)
           else res.status(400).json({message: 'Theres no commerce with that id in the DB'})
 
-        } else res.status(400).json({message: 'Sorry, the id isnot what the DB was expecting.'})
+        } else res.status(400).json({message: 'Sorry, the id is not what the DB was expecting.'})
       } catch (error) {
         res.status(400).json(error.message)
       }

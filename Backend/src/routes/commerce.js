@@ -65,10 +65,85 @@ const commerceController = require('../controllers/commerceController')
  *         description: Error al procesar datos o datos vacíos/tipo incorrecto
  */
 
+/**
+ * @swagger
+ * /delete/{id}:
+ *   delete:
+ *     summary: Eliminar/suspender un comercio
+ *     tags: [Commerce]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: Id del comercio a eliminar
+ *     responses:
+ *     200:
+ *       description: The commerce with the id ${id} was sucessfully deleted/banned
+ *     400:
+ *       description: Something went wrong deleting this. Try later please or error message 
+ */
+
+/**
+ * @swagger
+ * /list:
+ *  get:
+ *    summary: Obtener lista de comercios registrados
+ *    description: Ruta para visualizar la cantidad de comercios registrados
+ *    tags: [Commerce]
+ *    responses:
+ *      200:
+ *        description: La lista de los libros como array de objetos
+ *      400:
+ *        description: "Sorry the information came empty"
+ */
+
+/**
+ * @swagger
+ * /profile/{id}:
+ *   get:
+ *     summary: Obtener información de comercio por Id
+ *     description: Ruta para obtener informacion sobre un comercio específico
+ *     tags: [Commerce]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: Id del comercio a buscar
+ *     responses:
+ *       200:
+ *         description: objeto con información del comercio
+ *       400:
+ *         description: Theres no commerce with that id in the DB or Sorry, the id is not what the DB was expecting or error message
+ */
+
+/**
+ * @swagger
+ * /restore/{id}:
+ *  get:
+ *    summary: Restaurar comercio
+ *    tags: [Commerce]
+ *    parameters:
+ *      - in: path
+ *        name: id
+ *        required: true
+ *        schema:
+ *          type: integer
+ *        description: Id del comercio a restaurar
+ *    responses:
+ *      200:
+ *        description: Commerce restored! seguido del comercio restaurado
+ *      400:
+ *        description: We cant find an instance in the soft deleted records, so maybe that commerce didnt existed in first place or error message 
+ */
 router.post('/login', commerceLogIn);
 router.post("/register", commerceController.register)
 .get('/list', commerceController.read)
 .get(`/profile/:id`, commerceController.byId)
 .delete('/delete/:id', commerceController.softDelete)
+.get("/restore/:id", commerceController.restore)
 
 module.exports= router;
