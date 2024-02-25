@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
   }
   User.init(
     {
-      Name: DataTypes.STRING,
+      name: DataTypes.STRING,
       last_name: DataTypes.STRING,
       dni: DataTypes.INTEGER,
       date_of_birth: DataTypes.DATEONLY,
@@ -22,10 +22,6 @@ module.exports = (sequelize, DataTypes) => {
       phone_number: {
         type: DataTypes.STRING,
         defaultValue: "Información no disponible",
-      },
-      logged_in: {
-        type: DataTypes.BOOLEAN,
-        defaultValue: false,
       },
       rol: DataTypes.ENUM("user", "admin"),
       password: DataTypes.STRING,

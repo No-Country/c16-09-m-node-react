@@ -1,5 +1,7 @@
 import { useState } from "react";
 import "./Commerceview.css";
+import { Link } from "react-router-dom";
+
 
 function FormAddProduct() {
   const [formDataProduct, setFormDataProduct] = useState({
@@ -192,6 +194,7 @@ function FormDeleteProduct() {
             <th>Marca</th>
             <th>Precio</th>
             <th>Borrar</th>
+            <th>Editar</th>
           </tr>
         </thead>
         <tbody>
@@ -203,7 +206,9 @@ function FormDeleteProduct() {
                 <td>850</td>
                 <td><button className="btn-borrar" onClick={() => handleEliminarProducto(producto.id)}>
                     <label>❌</label>
-                  {/* <i className="fa fa-trash"></i> */}
+                </button></td>
+                <td><button className="btn-borrar" onClick={() => handleEditarProducto(producto.id)}>
+                    <label>✏️</label>
                 </button></td>
           {/* {productos.map((producto) => (
             <tr key={producto.id}>
@@ -225,9 +230,6 @@ function FormDeleteProduct() {
     </>
   );
 }
-// function ProductList() {
-//   return;
-// }
 
 //funcion principal
 function CommerceView() {
@@ -237,12 +239,10 @@ function CommerceView() {
     switch (mostrar) {
       case "newproduct":
         return <FormAddProduct />;
-      case "edit":
-        return <FormEditProduct />;
+    
       case "delete":
         return <FormDeleteProduct />;
-      //   case "list":
-      //     return <ProductList />;
+      
       default:
         return <p>Aguardando seleccione opcion</p>;
     }
@@ -252,17 +252,11 @@ function CommerceView() {
     setMostrar("newproduct");
   }
 
-  function handleViewEditProduct() {
-    setMostrar("edit");
-  }
+
 
   function handleViewDeleteProduct() {
     setMostrar("delete");
   }
-
-  //   function handleViewListProducts() {
-  //     setMostrar("list");
-  //   }
 
   return (
     <body className="commerce">
@@ -277,15 +271,11 @@ function CommerceView() {
           <button type="button" onClick={handleViewNewProduct}>
             Alta Producto
           </button>
-          <button type="button" onClick={handleViewEditProduct}>
-            Modificar Producto
-          </button>
+         
           <button type="button" onClick={handleViewDeleteProduct}>
-            Baja Producto
+            Modificacion o Baja Producto
           </button>
-          {/* <button type="button" onClick={handleViewListProducts}>
-            Listar Productos
-          </button> */}
+          <button type='button'><Link to='/'>Salir</Link></button>
         </div>
         <div className="right-section">{Vistas({ mostrar })}</div>
       </main>

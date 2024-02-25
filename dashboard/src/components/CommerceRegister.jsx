@@ -5,6 +5,7 @@ export default function CommerceRegister() {
   const [formData, setFormData] = useState({
     shopName: "",
     address: "",
+    phone:"",
     province: "",
     city: "",
     email: "",
@@ -40,6 +41,7 @@ export default function CommerceRegister() {
     setFormData({
       shopName: "",
       address: "",
+      phone:"",
       province: "",
       city: "",
       email: "",
@@ -101,6 +103,12 @@ export default function CommerceRegister() {
             <label>
               Nombre del Comercio:
               <input type='text' name='shopName' value={formData.shopName} onChange={handleChange} required />
+            </label>
+          </div>
+          <div className='form-group'>
+            <label>
+              Teléfono:
+              <input type='text' name='phone' value={formData.phone} onChange={handleChange} />
             </label>
           </div>
           <div className='form-group'>
@@ -177,16 +185,16 @@ export default function CommerceRegister() {
               />
             </label>
           </div>
-          <div className='form-group'>
+          <div className='terms'>
             <label htmlFor='termsCheckbox'>
-              Acepto los términos y condiciones
+              Acepto los términos y condiciones</label>
               <input type='checkbox' id='termsCheckbox' checked={termsAccepted} onChange={handleCheckboxChange} />
-            </label>
+            
           </div>
 
           <div className='form-group'>
             <button type='submit'>Registrar</button>
-            <button type='button'>Salir</button>
+            <button type='button'><Link to='/'>Salir</Link></button>
           </div>
         </form>
         <Link to='/'>Volver a inicio</Link>
