@@ -36,7 +36,7 @@ const userCreateController = require("../controllers/userCreateController");
  *           schema:
  *             type: object
  *             properties:
- *               Name:
+ *               name:
  *                 type: string
  *               last_name:
  *                 type: string
@@ -51,8 +51,6 @@ const userCreateController = require("../controllers/userCreateController");
  *                 type: string
  *               province:
  *                 type: string
- *               logged_in:
- *                 type: boolean
  *               password:
  *                 type: string
  *               phone_number:

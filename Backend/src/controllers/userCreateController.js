@@ -27,7 +27,6 @@ const createUser = {
         phone_number,
         email,
         password,
-        logged_in,
         date_of_birth,
       } = information;
 
@@ -52,7 +51,6 @@ const createUser = {
         phone_number,
         email,
         password,
-        logged_in,
       });
 
       if (userCreation != null || userCreation != undefined)
