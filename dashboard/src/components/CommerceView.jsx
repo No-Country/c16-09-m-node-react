@@ -259,14 +259,14 @@ function CommerceView() {
   }
 
   return (
-    <body className="commerce">
-      <header id="header-commerce">
+    <div className="commerce">
+      <div id="header-commerce">
         <h1 className="title-commerce">encuentraprecio.com</h1>
         <div>
           <h2 id="nombre-comercio">NOMBRE COMERCIO</h2>
         </div>
-      </header>
-      <main className="commerce-view">
+      </div>
+      <div className="commerce-view">
         <div className="side-bar">
           <button type="button" onClick={handleViewNewProduct}>
             Alta Producto
@@ -278,8 +278,8 @@ function CommerceView() {
           <button type='button'><Link to='/'>Salir</Link></button>
         </div>
         <div className="right-section">{Vistas({ mostrar })}</div>
-      </main>
-    </body>
+      </div>
+    </div>
   );
 }
 

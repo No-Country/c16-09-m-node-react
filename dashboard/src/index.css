@@ -42,6 +42,7 @@ h1 {
 h2 {
   color: #f05a38;
   font-size: 2.2em;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5)
 }
 .div h2 {
   text-align: center;
@@ -69,7 +70,8 @@ button:focus-visible {
 }
 input {
   width: 100%;
-  padding: 5px;
+  padding: 0.3em;
+  margin: 10 em;
 }
 form {
   width: 90%;
@@ -102,6 +104,8 @@ label {
 }
 .title {
   color: #f05a38;
+  text-shadow: 5px 5px 5px #242424 ;
+  text-align: center;
   background-color: transparent;
 }
 p {
@@ -112,6 +116,12 @@ p {
   align-items: center;
   background-color: rgba(255, 255, 255, 0.9);
   margin: 5%;
+}
+
+select {
+  font-size: 1.1em;
+  width: 28em;
+  margin-left: 1em;
 }
 .parrafo {
   width: 70%;
@@ -126,7 +136,6 @@ p {
   display: flex;
   flex-direction: row-reverse;
   align-items: stretch;
-  /* background-color: #f7f4f4; */
 }
 .form-group h2 {
   font-weight: 900;
@@ -135,14 +144,18 @@ p {
 .page-commerce {
   background-position: center center;
 
-  background-image: url("./images/load-2060616_1280.jpg");
+  background-image: url("../src/assets/images/imagesPages/load-2060616_1280.jpg");
   background-size: cover;
+  width: 100vw;
+  height: 50vw;
 }
 .page-usuarios {
   background-position: center center;
 
-  background-image: url("./images/shop-4527402_1280.jpg");
+  background-image: url("../src/assets/images/imagesPages/shop-4527402_1280.jpg");
   background-size: cover;
+  width: 100vw;
+  height: 50vw;
 }
 header {
   display: flex;
@@ -151,10 +164,8 @@ header {
 }
 .dashboard {
   display: grid;
-
   background-position: center center;
-  /* background-repeat: no-repeat; */
-  background-image: url("./images/shopping-879498_1280.jpg");
+  background-image: url("../src/assets/images/imagesPages/shopping-879498_1280.jpg");
   background-size: cover;
   justify-items: center;
   height: fit-content;
