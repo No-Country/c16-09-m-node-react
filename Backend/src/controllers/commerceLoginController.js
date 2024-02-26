@@ -7,7 +7,7 @@ const commerceLogin = {
 
             const verify = await db.Commerce.findOne({where: {email: email, password: passValue}});
 console.log(verify);
-            if(verify != null) return {inTheDatabase: true};
+            if(verify != null) return verify;
             else return {message:'It looks like the commerce is not in the DB'}
         } catch (error) {
             throw new Error(error.message)
