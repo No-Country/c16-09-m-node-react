@@ -6,21 +6,7 @@ export default function Login() {
   const { register, handleSubmit } = useForm();
   const [loggedIn, setLoggedIn] = useState(false);
 
-  useEffect(() => {
-    const isLoggedIn = localStorage.getItem("loggedIn");
-    if (isLoggedIn === "true") {
-      setLoggedIn(true);
-
-      const timeout = setTimeout(() => {
-        localStorage.removeItem("loggedIn");
-        setLoggedIn(false);
-      }, 600000);
-
-      return () => {
-        clearTimeout(timeout);
-      };
-    }
-  }, []);
+  // This process has no cookies configuration
 
   useEffect(() => {
     if (loggedIn) {
@@ -28,7 +14,7 @@ export default function Login() {
     }
   }, [loggedIn]);
 
-  const enviar = async (data) => {
+  const send = async (data) => {
     try {
       const response = await fetch("http://localhost:8000/user/login", {
         method: "POST",
@@ -44,13 +30,6 @@ export default function Login() {
 
       localStorage.setItem("loggedIn", "true");
       setLoggedIn(true);
-
-      const timeout = setTimeout(() => {
-        localStorage.removeItem("loggedIn");
-        setLoggedIn(false);
-      }, 600000);
-
-      return () => clearTimeout(timeout);
     } catch (error) {
       console.log("Error al iniciar la sesion: ", error.message);
     }
@@ -59,7 +38,7 @@ export default function Login() {
   return (
     <div className=''>
       <h1 className=''>Ingresa a tu cuenta</h1>
-      <form className='' onSubmit={handleSubmit(enviar)}>
+      <form className='' onSubmit={handleSubmit(send)}>
         <input type='email' placeholder='Ingresa tu Email' {...register("email")} />
         <input type='password' placeholder='Ingresa tu password' {...register("password")} />
         <button type='submit'>Enviar</button>
