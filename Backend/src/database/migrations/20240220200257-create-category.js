@@ -1,6 +1,6 @@
 'use strict';
 
-const { UUIDV4 } = require('sequelize');
+//const { UUIDV4 } = require('sequelize');
 
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
@@ -8,8 +8,9 @@ module.exports = {
     await queryInterface.createTable('Categories', {
       id: {
         allowNull: false,
-        type: Sequelize.UUID,
-        defaultValue: UUIDV4
+        type: Sequelize.INTEGER,
+        autoIncrement: true,
+        primaryKey: true
       },
       name: {
         type: Sequelize.STRING
