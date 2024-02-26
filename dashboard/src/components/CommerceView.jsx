@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./Commerceview.css";
+import { Link } from "react-router-dom";
 
 function FormAddProduct() {
   const [formDataProduct, setFormDataProduct] = useState({
@@ -99,86 +100,14 @@ function FormAddProduct() {
   );
 }
 
-function FormEditProduct() {
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    // setFormDataProduct({ ...formDataProduct, [name]: value });
-  };
-  function handleSubmit(e) {
-    e.preventDefault();
-    resetForm();
-    console.log("grabo datos del producto");
-  }
-
-  return (
-    <form className="form-container-producto" onSubmit={handleSubmit}>
-      <h3 className="h3">Modificacion de Producto</h3>
-      <div className="form-group">
-        <label htmlFor="rubro">Seleccione producto:</label>
-        <select id="rubro">
-          <option value="cargar productos base">cargar productos base</option>
-          <option value="cargar productos base">cargar productos base</option>
-          <option value="cargar productos base">cargar productos base</option>
-        </select>
-      </div>
-      <div className="form-group">
-        <label>
-          Nombre del Producto:
-          <input
-            className="input-producto"
-            type="text"
-            name="name"
-            // value={formDataProduct.name}
-            onChange={handleChange}
-            required
-          />
-        </label>
-      </div>
-      <div className="form-group">
-        <label>
-          Presentacion:
-          <input
-            className="input-producto"
-            type="text"
-            name="presentation"
-            // value={formDataProduct.presentation}
-            onChange={handleChange}
-            required
-          />
-        </label>
-      </div>
-      <div className="form-group">
-        <label>
-          Marca:
-          <input
-            className="input-producto"
-            type="text"
-            name="marca"
-            // value={formDataProduct.marca}
-            onChange={handleChange}
-            required
-          />
-        </label>
-      </div>
-      <div className="form-group">
-        <label>
-          Precio:
-          <input
-            className="input-producto"
-            type="number"
-            name="price"
-            // value={formDataProduct.price}
-            onChange={handleChange}
-            required
-          />
-        </label>
-      </div>
-      <div className="form-group">
-        <button type="submit">Guardar cambios</button>
-      </div>
-    </form>
-  );
+function handleEditarProducto(){
+  console.log("editar producto")
 }
+
+function handleEliminarProducto(){
+    console.log("borrar producto")
+}
+
 
 function FormDeleteProduct() {
   return (
@@ -192,6 +121,7 @@ function FormDeleteProduct() {
             <th>Marca</th>
             <th>Precio</th>
             <th>Borrar</th>
+            <th>Editar</th>
           </tr>
         </thead>
         <tbody>
@@ -203,7 +133,9 @@ function FormDeleteProduct() {
                 <td>850</td>
                 <td><button className="btn-borrar" onClick={() => handleEliminarProducto(producto.id)}>
                     <label>❌</label>
-                  {/* <i className="fa fa-trash"></i> */}
+                </button></td>
+                <td><button className="btn-borrar" onClick={() => handleEditarProducto(producto.id)}>
+                    <label>✏️</label>
                 </button></td>
           {/* {productos.map((producto) => (
             <tr key={producto.id}>
@@ -225,9 +157,6 @@ function FormDeleteProduct() {
     </>
   );
 }
-// function ProductList() {
-//   return;
-// }
 
 //funcion principal
 function CommerceView() {
@@ -237,12 +166,10 @@ function CommerceView() {
     switch (mostrar) {
       case "newproduct":
         return <FormAddProduct />;
-      case "edit":
-        return <FormEditProduct />;
+    
       case "delete":
         return <FormDeleteProduct />;
-      //   case "list":
-      //     return <ProductList />;
+      
       default:
         return <p>Aguardando seleccione opcion</p>;
     }
@@ -252,17 +179,11 @@ function CommerceView() {
     setMostrar("newproduct");
   }
 
-  function handleViewEditProduct() {
-    setMostrar("edit");
-  }
+
 
   function handleViewDeleteProduct() {
     setMostrar("delete");
   }
-
-  //   function handleViewListProducts() {
-  //     setMostrar("list");
-  //   }
 
   return (
     <body className="commerce">
@@ -277,15 +198,11 @@ function CommerceView() {
           <button type="button" onClick={handleViewNewProduct}>
             Alta Producto
           </button>
-          <button type="button" onClick={handleViewEditProduct}>
-            Modificar Producto
-          </button>
+         
           <button type="button" onClick={handleViewDeleteProduct}>
-            Baja Producto
+            Modificacion o Baja Producto
           </button>
-          {/* <button type="button" onClick={handleViewListProducts}>
-            Listar Productos
-          </button> */}
+          <button type='button'><Link to='/'>Salir</Link></button>
         </div>
         <div className="right-section">{Vistas({ mostrar })}</div>
       </main>
