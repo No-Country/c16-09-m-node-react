@@ -40,6 +40,7 @@ module.exports = {
       rol: {
         type: Sequelize.ENUM("user", "admin"),
         allowNull: true,
+        defaultValue: "user"
       },
       password: {
         type: Sequelize.STRING,
@@ -47,7 +48,7 @@ module.exports = {
       },
       email: {
         type: Sequelize.STRING,
-        allowNull: true,
+        allowNull: false,
       },
       createdAt: {
         allowNull: false,
