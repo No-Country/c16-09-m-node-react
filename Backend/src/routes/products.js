@@ -24,5 +24,6 @@ const productController = require('../controllers/productController');
  */
 
 router.get('/List', productController.read);
+router.post('/create', productController.create);
 
 module.exports = router;
