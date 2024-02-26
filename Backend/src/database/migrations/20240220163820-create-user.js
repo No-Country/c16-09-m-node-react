@@ -9,7 +9,7 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      Name: {
+      name: {
         type: Sequelize.STRING,
       },
       last_name: {
@@ -36,11 +36,6 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
         defaultValue: "Información no disponible",
-      },
-      logged_in: {
-        type: Sequelize.BOOLEAN,
-        defaultValue: false,
-        allowNull: true,
       },
       rol: {
         type: Sequelize.ENUM("user", "admin"),

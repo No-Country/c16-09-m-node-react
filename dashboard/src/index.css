@@ -83,6 +83,7 @@ label {
   width: 100%;
   font-weight: 1000;
   font-size: 18px;
+  text-align: left;
 }
 #termsCheckbox {
   width: 22px;
@@ -120,6 +121,12 @@ p {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
+}
+.terms{
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: stretch;
+  /* background-color: #f7f4f4; */
 }
 .form-group h2 {
   font-weight: 900;

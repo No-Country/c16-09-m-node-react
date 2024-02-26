@@ -137,6 +137,9 @@ function FormDeleteProduct() {
                 <td><button className="btn-borrar" onClick={() => handleEditarProducto(producto.id)}>
                     <label>✏️</label>
                 </button></td>
+                <td><button className="btn-borrar" onClick={() => handleEditarProducto(producto.id)}>
+                    <label>✏️</label>
+                </button></td>
           {/* {productos.map((producto) => (
             <tr key={producto.id}>
               <td>{producto.rubro}</td>
@@ -167,8 +170,10 @@ function CommerceView() {
       case "newproduct":
         return <FormAddProduct />;
     
+    
       case "delete":
         return <FormDeleteProduct />;
+      
       
       default:
         return <p>Aguardando seleccione opcion</p>;
@@ -178,6 +183,7 @@ function CommerceView() {
   function handleViewNewProduct() {
     setMostrar("newproduct");
   }
+
 
 
 
@@ -198,6 +204,7 @@ function CommerceView() {
           <button type="button" onClick={handleViewNewProduct}>
             Alta Producto
           </button>
+         
          
           <button type="button" onClick={handleViewDeleteProduct}>
             Modificacion o Baja Producto
