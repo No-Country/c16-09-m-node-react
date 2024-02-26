@@ -78,6 +78,7 @@ const UserRegister = () => {
 
   return (
     <div className='page-usuarios'>
+      <h1 className="title">encuentraprecio.com</h1>
       <div className='form-container'>
         <form onSubmit={handleSubmit}>
           <h2>Registro de Usuario</h2>

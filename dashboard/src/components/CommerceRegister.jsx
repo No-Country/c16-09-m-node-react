@@ -93,7 +93,8 @@ export default function CommerceRegister() {
   }, []);
 
   return (
-    <body className='page-commerce'>
+    <div className='page-commerce'>
+      <h1 className="title">encuentraprecio.com</h1>
       <div className='form-container'>
         <form onSubmit={handleSubmit}>
           <div className='form-group'>
@@ -199,6 +200,6 @@ export default function CommerceRegister() {
         </form>
         <Link to='/'>Volver a inicio</Link>
       </div>
-    </body>
+    </div>
   );
 }
