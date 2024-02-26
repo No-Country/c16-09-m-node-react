@@ -14,12 +14,12 @@ module.exports = (sequelize, DataTypes) => {
   User.init(
     {
       name: DataTypes.STRING,
-      last_name: DataTypes.STRING,
+      lastName: DataTypes.STRING,
       dni: DataTypes.INTEGER,
-      date_of_birth: DataTypes.DATEONLY,
+      dateOfBirth: DataTypes.DATEONLY,
       province: DataTypes.STRING,
       location: DataTypes.STRING,
-      phone_number: {
+      phoneNumber: {
         type: DataTypes.STRING,
         defaultValue: "Información no disponible",
       },
