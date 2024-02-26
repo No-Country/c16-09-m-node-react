@@ -1,35 +1,36 @@
-.login{
-    background-image: url("../assets/images/imagesPages/food-7253768_1280.jpg");
-    background-position: center center;
-    background-size: cover;
-    width: 100vw;
-    height: 50vw;
-    margin:0px;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
+.login {
+  background-image: url("../assets/images/imagesPages/food-7253768_1280.jpg");
+  background-position: center center;
+  background-size: cover;
+  width: 100vw;
+  height: 50vw;
+  margin: 0px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }
 
-.div-login{
-    
-    width: 50%;
-    height: 50%;
-    background-color: rgba(255, 255, 255, 0.4);
+.div-login {
+  width: 50%;
+  height: 50%;
+  background-color: rgba(255, 255, 255, 0.4);
 }
 
-.sub-title{
-    color: #f05a38;
-    text-align: center;
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+.sub-title {
+  color: #f05a38;
+  text-align: center;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
 }
 
-.input-login{
-    margin-top: 1em;
-    height: 25px;
-    width: 600px;
-
+.input-login {
+  margin-top: 1em;
+  height: 25px;
+  width: 600px;
 }
-.form-container-producto{
-    align-items: center;
+.form-container-login{
+  display: flex;
+  flex-direction: column;
+  margin: 2%;
+  align-items: center;
 }

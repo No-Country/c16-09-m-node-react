@@ -13,16 +13,30 @@ export default function Login() {
   };
 
   return (
-    <div className='login'>
+    <div className="login">
       <div className="div-login">
-
         <h1 className="title">encuentraprecio.com</h1>
-        <h1 className='sub-title'>Mi Comercio</h1>
-        <form className='form-container-producto' onSubmit={handleSubmit(enviar)}>
-          <input className= "input-login" type='email' placeholder='Ingresa tu Email' {...register("email")} />
-          <input className= "input-login" type='password' placeholder='Ingresa tu password' {...register("password")} />
-          <button type='submit'>Enviar</button>
-        <Link className ="link" to='/'>Volver a inicio</Link>
+        <h1 className="sub-title">Mi Comercio</h1>
+        <form
+          className="form-container-login"
+          onSubmit={handleSubmit(enviar)}
+        >
+          <input
+            className="input-login"
+            type="email"
+            placeholder="Ingresa tu Email"
+            {...register("email")}
+          />
+          <input
+            className="input-login"
+            type="password"
+            placeholder="Ingresa tu password"
+            {...register("password")}
+          />
+          <button type="submit">Enviar</button>
+          <Link className="link" to="/">
+            Volver a inicio
+          </Link>
         </form>
       </div>
     </div>
