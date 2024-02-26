@@ -1,24 +1,10 @@
 const db = require("../database/models");
 
 const createUser = {
-  /**
-   * @swagger
-   * /user/create:
-   *   get:
-   *     summary: Registrar datos de usuario
-   *     tags: [Users]
-   *     responses:
-   *       200:
-   *         description: El objeto creado a partir de la información para el registro
-   *       500:
-   *         description: Error del servidor
-   *       400:
-   * description: Error de creación
-   */
   index: async function (information) {
     try {
       const {
-        Name,
+        name,
         last_name,
         dni,
         rol,
@@ -30,9 +16,9 @@ const createUser = {
         date_of_birth,
       } = information;
 
-      if (Name == null || dni == null || password == null)
+      if (name == null || dni == null || password == null)
         return {
-          message: `I'm sorry, whith half of the information we can't continue. Have a nice day!`,
+          message: `I'm sorry, with half of the information we can't continue. Have a nice day!`,
         };
 
       const verify = await db.User.findOne({ where: { email: email } });
@@ -40,18 +26,7 @@ const createUser = {
       if (verify != null)
         return { message: "Well, there is an user with the same email" };
 
-      const userCreation = await db.User.create({
-        Name,
-        last_name,
-        dni,
-        rol,
-        location,
-        date_of_birth,
-        province,
-        phone_number,
-        email,
-        password,
-      });
+      const userCreation = await db.User.create(information);
 
       if (userCreation != null || userCreation != undefined)
         return userCreation;
