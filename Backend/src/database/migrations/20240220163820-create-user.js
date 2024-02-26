@@ -12,7 +12,7 @@ module.exports = {
       name: {
         type: Sequelize.STRING,
       },
-      last_name: {
+      lastName: {
         type: Sequelize.STRING,
         allowNull: false,
       },
@@ -20,7 +20,7 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
       },
-      date_of_birth: {
+      dateOfBirth: {
         type: Sequelize.DATEONLY,
         allowNull: false,
       },
@@ -32,7 +32,7 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      phone_number: {
+      phoneNumber: {
         type: Sequelize.STRING,
         allowNull: false,
         defaultValue: "Información no disponible",
