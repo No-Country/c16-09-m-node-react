@@ -10,6 +10,8 @@ export default function Login() {
 
   useEffect(() => {
     if (loggedIn) {
+      console.log("loggedIn", loggedIn);
+
       window.location.href = "/";
     }
   }, [loggedIn]);
@@ -23,6 +25,7 @@ export default function Login() {
         },
         body: JSON.stringify(data),
       });
+      console.log("response", response);
 
       if (!response.ok) {
         throw new Error("Error al iniciar la sesion");
