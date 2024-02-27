@@ -25,6 +25,10 @@ export default function Login() {
         },
         body: JSON.stringify(data),
       });
+
+      const responseData = await response.json();
+      console.log("Respuesta del servidor:", responseData);
+
       console.log("response", response);
       console.log("Data", data);
 
