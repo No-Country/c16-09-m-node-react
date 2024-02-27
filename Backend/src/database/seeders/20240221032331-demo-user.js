@@ -7,12 +7,12 @@ module.exports = {
       [
         {
           name: "Usuario1",
-          last_name: "Apellido1",
+          lastName: "Apellido1", // Corregido: last_name a lastName
           dni: 12345678,
-          date_of_birth: "1990-01-01",
+          dateOfBirth: "1990-01-01", // Corregido: date_of_birth a dateOfBirth
           province: "Provincia1",
           location: "Ciudad1",
-          phone_number: "123456789",
+          phoneNumber: "123456789", // Corregido: phone_number a phoneNumber
           rol: "user",
           password: "contraseña123",
           email: "usuario1@example.com",
@@ -21,12 +21,12 @@ module.exports = {
         },
         {
           name: "Usuario2",
-          last_name: "Apellido2",
+          lastName: "Apellido2",
           dni: 23456789,
-          date_of_birth: "1995-02-02",
+          dateOfBirth: "1995-02-02",
           province: "Provincia2",
           location: "Ciudad2",
-          phone_number: "987654321",
+          phoneNumber: "987654321",
           rol: "user",
           password: "contraseña456",
           email: "usuario2@example.com",
@@ -35,12 +35,12 @@ module.exports = {
         },
         {
           name: "Admin",
-          last_name: "Root",
+          lastName: "Root",
           dni: 34567890,
-          date_of_birth: "1985-03-03",
+          dateOfBirth: "1985-03-03",
           province: "Provincia3",
           location: "Ciudad3",
-          phone_number: "555555555",
+          phoneNumber: "555555555",
           rol: "admin",
           password: "contraseñaadmin",
           email: "admin@example.com",

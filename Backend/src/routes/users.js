@@ -38,11 +38,11 @@ const userCreateController = require("../controllers/userCreateController");
  *             properties:
  *               name:
  *                 type: string
- *               last_name:
+ *               lastName:  
  *                 type: string
  *               dni:
  *                 type: integer
- *               date_of_birth:
+ *               dateOfBirth:  
  *                 type: string
  *                 format: date
  *               email:
@@ -53,7 +53,7 @@ const userCreateController = require("../controllers/userCreateController");
  *                 type: string
  *               password:
  *                 type: string
- *               phone_number:
+ *               phoneNumber:  
  *                 type: string
  *     responses:
  *       '200':
