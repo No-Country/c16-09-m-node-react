@@ -3,30 +3,58 @@ import "./Commerceview.css";
 import { Link } from "react-router-dom";
 
 
-function FormAddProduct() {
-  
+function FormAddProduct({commerceID}) {
+  const [success, setSuccess] = useState(false);
   const [formDataProduct, setFormDataProduct] = useState({
+    commerceID,
     name: "",
-    presentation: "",
-    marca: "",
+    description: "",
+    company: "",
     price: "",
+    image: "",
+    categoryId:"",
   });
+
+  
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormDataProduct({ ...formDataProduct, [name]: value });
   };
-  function handleSubmit(e) {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setSuccess(false);
+    // try {
+    //   const response = await fetch("http://localhost:8000/product/register", {
+    //     method: "POST",
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //     },
+    //     body: JSON.stringify(formData),
+    //   });
+
+    //   if (!response.ok) {
+    //     throw new Error("Error al registrar el comercio");
+    //   }
+    //   setSuccess(true);
+    // } catch (error) {
+    //   console.error("Error al registrar el comercio:", error);
+    // }
+    setFormDataProduct({ ...formDataProduct, commerceId: {commerceID}});
+    
+    console.log(formDataProduct)
+
     resetForm();
-    console.log("grabo datos del producto");
-  }
+  };
   const resetForm = () => {
     setFormDataProduct({
+      commerceID,
       name: "",
-      presentation: "",
-      marca: "",
+      description: "",
+      company: "",
       price: "",
+      image: "",
     });
   };
   return (
@@ -34,10 +62,10 @@ function FormAddProduct() {
       <h3 className="h3">Alta de Producto</h3>
       <div className="form-group">
         <label htmlFor="rubro">Rubro:</label>
-        <select id="rubro" >
-          <option value="lacteos">Lácteos</option>
-          <option value="bebidas">Bebidas</option>
-          <option value="limpieza">Limpieza</option>
+        <select id="rubro" onChange={handleChange} >
+          <option name= "lacteos" value={formDataProduct.categoryId}>Lácteos</option>
+          <option name="bebidas" value={formDataProduct.categoryId}>Bebidas</option>
+          <option name="limpieza" value={formDataProduct.categoryId}>Limpieza</option>
         </select>
       </div>
       <div className="form-group">
@@ -59,8 +87,8 @@ function FormAddProduct() {
           <input
             className="input-producto"
             type="text"
-            name="presentation"
-            value={formDataProduct.presentation}
+            name="description"
+            value={formDataProduct.description}
             onChange={handleChange}
             required
           />
@@ -72,8 +100,8 @@ function FormAddProduct() {
           <input
             className="input-producto"
             type="text"
-            name="marca"
-            value={formDataProduct.marca}
+            name="company"
+            value={formDataProduct.company}
             onChange={handleChange}
             required
           />
@@ -87,6 +115,19 @@ function FormAddProduct() {
             type="number"
             name="price"
             value={formDataProduct.price}
+            onChange={handleChange}
+            required
+          />
+        </label>
+      </div>
+      <div className="form-group">
+        <label>
+          Imagen:
+          <input
+            className="input-producto"
+            type="file"
+            name="image"
+            value={formDataProduct.image}
             onChange={handleChange}
             required
           />
@@ -110,87 +151,6 @@ const logout = () => {
   navigate("/"); 
 };
 
-
-// function FormEditProduct() {
-//   const handleChange = (e) => {
-//     const { name, value } = e.target;
-//     // setFormDataProduct({ ...formDataProduct, [name]: value });
-//   };
-//   function handleSubmit(e) {
-//     e.preventDefault();
-//     resetForm();
-//     console.log("grabo datos del producto");
-//   }
-
-//   return (
-//     <form className="form-container-producto" onSubmit={handleSubmit}>
-//       <h3 className="h3">Modificacion de Producto</h3>
-//       <div className="form-group">
-//         <label htmlFor="rubro">Seleccione producto:</label>
-//         <select id="rubro">
-//           <option value="cargar productos base">cargar productos base</option>
-//           <option value="cargar productos base">cargar productos base</option>
-//           <option value="cargar productos base">cargar productos base</option>
-//         </select>
-//       </div>
-//       <div className="form-group">
-//         <label>
-//           Nombre del Producto:
-//           <input
-//             className="input-producto"
-//             type="text"
-//             name="name"
-//             // value={formDataProduct.name}
-//             onChange={handleChange}
-//             required
-//           />
-//         </label>
-//       </div>
-//       <div className="form-group">
-//         <label>
-//           Presentacion:
-//           <input
-//             className="input-producto"
-//             type="text"
-//             name="presentation"
-//             // value={formDataProduct.presentation}
-//             onChange={handleChange}
-//             required
-//           />
-//         </label>
-//       </div>
-//       <div className="form-group">
-//         <label>
-//           Marca:
-//           <input
-//             className="input-producto"
-//             type="text"
-//             name="marca"
-//             // value={formDataProduct.marca}
-//             onChange={handleChange}
-//             required
-//           />
-//         </label>
-//       </div>
-//       <div className="form-group">
-//         <label>
-//           Precio:
-//           <input
-//             className="input-producto"
-//             type="number"
-//             name="price"
-//             // value={formDataProduct.price}
-//             onChange={handleChange}
-//             required
-//           />
-//         </label>
-//       </div>
-//       <div className="form-group">
-//         <button type="submit">Guardar cambios</button>
-//       </div>
-//     </form>
-//   );
-// }
 
 function FormDeleteProduct() {
   return (
@@ -225,7 +185,7 @@ function FormDeleteProduct() {
               <td>{producto.rubro}</td>
               <td>{producto.nombre}</td>
               <td>{producto.presentacion}</td>
-              <td>{producto.marca}</td>
+              <td>{producto.company}</td>
               <td>
                 <button onClick={() => handleEliminarProducto(producto.id)}>
                   <i className="fa fa-trash"></i>
@@ -246,18 +206,17 @@ function CommerceView() {
   const [mostrar, setMostrar] = useState("");
   const commerceName = JSON.parse(localStorage.getItem("commerceData"));
   const cName = commerceName.name;
-  const cID = commerceName.id;
+  const commerceID = commerceName.id;
 
-  function Vistas({ mostrar }) {
+  function Vistas({ mostrar , commerceID}) {
     switch (mostrar) {
       case "newproduct":
-        return <FormAddProduct />;
+        return <FormAddProduct commerceID = {commerceID}/>;
     
       case "delete":
         return <FormDeleteProduct />;
       
       default:
-        console.log(localStorage.commerceData)
         return <p>Aguardando seleccione opcion</p>;
     }
   }
@@ -291,7 +250,7 @@ function CommerceView() {
           </button>
           <button type='button'><Link onClick = {logout} to='/'>Salir</Link></button>
         </div>
-        <div className="right-section">{Vistas({ mostrar })}</div>
+        <div className="right-section">{Vistas({ mostrar, commerceID })}</div>
       </div>
     </div>
   );
