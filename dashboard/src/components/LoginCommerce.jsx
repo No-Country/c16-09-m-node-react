@@ -15,6 +15,7 @@ export default function Login() {
       navigate("/logincomercio/comercio");
     }
   },[loggedIn]);
+
   const send = async (data) => {
     console.log(data);
     try {
@@ -25,23 +26,28 @@ export default function Login() {
         },
         body: JSON.stringify(data),
       });
-      console.log("response", response);
+      const responseData = await response.json();
+      console.log(responseData);
+      localStorage.setItem("commerceData", JSON.stringify(responseData));
 
-      if (!response.ok) {
+      if (!responseData.name) {
         throw new Error("Error al iniciar la sesion");
       }
 
+      
       localStorage.setItem("loggedIn", "true");
       setLoggedIn(true);
     } catch (error) {
       console.log("Error al iniciar la sesion: ", error.message);
     }
   };
-  const logout = () => {
-    localStorage.removeItem("loggedIn"); // limpio local storage
-    setLoggedIn(false); // actualizo loggedIn state
-    navigate("/"); 
-  };
+  // const logout = () => {
+  //   console.log("logout")
+  //   localStorage.removeItem("loggedIn");
+  //   localStorage.removeItem("commerceData"); // limpio local storage
+  //   setLoggedIn(false); // actualizo loggedIn state
+  //   navigate("/"); 
+  // };
 
   return (
     <div className="login">
@@ -57,15 +63,17 @@ export default function Login() {
             type="email"
             placeholder="Ingresa tu Email"
             {...register("email")}
+            required
           />
           <input
             className="input-login"
             type="password"
             placeholder="Ingresa tu password"
             {...register("password")}
+            required
           />
           <button type="submit">Enviar</button>
-          <Link onClick = {logout} to="/">
+          <Link onClick to="/">
             Volver a inicio
           </Link>
         </form>

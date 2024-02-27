@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 
 
 function FormAddProduct() {
+  
   const [formDataProduct, setFormDataProduct] = useState({
     name: "",
     presentation: "",
@@ -101,86 +102,95 @@ function FormAddProduct() {
   );
 }
 
-function FormEditProduct() {
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    // setFormDataProduct({ ...formDataProduct, [name]: value });
-  };
-  function handleSubmit(e) {
-    e.preventDefault();
-    resetForm();
-    console.log("grabo datos del producto");
-  }
+const logout = () => {
+  console.log("logout")
+  localStorage.removeItem("loggedIn");
+  localStorage.removeItem("commerceData"); // limpio local storage
+  // setLoggedIn(false); // actualizo loggedIn state
+  navigate("/"); 
+};
 
-  return (
-    <form className="form-container-producto" onSubmit={handleSubmit}>
-      <h3 className="h3">Modificacion de Producto</h3>
-      <div className="form-group">
-        <label htmlFor="rubro">Seleccione producto:</label>
-        <select id="rubro">
-          <option value="cargar productos base">cargar productos base</option>
-          <option value="cargar productos base">cargar productos base</option>
-          <option value="cargar productos base">cargar productos base</option>
-        </select>
-      </div>
-      <div className="form-group">
-        <label>
-          Nombre del Producto:
-          <input
-            className="input-producto"
-            type="text"
-            name="name"
-            // value={formDataProduct.name}
-            onChange={handleChange}
-            required
-          />
-        </label>
-      </div>
-      <div className="form-group">
-        <label>
-          Presentacion:
-          <input
-            className="input-producto"
-            type="text"
-            name="presentation"
-            // value={formDataProduct.presentation}
-            onChange={handleChange}
-            required
-          />
-        </label>
-      </div>
-      <div className="form-group">
-        <label>
-          Marca:
-          <input
-            className="input-producto"
-            type="text"
-            name="marca"
-            // value={formDataProduct.marca}
-            onChange={handleChange}
-            required
-          />
-        </label>
-      </div>
-      <div className="form-group">
-        <label>
-          Precio:
-          <input
-            className="input-producto"
-            type="number"
-            name="price"
-            // value={formDataProduct.price}
-            onChange={handleChange}
-            required
-          />
-        </label>
-      </div>
-      <div className="form-group">
-        <button type="submit">Guardar cambios</button>
-      </div>
-    </form>
-  );
-}
+
+// function FormEditProduct() {
+//   const handleChange = (e) => {
+//     const { name, value } = e.target;
+//     // setFormDataProduct({ ...formDataProduct, [name]: value });
+//   };
+//   function handleSubmit(e) {
+//     e.preventDefault();
+//     resetForm();
+//     console.log("grabo datos del producto");
+//   }
+
+//   return (
+//     <form className="form-container-producto" onSubmit={handleSubmit}>
+//       <h3 className="h3">Modificacion de Producto</h3>
+//       <div className="form-group">
+//         <label htmlFor="rubro">Seleccione producto:</label>
+//         <select id="rubro">
+//           <option value="cargar productos base">cargar productos base</option>
+//           <option value="cargar productos base">cargar productos base</option>
+//           <option value="cargar productos base">cargar productos base</option>
+//         </select>
+//       </div>
+//       <div className="form-group">
+//         <label>
+//           Nombre del Producto:
+//           <input
+//             className="input-producto"
+//             type="text"
+//             name="name"
+//             // value={formDataProduct.name}
+//             onChange={handleChange}
+//             required
+//           />
+//         </label>
+//       </div>
+//       <div className="form-group">
+//         <label>
+//           Presentacion:
+//           <input
+//             className="input-producto"
+//             type="text"
+//             name="presentation"
+//             // value={formDataProduct.presentation}
+//             onChange={handleChange}
+//             required
+//           />
+//         </label>
+//       </div>
+//       <div className="form-group">
+//         <label>
+//           Marca:
+//           <input
+//             className="input-producto"
+//             type="text"
+//             name="marca"
+//             // value={formDataProduct.marca}
+//             onChange={handleChange}
+//             required
+//           />
+//         </label>
+//       </div>
+//       <div className="form-group">
+//         <label>
+//           Precio:
+//           <input
+//             className="input-producto"
+//             type="number"
+//             name="price"
+//             // value={formDataProduct.price}
+//             onChange={handleChange}
+//             required
+//           />
+//         </label>
+//       </div>
+//       <div className="form-group">
+//         <button type="submit">Guardar cambios</button>
+//       </div>
+//     </form>
+//   );
+// }
 
 function FormDeleteProduct() {
   return (
@@ -234,6 +244,9 @@ function FormDeleteProduct() {
 //funcion principal
 function CommerceView() {
   const [mostrar, setMostrar] = useState("");
+  const commerceName = JSON.parse(localStorage.getItem("commerceData"));
+  const cName = commerceName.name;
+  const cID = commerceName.id;
 
   function Vistas({ mostrar }) {
     switch (mostrar) {
@@ -244,6 +257,7 @@ function CommerceView() {
         return <FormDeleteProduct />;
       
       default:
+        console.log(localStorage.commerceData)
         return <p>Aguardando seleccione opcion</p>;
     }
   }
@@ -263,7 +277,7 @@ function CommerceView() {
       <div id="header-commerce">
         <h1 className="title-commerce">encuentraprecio.com</h1>
         <div>
-          <h2 id="nombre-comercio">NOMBRE COMERCIO</h2>
+          <h2 id="nombre-comercio">{cName.toUpperCase()}</h2>
         </div>
       </div>
       <div className="commerce-view">
@@ -275,7 +289,7 @@ function CommerceView() {
           <button type="button" onClick={handleViewDeleteProduct}>
             Modificacion o Baja Producto
           </button>
-          <button type='button'><Link to='/'>Salir</Link></button>
+          <button type='button'><Link onClick = {logout} to='/'>Salir</Link></button>
         </div>
         <div className="right-section">{Vistas({ mostrar })}</div>
       </div>
