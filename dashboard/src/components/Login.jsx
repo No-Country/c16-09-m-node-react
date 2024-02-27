@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, json } from "react-router-dom";
 
 export default function Login() {
   const { register, handleSubmit } = useForm();
@@ -25,7 +25,9 @@ export default function Login() {
         },
         body: JSON.stringify(data),
       });
-      console.log("response", response);
+
+      const responseData = await response.json();
+      localStorage.setItem("userData", JSON.stringify(responseData));
 
       if (!response.ok) {
         throw new Error("Error al iniciar la sesion");

@@ -2,11 +2,13 @@ import NavBarCategory from "./NavBarCategory";
 import ProductsOnSale from "./ProductsOnSale";
 import ProductsMostViewed from "./ProductsMostViewed";
 import NavBarButtonsMain from "./NavBarButtonsMain";
+import LoginWelcome from "./LoginWelcome";
 
 function Dashboard() {
   return (
     <>
       <h1 className='title'>encuentraprecio.com</h1>
+      <LoginWelcome />
       <h2>Las mejores ofertas están a solo un clic de distancia!</h2>
       <header>
         <NavBarButtonsMain />
