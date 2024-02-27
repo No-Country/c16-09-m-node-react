@@ -26,6 +26,6 @@ const productController = require('../controllers/productController');
 router.get('/List', productController.read);
 router.post('/create', productController.create);
 router.delete('/delete/:id', productController.softDelete);
-
+router.get('/restore/:id', productController.restore)
 
 module.exports = router;

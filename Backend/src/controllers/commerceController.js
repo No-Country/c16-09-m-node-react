@@ -67,7 +67,7 @@ else res.status(400).json({message: 'Sorry, the information came empty'});
       try {
         const {id} = req.params;
 let restored;
-        if(id != null && typeof id == 'number'){
+        if(id != null){
           const commerceToRestore = await db.Commerce.findByPk(id, {paranoid: false});
 
           if(commerceToRestore != null) {
