@@ -3,7 +3,7 @@ const LoginWelcome = () => {
   const userData = JSON.parse(userDataString);
 
   if (!userData) {
-    return <h3>Ingresa a tu cuenta para ver todas las ofertas para ver todas las ofertas!</h3>;
+    return <h3>Ingresa a tu cuenta para ver todas las ofertas!</h3>;
   }
 
   const { name, lastName } = userData;
