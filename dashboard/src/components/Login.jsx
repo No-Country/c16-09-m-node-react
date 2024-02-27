@@ -26,6 +26,7 @@ export default function Login() {
         body: JSON.stringify(data),
       });
       console.log("response", response);
+      console.log("Data", data);
 
       if (!response.ok) {
         throw new Error("Error al iniciar la sesion");

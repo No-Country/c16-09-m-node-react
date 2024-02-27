@@ -42,13 +42,6 @@ const UserRegister = () => {
       // Con Registro exitoso implementar redirección a la imagen de perfil, dejo redireccion a la vista inicio
       setUserRegisterOk(true);
 
-      // analizar error de este hook
-      // useEffect(() => {
-      //   if (userRegisterOk) {
-      //     window.location.href = "/";
-      //   }
-      // }, [userRegisterOk]);
-
       // Hacer test del proceso de registro y redireccion
     } catch (error) {
       console.log("Error al registrar usuario", error);
@@ -56,7 +49,7 @@ const UserRegister = () => {
   };
 
   const handleCancelar = () => {
-    // Aquí puedes implementar la lógica de cancelación o redirección
+    // Aquí  implementar la lógica de cancelación o redirección
     console.log("Registro cancelado");
   };
 
@@ -104,11 +97,11 @@ const UserRegister = () => {
 
   return (
     <div className='page-usuarios'>
-      <h1 className="title">encuentraprecio.com</h1>
+      <h1 className='title'>encuentraprecio.com</h1>
       <div className='form-container'>
         <form onSubmit={handleSubmit}>
           <h2>Registro de Usuario</h2>
-          {/* Campos de entrada */}
+
           <div className='form-group'>
             <label>
               Nombre:
