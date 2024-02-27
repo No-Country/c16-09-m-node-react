@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, json } from "react-router-dom";
 
 export default function Login() {
   const { register, handleSubmit } = useForm();
@@ -27,8 +27,9 @@ export default function Login() {
       });
 
       const responseData = await response.json();
-      console.log("Respuesta del servidor:", responseData);
+      localStorage.setItem("userData", JSON.stringify(responseData));
 
+      console.log("Respuesta del servidor:", responseData);
       console.log("response", response);
       console.log("Data", data);
 
