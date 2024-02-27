@@ -47,45 +47,70 @@ const controller = {
       if (id == null || id == undefined)
         res.status(400).json({ message: "You need an id for this operation." });
 
-        const fCheck = await db.Product.findByPk(id)
+      const fCheck = await db.Product.findByPk(id);
 
-        if(fCheck){
-          await db.Product.destroy({ where: { id: id } });
+      if (fCheck) {
+        await db.Product.destroy({ where: { id: id } });
 
-          fCheck == null
-            ? res
-                .status(200)
-                .json({
-                  message: `The product with the id ${id} was succesfully deleted`,
-                })
-            : res
-                .status(400)
-                .json({
-                  message:
-                    "There was an error deleting because we found the product in DB",
-                });
-        } else res.status(400).json({message: 'If we are here, is because the product didnt exist or you delete it already.'})
-      
+        fCheck == null
+          ? res.status(200).json({
+              message: `The product with the id ${id} was succesfully deleted`,
+            })
+          : res.status(400).json({
+              message:
+                "There was an error deleting because we found the product in DB",
+            });
+      } else
+        res
+          .status(400)
+          .json({
+            message:
+              "If we are here, is because the product didnt exist or you delete it already.",
+          });
     } catch (error) {
       res.status(400).json(error.message);
     }
   },
-  restore: async function(req, res){
+  restore: async function (req, res) {
     try {
-      const {id}= req.params;
+      const { id } = req.params;
 
-      if(id== null) res.status(400).json('We need an id... please');
-console.log(typeof id);
-      const toRestore = await db.Product.findByPk(id, {paranoid: false});
+      if (id == null) res.status(400).json("We need an id... please");
+      console.log(typeof id);
+      const toRestore = await db.Product.findByPk(id, { paranoid: false });
 
-      if(toRestore != null && toRestore.deletedAt != null) {
+      if (toRestore != null && toRestore.deletedAt != null) {
         await toRestore.restore();
-        res.status(200).json({message: 'Product restored successfully', toRestore});
-      } else res.status(400).json({message:'There wasnt any product to restore, sorry'});
+        res
+          .status(200)
+          .json({ message: "Product restored successfully", toRestore });
+      } else
+        res
+          .status(400)
+          .json({ message: "There wasnt any product to restore, sorry" });
     } catch (error) {
-      res.status(400).json(error.message)
+      res.status(400).json(error.message);
     }
-  }
+  },
+  update: async function (req, res) {
+    try {
+      const { id } = req.params;
+      console.log(id);
+      if (id == null) res.status(400).json("You need an id for this operation");
+
+      const checking = await db.Product.findByPk(id);
+      if (checking != null) {
+        const updating = await db.Product.update(req.body, {
+          where: { id: id },
+        });
+        const infoUpdated= await db.Product.findByPk(id);
+        updating!= null? res.status(200).json({message: 'Succesfull updating', infoUpdated}): res.status(400).json('Sorry, something went wrong')
+      }
+
+    } catch (error) {
+      res.status(400).json(error.message);
+    }
+  },
   //filter: async function (req, res) {
   //  try {
   //    const { amount } = req.body;
