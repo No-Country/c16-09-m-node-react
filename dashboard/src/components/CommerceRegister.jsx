@@ -3,21 +3,33 @@ import { Link } from "react-router-dom";
 
 export default function CommerceRegister() {
   const [formData, setFormData] = useState({
-    shopName: "",
+    name: "",
     address: "",
-    phone:"",
+    phoneNumber:"",
+    location: "",
     province: "",
-    city: "",
     email: "",
     password: "",
   });
   const [termsAccepted, setTermsAccepted] = useState(false); //para aceptar terminos y condiciones
-
+  const [success, setSuccess] = useState(false);
   const [provincias, setProvincias] = useState([]);
   const [selectedProvincia, setSelectedProvincia] = useState("");
   const [localidades, setLocalidades] = useState([]);
   const [selectedLocalidad, setSelectedLocalidad] = useState("");
+  const [message, setMessage] = useState("");
 
+
+  useEffect(() => {
+    if (success) {
+      setMessage("¡Comercio registrado exitosamente!");
+      resetForm();
+      setTimeout(() => {
+        setMessage("");
+      }, 5000);
+    }
+  }, [success]);
+  
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -27,23 +39,41 @@ export default function CommerceRegister() {
     setTermsAccepted(!termsAccepted);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!termsAccepted) {
       alert("Debe aceptar los términos y condiciones.");
       return;
     }
+    setSuccess(false);
+    try {
+      const response = await fetch("http://localhost:8000/commerce/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+  
+      if (!response.ok) {
+        throw new Error("Error al registrar el comercio");
+      }
+      setSuccess(true);
+    } catch (error) {
+      console.error("Error al registrar el comercio:", error);
+    }
+
 
     resetForm();
   };
 
   const resetForm = () => {
     setFormData({
-      shopName: "",
+      name: "",
       address: "",
-      phone:"",
+      phoneNumber:"",
       province: "",
-      city: "",
+      location: "",
       email: "",
       password: "",
       confirmPassword: "",
@@ -63,7 +93,7 @@ export default function CommerceRegister() {
       }
       const data = await response.json();
       setLocalidades(data.localidades);
-      setUsuario({ ...usuario, provincia: provincia });
+      setFormData({ ...formData, province: provincia });
     } catch (error) {
       console.log("Error al obtener las localidades:", error);
     }
@@ -71,7 +101,7 @@ export default function CommerceRegister() {
 
   const handleLocalidadChange = (e) => {
     setSelectedLocalidad(e.target.value);
-    setUsuario({ ...usuario, localidad: e.target.value });
+    setFormData({ ...formData, location: e.target.value });
   };
 
   useEffect(() => {
@@ -103,13 +133,13 @@ export default function CommerceRegister() {
           <div className='form-group'>
             <label>
               Nombre del Comercio:
-              <input type='text' name='shopName' value={formData.shopName} onChange={handleChange} required />
+              <input type='text' name='name' value={formData.name} onChange={handleChange} required />
             </label>
           </div>
           <div className='form-group'>
             <label>
               Teléfono:
-              <input type='text' name='phone' value={formData.phone} onChange={handleChange} />
+              <input type='text' name='phoneNumber' value={formData.phoneNumber} onChange={handleChange} />
             </label>
           </div>
           <div className='form-group'>
@@ -194,6 +224,7 @@ export default function CommerceRegister() {
           </div>
 
           <div className='form-group'>
+          {message && <p className='success-message'>{message}</p>}
             <button type='submit'>Registrar</button>
             <button type='button'><Link to='/'>Salir</Link></button>
           </div>
