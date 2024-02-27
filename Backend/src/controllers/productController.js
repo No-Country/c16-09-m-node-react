@@ -7,7 +7,7 @@ const controller = {
       const productsList = await db.Product.findAll({
         include: [{ model: db.Category, attributes: ["id", "name"] }],
       });
-console.log(productsList)
+      console.log(productsList);
       if (productsList.length > 0) res.status(200).json(productsList);
       else
         res
@@ -37,6 +37,35 @@ console.log(productsList)
             : res.status(400).json("There was an error creating the product");
         }
       }
+    } catch (error) {
+      res.status(400).json(error.message);
+    }
+  },
+  softDelete: async function (req, res) {
+    try {
+      const { id } = req.params;
+      if (id == null || id == undefined)
+        res.status(400).json({ message: "You need an id for this operation." });
+
+        const fCheck = await db.Product.findByPk(id)
+
+        if(fCheck){
+          await db.Product.destroy({ where: { id: id } });
+
+          fCheck == null
+            ? res
+                .status(200)
+                .json({
+                  message: `The product with the id ${id} was succesfully deleted`,
+                })
+            : res
+                .status(400)
+                .json({
+                  message:
+                    "There was an error deleting because we found the product in DB",
+                });
+        } else res.status(400).json({message: 'If we are here, is because the product didnt exist or you delete it already.'})
+      
     } catch (error) {
       res.status(400).json(error.message);
     }
