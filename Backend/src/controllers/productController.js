@@ -70,6 +70,22 @@ const controller = {
       res.status(400).json(error.message);
     }
   },
+  restore: async function(req, res){
+    try {
+      const {id}= req.params;
+
+      if(id== null) res.status(400).json('We need an id... please');
+console.log(typeof id);
+      const toRestore = await db.Product.findByPk(id, {paranoid: false});
+
+      if(toRestore != null && toRestore.deletedAt != null) {
+        await toRestore.restore();
+        res.status(200).json({message: 'Product restored successfully', toRestore});
+      } else res.status(400).json({message:'There wasnt any product to restore, sorry'});
+    } catch (error) {
+      res.status(400).json(error.message)
+    }
+  }
   //filter: async function (req, res) {
   //  try {
   //    const { amount } = req.body;
