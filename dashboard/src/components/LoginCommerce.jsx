@@ -1,15 +1,46 @@
 import { useForm } from "react-hook-form";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate} from "react-router-dom";
+import { useState, useEffect } from "react";
 import "./login.css";
 
 
 export default function Login() {
   const { register, handleSubmit } = useForm();
   const navigate= useNavigate();
-  const enviar = (data) => {
-    console.log("enviado", data);
-    navigate("/logincomercio/comercio");
-    // window.location.href = "/logincomercio/comercio";
+  const [loggedIn, setLoggedIn] = useState(false);
+
+  useEffect(() =>{
+    if (loggedIn){
+      console.log("loggedIn", loggedIn);
+      navigate("/logincomercio/comercio");
+    }
+  },[loggedIn]);
+  const send = async (data) => {
+    console.log(data);
+    try {
+      const response = await fetch("http://localhost:8000/commerce/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+      console.log("response", response);
+
+      if (!response.ok) {
+        throw new Error("Error al iniciar la sesion");
+      }
+
+      localStorage.setItem("loggedIn", "true");
+      setLoggedIn(true);
+    } catch (error) {
+      console.log("Error al iniciar la sesion: ", error.message);
+    }
+  };
+  const logout = () => {
+    localStorage.removeItem("loggedIn"); // limpio local storage
+    setLoggedIn(false); // actualizo loggedIn state
+    navigate("/"); 
   };
 
   return (
@@ -19,7 +50,7 @@ export default function Login() {
         <h1 className="sub-title">Mi Comercio</h1>
         <form
           className="form-container-login"
-          onSubmit={handleSubmit(enviar)}
+          onSubmit={handleSubmit(send)}
         >
           <input
             className="input-login"
@@ -34,7 +65,7 @@ export default function Login() {
             {...register("password")}
           />
           <button type="submit">Enviar</button>
-          <Link className="link" to="/">
+          <Link onClick = {logout} to="/">
             Volver a inicio
           </Link>
         </form>
