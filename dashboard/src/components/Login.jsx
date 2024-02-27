@@ -29,10 +29,6 @@ export default function Login() {
       const responseData = await response.json();
       localStorage.setItem("userData", JSON.stringify(responseData));
 
-      console.log("Respuesta del servidor:", responseData);
-      console.log("response", response);
-      console.log("Data", data);
-
       if (!response.ok) {
         throw new Error("Error al iniciar la sesion");
       }
