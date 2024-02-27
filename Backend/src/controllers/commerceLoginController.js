@@ -4,7 +4,7 @@ const commerceLogin = {
     index: async function(email, passValue){
         try {
             if(email == null || passValue == null) return{message: 'Without the right data, the right answer cannot be acquired'};
-
+else if(email == '' || password == '') return {message:'Im so sorry, empty strings are not valid as inputs here. Put the correct inputs please'};
             const verify = await db.Commerce.findOne({where: {email: email, password: passValue}});
 console.log(verify);
             if(verify != null) return verify;
