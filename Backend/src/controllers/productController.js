@@ -19,24 +19,50 @@ const controller = {
   },
   create: async function (req, res) {
     try {
-      if (req.body != null) {
-        const { name, company, description, offers, image, price } = req.body;
-        if (
-          (typeof name == "string" &&
-            typeof company == "string" &&
-            typeof description == "string" &&
-            typeof image == "string",
-          typeof price == "number")
-        ) {
-          const verifying = await db.Product.findOne({ where: { name: name } });
-          if (verifying != null)
-            res.status(400).json("There is a product with the same name");
-          const newProduct = await db.Product.create(req.body);
-          newProduct != null
-            ? res.status(200).json(newProduct)
-            : res.status(400).json("There was an error creating the product");
-        }
+      if (!req.body) {
+        return res
+          .status(400)
+          .json({ message: "No se han enviado datos del producto." });
       }
+
+      const { name, company, description, offers, price } = req.body;
+
+      if (!req.file) {
+        return res
+          .status(400)
+          .json({ message: "No se ha enviado ninguna imagen." });
+      }
+
+      const verifying = await db.Product.findOne({ where: { name } });
+      if (verifying) {
+        return res
+          .status(400)
+          .json({ message: "Ya existe un producto con este nombre." });
+      }
+
+
+       const imagePath = req.file.path;
+
+        const newProduct = await db.Product.create({
+          name,
+          company,
+          description,
+          offers,
+          price,
+          image: imagePath,
+        });
+        if (newProduct) {
+          return res
+            .status(200)
+            .json({
+              message: "Producto creado con éxito.",
+              product: newProduct,
+            });
+        } else {
+          return res
+            .status(400)
+            .json({ message: "Hubo un error al crear el producto." });
+        }
     } catch (error) {
       res.status(400).json(error.message);
     }
@@ -47,26 +73,21 @@ const controller = {
       if (id == null || id == undefined)
         res.status(400).json({ message: "You need an id for this operation." });
 
-      const fCheck = await db.Product.findByPk(id);
+      const product = await db.Product.findByPk(id);
 
-      if (fCheck) {
-        await db.Product.destroy({ where: { id: id } });
+      if (!product) {
+        return res.status(404).json({ message: "Product not found" });
+      }
 
-        fCheck == null
-          ? res.status(200).json({
-              message: `The product with the id ${id} was succesfully deleted`,
-            })
-          : res.status(400).json({
-              message:
-                "There was an error deleting because we found the product in DB",
-            });
-      } else
-        res
-          .status(400)
-          .json({
-            message:
-              "If we are here, is because the product didnt exist or you delete it already.",
-          });
+      if (product.image) {
+        await fs.unlink(path.join("../public/uploads", product.image));
+      }
+
+      await db.Product.destroy({ where: { id: id } });
+
+      res.status(200).json({
+        message: `The product with the id ${id} was successfully deleted`,
+      });
     } catch (error) {
       res.status(400).json(error.message);
     }
@@ -95,18 +116,45 @@ const controller = {
   update: async function (req, res) {
     try {
       const { id } = req.params;
-      console.log(id);
-      if (id == null) res.status(400).json("You need an id for this operation");
-
-      const checking = await db.Product.findByPk(id);
-      if (checking != null) {
-        const updating = await db.Product.update(req.body, {
-          where: { id: id },
+      if (!id) {
+        return res.status(400).json({
+          message: "A valid ID is required to update the product.",
         });
-        const infoUpdated= await db.Product.findByPk(id);
-        updating!= null? res.status(200).json({message: 'Succesfull updating', infoUpdated}): res.status(400).json('Sorry, something went wrong')
       }
 
+      const checking = await db.Product.findByPk(id);
+      if (!checking) {
+        return res.status(404).json({ message: "Product not found" });
+      }
+
+      const { name, company, description, price } = req.body;
+
+      let imagePath = checking.image;
+      if (req.file) {
+        imagePath = req.file.path;
+      }
+
+      const updatedFields = {
+        name: name ? name : checking.name,
+        company: company ? company : checking.company,
+        description: description ? description : checking.description,
+        image: imagePath,
+        price: price ? price : checking.price,
+      };
+
+      const updatedProduct = await checking.update(updatedFields);
+      if (updatedProduct) {
+        return res
+          .status(200)
+          .json({
+            message: "Producto actualizado con éxito.",
+            product: updatedProduct,
+          });
+      } else {
+        return res
+          .status(400)
+          .json({ message: "Hubo un error al actualizar el producto." });
+      }
     } catch (error) {
       res.status(400).json(error.message);
     }
