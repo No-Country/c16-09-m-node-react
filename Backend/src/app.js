@@ -26,10 +26,12 @@ server.use((req, res, next) => {
 const userRoutes = require("./routes/users");
 const commerceRoutes = require("./routes/commerce");
 const productsRoutes = require('./routes/products');
+const categoryRoutes = require('./routes/category')
 
 server.use("/user", userRoutes);
 server.use("/commerce", commerceRoutes);
-server.use("/products", productsRoutes)
+server.use("/products", productsRoutes);
+server.use("/category", categoryRoutes);
 
 // Configurar Swagger
 const swaggerOptions = {
@@ -47,7 +49,15 @@ const swaggerOptions = {
       },
     ],
   },
-  apis: ["./routes/users.js", "./controllers/userController.js", "./routes/commerce.js", "./controllers/commerceLoginController.js", "./routes/products.js", "./controllers/productController.js"],
+  apis: [
+    "./routes/users.js",
+    "./controllers/userController.js",
+    "./routes/commerce.js",
+    "./controllers/commerceLoginController.js",
+    "./routes/products.js",
+    "./controllers/productController.js",
+    "./routes/category.js",
+  ],
 };
 const swaggerSpec = swaggerJSDoc(swaggerOptions);
 server.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
