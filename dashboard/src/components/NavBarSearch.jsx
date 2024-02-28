@@ -26,7 +26,7 @@ const NavBarSearch = () => {
 
   const filterProducts = (terms) => {
     let searchResult = productsList.filter((product) => {
-      if (product.name.toString().toLowercase().incluides(terms.toLowercase())) {
+      if (product.name.toString().toLowerCase().includes(terms.toLowerCase())) {
         return product;
       }
     });
@@ -41,12 +41,7 @@ const NavBarSearch = () => {
     <div>
       <div>
         <h3>Ingresa el producto que buscas</h3>
-        <input
-          type='search'
-          value={search}
-          onChange={handleChange}
-          placeholder='Busca tu producto para comparar precios'
-        />
+        <input type='search' value={search} onChange={handleChange} placeholder='Busca tu producto ' />
       </div>
       <table>
         <thead>

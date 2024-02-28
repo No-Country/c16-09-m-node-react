@@ -10,8 +10,6 @@ export default function Login() {
 
   useEffect(() => {
     if (loggedIn) {
-      console.log("loggedIn", loggedIn);
-
       window.location.href = "/";
     }
   }, [loggedIn]);
