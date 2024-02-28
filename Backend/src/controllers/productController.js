@@ -1,5 +1,7 @@
 const db = require("../database/models");
 const { Op } = require("sequelize");
+const path = require('path')
+const fs = require("fs");
 
 const controller = {
   read: async function (req, res) {
@@ -40,29 +42,26 @@ const controller = {
           .json({ message: "Ya existe un producto con este nombre." });
       }
 
+      const imagePath = req.file.path;
 
-       const imagePath = req.file.path;
-
-        const newProduct = await db.Product.create({
-          name,
-          company,
-          description,
-          offers,
-          price,
-          image: imagePath,
+      const newProduct = await db.Product.create({
+        name,
+        company,
+        description,
+        offers,
+        price,
+        image: imagePath,
+      });
+      if (newProduct) {
+        return res.status(200).json({
+          message: "Producto creado con éxito.",
+          product: newProduct,
         });
-        if (newProduct) {
-          return res
-            .status(200)
-            .json({
-              message: "Producto creado con éxito.",
-              product: newProduct,
-            });
-        } else {
-          return res
-            .status(400)
-            .json({ message: "Hubo un error al crear el producto." });
-        }
+      } else {
+        return res
+          .status(400)
+          .json({ message: "Hubo un error al crear el producto." });
+      }
     } catch (error) {
       res.status(400).json(error.message);
     }
@@ -70,8 +69,11 @@ const controller = {
   softDelete: async function (req, res) {
     try {
       const { id } = req.params;
-      if (id == null || id == undefined)
-        res.status(400).json({ message: "You need an id for this operation." });
+      if (!id) {
+        return res.status(400).json({
+          message: "A valid ID is required to delete the product.",
+        });
+      }
 
       const product = await db.Product.findByPk(id);
 
@@ -79,13 +81,9 @@ const controller = {
         return res.status(404).json({ message: "Product not found" });
       }
 
-      if (product.image) {
-        await fs.unlink(path.join("../public/uploads", product.image));
-      }
-
       await db.Product.destroy({ where: { id: id } });
 
-      res.status(200).json({
+      return res.status(200).json({
         message: `The product with the id ${id} was successfully deleted`,
       });
     } catch (error) {
@@ -144,12 +142,10 @@ const controller = {
 
       const updatedProduct = await checking.update(updatedFields);
       if (updatedProduct) {
-        return res
-          .status(200)
-          .json({
-            message: "Producto actualizado con éxito.",
-            product: updatedProduct,
-          });
+        return res.status(200).json({
+          message: "Producto actualizado con éxito.",
+          product: updatedProduct,
+        });
       } else {
         return res
           .status(400)
