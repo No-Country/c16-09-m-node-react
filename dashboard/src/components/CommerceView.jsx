@@ -14,6 +14,26 @@ function FormAddProduct({commerceID}) {
     image: "",
     categoryId:"",
   });
+  const [selectedCategory, setSelectedCategory]= useState("")
+  const handleRubroChange = async (e) => {
+    const category = e.target.value;
+
+    setSelectedCategory(category);
+
+    try {
+      const response = await fetch(
+        // `https://apis.datos.gob.ar/georef/api/localidades?provincia=${provincia}&orden=id&aplanar=true&campos=estandar&max=530`
+      );
+      if (!response.ok) {
+        throw new Error("Error al obtener las categorias");
+      }
+      const data = await response.json();
+      setSelectedCategory(data.category);
+      setFormDataProduct({ ...formDataProduct, categoryId: category });
+    } catch (error) {
+      console.log("Error al obtener las categorias:", error);
+    }
+  };
 
   
 
@@ -25,22 +45,22 @@ function FormAddProduct({commerceID}) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setSuccess(false);
-    // try {
-    //   const response = await fetch("http://localhost:8000/product/register", {
-    //     method: "POST",
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //     body: JSON.stringify(formData),
-    //   });
+    try {
+      const response = await fetch("http://localhost:8000/products/create", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
 
-    //   if (!response.ok) {
-    //     throw new Error("Error al registrar el comercio");
-    //   }
-    //   setSuccess(true);
-    // } catch (error) {
-    //   console.error("Error al registrar el comercio:", error);
-    // }
+      if (!response.ok) {
+        throw new Error("Error al registrar el comercio");
+      }
+      setSuccess(true);
+    } catch (error) {
+      console.error("Error al registrar el comercio:", error);
+    }
     setFormDataProduct({ ...formDataProduct, commerceId: {commerceID}});
     
     console.log(formDataProduct)
@@ -61,11 +81,14 @@ function FormAddProduct({commerceID}) {
     <form className="form-container-producto" onSubmit={handleSubmit}>
       <h3 className="h3">Alta de Producto</h3>
       <div className="form-group">
-        <label htmlFor="rubro">Rubro:</label>
-        <select id="rubro" onChange={handleChange} >
-          <option name= "lacteos" value={formDataProduct.categoryId}>Lácteos</option>
-          <option name="bebidas" value={formDataProduct.categoryId}>Bebidas</option>
-          <option name="limpieza" value={formDataProduct.categoryId}>Limpieza</option>
+        <label htmlFor="rubro">Seleccione Rubro:</label>
+        <select name= "category" id="category" value={selectedCategory} onChange={handleRubroChange} >
+          <option value=''>Rubro</option>
+          {category.map((category) => (
+                  <option key={category.id} value={category.id}>
+                    {category.nombre}
+                  </option>
+                ))}
         </select>
       </div>
       <div className="form-group">
