@@ -42,7 +42,7 @@ h1 {
 h2 {
   color: #f05a38;
   font-size: 2.2em;
-  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5)
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
 }
 .div h2 {
   text-align: center;
@@ -104,7 +104,7 @@ label {
 }
 .title {
   color: #f05a38;
-  text-shadow: 5px 5px 5px #242424 ;
+  text-shadow: 5px 5px 5px #242424;
   text-align: center;
   background-color: transparent;
 }
@@ -132,7 +132,7 @@ select {
   flex-wrap: wrap;
   justify-content: space-evenly;
 }
-.terms{
+.terms {
   display: flex;
   flex-direction: row-reverse;
   align-items: stretch;
@@ -143,7 +143,6 @@ select {
 }
 .page-commerce {
   background-position: center center;
-
   background-image: url("../src/assets/images/imagesPages/load-2060616_1280.jpg");
   background-size: cover;
   width: 100vw;
@@ -165,7 +164,7 @@ header {
 .dashboard {
   display: grid;
   background-position: center center;
-  background-image: url("../src/assets/images/imagesPages/shopping-879498_1280.jpg");
+  /* background-image: url("../src/assets/images/imagesPages/shopping-879498_1280.jpg"); */
   background-size: cover;
   justify-items: center;
   height: fit-content;

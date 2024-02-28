@@ -3,6 +3,7 @@ import ProductsOnSale from "./ProductsOnSale";
 import ProductsMostViewed from "./ProductsMostViewed";
 import NavBarButtonsMain from "./NavBarButtonsMain";
 import LoginWelcome from "./LoginWelcome";
+import NavBarSearch from "./NavBarSearch";
 
 function Dashboard() {
   return (
@@ -22,10 +23,8 @@ function Dashboard() {
           </p>
         </div>
         <NavBarCategory />
-        <form>
-          <input type='search' placeholder='Busca el producto para comparar precios' />
-          <button type='submit'>Buscar Productos</button>
-        </form>
+
+        <NavBarSearch />
       </div>
 
       <ProductsOnSale />
