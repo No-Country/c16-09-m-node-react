@@ -1,6 +1,6 @@
 const db = require("../database/models");
 const { Op } = require("sequelize");
-const path = require('path')
+const path = require("path");
 const fs = require("fs");
 
 const controller = {
@@ -24,7 +24,7 @@ const controller = {
       if (!req.body) {
         return res
           .status(400)
-          .json({ message: "No se han enviado datos del producto." });
+          .json({ message: "No product data has been sent." });
       }
 
       const { name, company, description, offers, price } = req.body;
@@ -32,14 +32,14 @@ const controller = {
       if (!req.file) {
         return res
           .status(400)
-          .json({ message: "No se ha enviado ninguna imagen." });
+          .json({ message: "No image has been sent." });
       }
 
       const verifying = await db.Product.findOne({ where: { name } });
       if (verifying) {
         return res
           .status(400)
-          .json({ message: "Ya existe un producto con este nombre." });
+          .json({ message: "There is already a product with this name." });
       }
 
       const imagePath = req.file.path;
@@ -54,13 +54,13 @@ const controller = {
       });
       if (newProduct) {
         return res.status(200).json({
-          message: "Producto creado con éxito.",
+          message: "Successfully created product.",
           product: newProduct,
         });
       } else {
         return res
           .status(400)
-          .json({ message: "Hubo un error al crear el producto." });
+          .json({ message: "There was an error creating the product." });
       }
     } catch (error) {
       res.status(400).json(error.message);
@@ -143,13 +143,13 @@ const controller = {
       const updatedProduct = await checking.update(updatedFields);
       if (updatedProduct) {
         return res.status(200).json({
-          message: "Producto actualizado con éxito.",
+          message: "Product updated successfully.",
           product: updatedProduct,
         });
       } else {
         return res
           .status(400)
-          .json({ message: "Hubo un error al actualizar el producto." });
+          .json({ message: "There was an error updating the product." });
       }
     } catch (error) {
       res.status(400).json(error.message);
