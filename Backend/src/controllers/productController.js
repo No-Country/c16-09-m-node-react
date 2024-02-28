@@ -1,5 +1,7 @@
 const db = require("../database/models");
 const { Op } = require("sequelize");
+const path = require("path");
+const fs = require("fs");
 
 const controller = {
   read: async function (req, res) {
@@ -19,23 +21,46 @@ const controller = {
   },
   create: async function (req, res) {
     try {
-      if (req.body != null) {
-        const { name, company, description, offers, image, price } = req.body;
-        if (
-          (typeof name == "string" &&
-            typeof company == "string" &&
-            typeof description == "string" &&
-            typeof image == "string",
-          typeof price == "number")
-        ) {
-          const verifying = await db.Product.findOne({ where: { name: name } });
-          if (verifying != null)
-            res.status(400).json("There is a product with the same name");
-          const newProduct = await db.Product.create(req.body);
-          newProduct != null
-            ? res.status(200).json(newProduct)
-            : res.status(400).json("There was an error creating the product");
-        }
+      if (!req.body) {
+        return res
+          .status(400)
+          .json({ message: "No product data has been sent." });
+      }
+
+      const { name, company, description, offers, price } = req.body;
+
+      if (!req.file) {
+        return res
+          .status(400)
+          .json({ message: "No image has been sent." });
+      }
+
+      const verifying = await db.Product.findOne({ where: { name } });
+      if (verifying) {
+        return res
+          .status(400)
+          .json({ message: "There is already a product with this name." });
+      }
+
+      const imagePath = req.file.path;
+
+      const newProduct = await db.Product.create({
+        name,
+        company,
+        description,
+        offers,
+        price,
+        image: imagePath,
+      });
+      if (newProduct) {
+        return res.status(200).json({
+          message: "Successfully created product.",
+          product: newProduct,
+        });
+      } else {
+        return res
+          .status(400)
+          .json({ message: "There was an error creating the product." });
       }
     } catch (error) {
       res.status(400).json(error.message);
@@ -44,29 +69,23 @@ const controller = {
   softDelete: async function (req, res) {
     try {
       const { id } = req.params;
-      if (id == null || id == undefined)
-        res.status(400).json({ message: "You need an id for this operation." });
+      if (!id) {
+        return res.status(400).json({
+          message: "A valid ID is required to delete the product.",
+        });
+      }
 
-      const fCheck = await db.Product.findByPk(id);
+      const product = await db.Product.findByPk(id);
 
-      if (fCheck) {
-        await db.Product.destroy({ where: { id: id } });
+      if (!product) {
+        return res.status(404).json({ message: "Product not found" });
+      }
 
-        fCheck == null
-          ? res.status(200).json({
-              message: `The product with the id ${id} was succesfully deleted`,
-            })
-          : res.status(400).json({
-              message:
-                "There was an error deleting because we found the product in DB",
-            });
-      } else
-        res
-          .status(400)
-          .json({
-            message:
-              "If we are here, is because the product didnt exist or you delete it already.",
-          });
+      await db.Product.destroy({ where: { id: id } });
+
+      return res.status(200).json({
+        message: `The product with the id ${id} was successfully deleted`,
+      });
     } catch (error) {
       res.status(400).json(error.message);
     }
@@ -95,18 +114,43 @@ const controller = {
   update: async function (req, res) {
     try {
       const { id } = req.params;
-      console.log(id);
-      if (id == null) res.status(400).json("You need an id for this operation");
-
-      const checking = await db.Product.findByPk(id);
-      if (checking != null) {
-        const updating = await db.Product.update(req.body, {
-          where: { id: id },
+      if (!id) {
+        return res.status(400).json({
+          message: "A valid ID is required to update the product.",
         });
-        const infoUpdated= await db.Product.findByPk(id);
-        updating!= null? res.status(200).json({message: 'Succesfull updating', infoUpdated}): res.status(400).json('Sorry, something went wrong')
       }
 
+      const checking = await db.Product.findByPk(id);
+      if (!checking) {
+        return res.status(404).json({ message: "Product not found" });
+      }
+
+      const { name, company, description, price } = req.body;
+
+      let imagePath = checking.image;
+      if (req.file) {
+        imagePath = req.file.path;
+      }
+
+      const updatedFields = {
+        name: name ? name : checking.name,
+        company: company ? company : checking.company,
+        description: description ? description : checking.description,
+        image: imagePath,
+        price: price ? price : checking.price,
+      };
+
+      const updatedProduct = await checking.update(updatedFields);
+      if (updatedProduct) {
+        return res.status(200).json({
+          message: "Product updated successfully.",
+          product: updatedProduct,
+        });
+      } else {
+        return res
+          .status(400)
+          .json({ message: "There was an error updating the product." });
+      }
     } catch (error) {
       res.status(400).json(error.message);
     }
