@@ -67,7 +67,7 @@ const commerceController = require('../controllers/commerceController')
 
 /**
  * @swagger
- * /delete/{id}:
+ * /commerce/delete/{id}:
  *   delete:
  *     summary: Eliminar/suspender un comercio
  *     tags: [Commerce]
@@ -87,7 +87,7 @@ const commerceController = require('../controllers/commerceController')
 
 /**
  * @swagger
- * /list:
+ * /commerce/list:
  *  get:
  *    summary: Obtener lista de comercios registrados
  *    description: Ruta para visualizar la cantidad de comercios registrados
@@ -101,7 +101,7 @@ const commerceController = require('../controllers/commerceController')
 
 /**
  * @swagger
- * /profile/{id}:
+ * /commerce/profile/{id}:
  *   get:
  *     summary: Obtener información de comercio por Id
  *     description: Ruta para obtener informacion sobre un comercio específico
@@ -122,7 +122,7 @@ const commerceController = require('../controllers/commerceController')
 
 /**
  * @swagger
- * /restore/{id}:
+ * /commerce/restore/{id}:
  *  get:
  *    summary: Restaurar comercio
  *    tags: [Commerce]
