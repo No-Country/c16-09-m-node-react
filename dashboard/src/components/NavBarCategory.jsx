@@ -1,72 +1,82 @@
 import { useState } from "react";
 import "./NavBarCategory.css";
+import FilterProducts from "./FilterProduct";
 
 export default function NavBarCategory() {
   // Estado para almacenar los valores seleccionados de los checkboxes
-  const [selectedCategories, setSelectedCategories] = useState({
-    category1: false,
-    category2: false,
-    category3: false,
-    category4: false,
-    category5: false,
-  });
+  const [selectedCategories, setSelectedCategories] = useState("");
 
   // Función para manejar el cambio de estado de los checkboxes
-  const handleCheckboxChange = (category) => {
-    setSelectedCategories({ ...selectedCategories, [category]: !selectedCategories[category] });
+  const HandleCheckboxChange = (category) => {
+    setSelectedCategories(category);
+    return(
+      <FilterProducts category={selectedCategories}/>
+    )
+    // console.log(category);
+
+        // <FilterProducts category = {category}/>
+   
   };
   return (
-    <div className='navbar-categories'>
-      <div className='category-item'>
-        <label className='category-label'>
-          Almacen:
-          <input
-            type='checkbox'
-            checked={selectedCategories.category1}
-            onChange={() => handleCheckboxChange("category1")}
-          />
-        </label>
+    <div className="div-seleccion">
+      <div className="navbar-categories">
+        <div className="category-item">
+          <label className="category-label">
+            Almacen:
+            <input
+              type="radio"
+              name="category"
+              checked={selectedCategories.almacen}
+              onChange={() => HandleCheckboxChange("1")}
+            />
+          </label>
+        </div>
+        <div className="category-item">
+          <label className="category-label">
+            Bebidas:
+            <input
+              type="radio"
+              name="category"
+              checked={selectedCategories.category2}
+              onChange={() => HandleCheckboxChange("2")}
+            />
+          </label>
+        </div>
+        <div className="category-item">
+          <label className="category-label">
+            Limpieza:
+            <input
+              type="radio"
+              name="category"
+              checked={selectedCategories.category3}
+              onChange={() => HandleCheckboxChange("3")}
+            />
+          </label>
+        </div>
+        <div className="category-item">
+          <label className="category-label">
+            Perfumeria:
+            <input
+              type="radio"
+              name="category"
+              checked={selectedCategories.category4}
+              onChange={() => HandleCheckboxChange("4")}
+            />
+          </label>
+        </div>
+        <div className="category-item">
+          <label className="category-label">
+            Mascotas:
+            <input
+              type="radio"
+              name="category"
+              checked={selectedCategories.category5}
+              onChange={() => HandleCheckboxChange("5")}
+            />
+          </label>
+        </div>
       </div>
-      <div className='category-item'>
-        <label className='category-label'>
-          Bebidas:
-          <input
-            type='checkbox'
-            checked={selectedCategories.category2}
-            onChange={() => handleCheckboxChange("category2")}
-          />
-        </label>
-      </div>
-      <div className='category-item'>
-        <label className='category-label'>
-          Limpieza:
-          <input
-            type='checkbox'
-            checked={selectedCategories.category3}
-            onChange={() => handleCheckboxChange("category3")}
-          />
-        </label>
-      </div>
-      <div className='category-item'>
-        <label className='category-label'>
-          Perfumeria:
-          <input
-            type='checkbox'
-            checked={selectedCategories.category4}
-            onChange={() => handleCheckboxChange("category4")}
-          />
-        </label>
-      </div>
-      <div className='category-item'>
-        <label className='category-label'>
-          Mascotas:
-          <input
-            type='checkbox'
-            checked={selectedCategories.category5}
-            onChange={() => handleCheckboxChange("category5")}
-          />
-        </label>
-      </div>
+      {selectedCategories && <FilterProducts category={selectedCategories} />}
     </div>
   );
 }
