@@ -1,7 +1,9 @@
 import "./ProductCard.css";
 import defaultProductImage from "../assets/images/products/defaul-product-image.jpeg";
 
-const ProductCard = () => {
+const ProductCard = ({ product }) => {
+  const { name, category, price, company, descripcion, image } = product;
+
   return (
     <div className='product-card'>
       <div className='product-image'>
