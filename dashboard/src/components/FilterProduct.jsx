@@ -51,10 +51,8 @@ const FilterProducts = ({category}) => {
 
   
   const filterProducts = () => {
-    console.log(category +" en filterProducts");
-    console.log(products.categoryId)
-    console.log(productsList);
-    const searchResult = productsList.filter((product) => product?.categoryId === category);
+    // console.log(productsList[0].categoryId);
+    const searchResult = productsList.filter((product) => product?.categoryId == category);
     setProducts(searchResult);
     
   };
