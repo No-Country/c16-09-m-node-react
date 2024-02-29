@@ -7,7 +7,13 @@ const controller = {
   read: async function (req, res) {
     try {
       const productsList = await db.Product.findAll({
-        include: [{ model: db.Category, attributes: ["id", "name"] }],
+        include: [
+          { model: db.Category, attributes: ["id", "name"] },
+          {
+            model: db.Commerce,
+            attributes: ["name", "location", "address", "province"],
+          },
+        ],
       });
       console.log(productsList);
       if (productsList.length > 0) res.status(200).json(productsList);
@@ -30,9 +36,7 @@ const controller = {
       const { name, company, description, offers, price } = req.body;
 
       if (!req.file) {
-        return res
-          .status(400)
-          .json({ message: "No image has been sent." });
+        return res.status(400).json({ message: "No image has been sent." });
       }
 
       const verifying = await db.Product.findOne({ where: { name } });
