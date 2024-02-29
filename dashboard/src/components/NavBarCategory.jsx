@@ -7,11 +7,8 @@ export default function NavBarCategory() {
   const [selectedCategories, setSelectedCategories] = useState("");
 
   // Función para manejar el cambio de estado de los checkboxes
-  const HandleCheckboxChange = (category) => {
+  const handleCheckboxChange = (category) => {
     setSelectedCategories(category);
-    return(
-      <FilterProducts category={selectedCategories}/>
-    )
     // console.log(category);
 
         // <FilterProducts category = {category}/>
@@ -27,7 +24,7 @@ export default function NavBarCategory() {
               type="radio"
               name="category"
               checked={selectedCategories.almacen}
-              onChange={() => HandleCheckboxChange("1")}
+              onChange={() => handleCheckboxChange("1")}
             />
           </label>
         </div>
@@ -38,7 +35,7 @@ export default function NavBarCategory() {
               type="radio"
               name="category"
               checked={selectedCategories.category2}
-              onChange={() => HandleCheckboxChange("2")}
+              onChange={() => handleCheckboxChange("2")}
             />
           </label>
         </div>
@@ -49,7 +46,7 @@ export default function NavBarCategory() {
               type="radio"
               name="category"
               checked={selectedCategories.category3}
-              onChange={() => HandleCheckboxChange("3")}
+              onChange={() => handleCheckboxChange("3")}
             />
           </label>
         </div>
@@ -60,7 +57,7 @@ export default function NavBarCategory() {
               type="radio"
               name="category"
               checked={selectedCategories.category4}
-              onChange={() => HandleCheckboxChange("4")}
+              onChange={() => handleCheckboxChange("4")}
             />
           </label>
         </div>
@@ -71,7 +68,7 @@ export default function NavBarCategory() {
               type="radio"
               name="category"
               checked={selectedCategories.category5}
-              onChange={() => HandleCheckboxChange("5")}
+              onChange={() => handleCheckboxChange("5")}
             />
           </label>
         </div>
