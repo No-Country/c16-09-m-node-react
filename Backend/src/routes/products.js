@@ -152,5 +152,6 @@ router.post("/create", upload.single("image"), productController.create);
 router.delete("/delete/:id", productController.softDelete);
 router.get("/restore/:id", productController.restore);
 router.put("/update/:id", upload.single("image"), productController.update);
+router.post("/filterByLocation", productController.filterByLocation)
 
 module.exports = router;

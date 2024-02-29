@@ -159,6 +159,28 @@ const controller = {
       res.status(400).json(error.message);
     }
   },
+  filterByLocation: async function (req, res) {
+    try {
+      const { location, province } = req.body;
+
+      if (location == null || province == null)
+        res.status(400).json("Sorry, empty values");
+      else if (location == "" || province == "")
+        res.status(400).json("Still empty strings... why is this happening?");
+
+      const filterThis = await db.Product.findAll({
+        include: [{ model: db.Commerce, where: {
+          location: location,
+          province: province
+        } }, {model: db.Category, attributes: ["name"]}],
+      });
+
+      if(filterThis.length < 0) res.status(404).json('Sorry, there was nothing that matches the search.')
+      res.status(200).json(filterThis);
+    } catch (error) {
+      res.status(404).json(error.message)
+    }
+  }
   //filter: async function (req, res) {
   //  try {
   //    const { amount } = req.body;
