@@ -1,21 +1,138 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./Commerceview.css";
 import { Link } from "react-router-dom";
-
+import axios from "axios";
 
 function FormAddProduct({commerceID}) {
-  const [success, setSuccess] = useState(false);
-  const [formDataProduct, setFormDataProduct] = useState({
-    commerceID,
-    name: "",
-    description: "",
-    company: "",
-    price: "",
-    image: "",
-    categoryId:"",
-  });
+  // const [success, setSuccess] = useState(false);
+  // const url = "http://localhost:8000/category";
+  // const [formDataProduct, setFormDataProduct] = useState({
+  //   commerceID,
+  //   name: "",
+  //   description: "",
+  //   company: "",
+  //   price: "",
+  //   image: "",
+  //   categoryId:"",
+  // });
 
+  // useEffect(() => {
+  //   populateSelect();
+  // }, []);
+
+
+  // const [selectedCategory, setSelectedCategory]= useState("")
+  // const fetchData = async () => {
+  //   const response = await fetch(url);
+  //   const data = await response.json();
+  //   return data;
+  // };
+  // const populateSelect = async () => {
+  //   const data = await fetchData();
+  //   const options = data.map((category) => {
+  //     return `<option value="${category.id}">${category.name}</option>`;
+  //   });
+  //   const selectElement = document.getElementById("select");
+  //   selectElement.innerHTML = options.join("");
+  // };
   
+  // // populateSelect();
+  // const handleRubroChange = async (e) => {
+  //   // const category = e.target.value;
+  //   const { name, value } = e.target;
+  //   setFormDataProduct({ ...formDataProduct, [name]: value });
+
+    // setSelectedCategory(category);
+
+    // try {
+    //   const response = await fetch(
+    //     `http://localhost:8000/category`
+    //     // `https://apis.datos.gob.ar/georef/api/localidades?provincia=${provincia}&orden=id&aplanar=true&campos=estandar&max=530`
+    //   );
+    //   if (!response.ok) {
+    //     throw new Error("Error al obtener las categorias");
+    //   }
+    //   const data = await response.json();
+    //   setSelectedCategory(data.category);
+    //   setFormDataProduct({ ...formDataProduct, categoryId: category });
+    // } catch (error) {
+    //   console.log("Error al obtener las categorias:", error);
+    // }
+  // };
+
+    const [success, setSuccess] = useState(false);
+    const url = "http://localhost:8000/category/categories";
+    const [formDataProduct, setFormDataProduct] = useState({
+      commerceID,
+      name: "",
+      description: "",
+      company: "",
+      price: "",
+      image: "",
+      categoryId: "",
+    });
+    const [selectedCategory, setSelectedCategory] = useState("");
+    const [categories, setCategories] = useState([]); // Store fetched categories
+  
+    // useEffect(() => {
+
+    //   const getProducts = async () => {
+    //     await axios
+    //       .get(url)
+    //       .then((response) => {
+    //         setCategories(response.data);
+    //         populateSelect();
+    //       })
+    //       .catch((error) => {
+    //         console.log(error);
+    //       });
+    //   };
+    //   console.log(setCategories);
+    //   getProducts();
+      // async function fetchData() {
+      //   try {
+      //     const response = await fetch(url);
+      //     if (!response.ok) {
+      //       throw new Error("Failed to fetch categories");
+      //     }
+      //     const data = await response.json();
+      //     setCategories(data);
+      //     populateSelect();
+      //   } catch (error) {
+      //     console.error("Error fetching categories:", error);
+      //     // Handle the error appropriately (e.g., display an error message to the user)
+      //   }
+      // }
+      
+
+
+      // const fetchData = async () => {
+      //   const response = await fetch(url);
+      //   const data = await response.json();
+      //   setCategories(data); // Store categories in state
+      //   populateSelect(); // Call populateSelect after categories are fetched
+      // };
+      // fetchData();
+    // }, []);
+  
+    // const populateSelect = () => {
+    //   const options = categories.map((category) => (
+    //     <option key={category.id} value={category.id}>
+    //       {category.nombre}
+    //     </option>
+    //   ));
+    //   // Use the correct ID for the select element
+    //   const selectElement = document.getElementById("category");
+    //   selectElement.innerHTML = options.join("");
+    // };
+
+    const handleRubroChange = async (e) => {
+      console.log(e.target.value);
+      // const { name, value } = e.target.value;
+      setFormDataProduct({ ...formDataProduct, categoryId: e.target.value });
+    };
+
+
 
 
   const handleChange = (e) => {
@@ -25,22 +142,22 @@ function FormAddProduct({commerceID}) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setSuccess(false);
-    // try {
-    //   const response = await fetch("http://localhost:8000/product/register", {
-    //     method: "POST",
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //     body: JSON.stringify(formData),
-    //   });
+    try {
+      const response = await fetch("http://localhost:8000/products/create", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formDataProduct),
+      });
 
-    //   if (!response.ok) {
-    //     throw new Error("Error al registrar el comercio");
-    //   }
-    //   setSuccess(true);
-    // } catch (error) {
-    //   console.error("Error al registrar el comercio:", error);
-    // }
+      if (!response.ok) {
+        throw new Error("Error al registrar el comercio");
+      }
+      setSuccess(true);
+    } catch (error) {
+      console.error("Error al registrar el comercio:", error);
+    }
     setFormDataProduct({ ...formDataProduct, commerceId: {commerceID}});
     
     console.log(formDataProduct)
@@ -55,17 +172,33 @@ function FormAddProduct({commerceID}) {
       company: "",
       price: "",
       image: "",
+      categoryId: "Rubro",
     });
   };
   return (
     <form className="form-container-producto" onSubmit={handleSubmit}>
       <h3 className="h3">Alta de Producto</h3>
       <div className="form-group">
-        <label htmlFor="rubro">Rubro:</label>
-        <select id="rubro" onChange={handleChange} >
-          <option name= "lacteos" value={formDataProduct.categoryId}>Lácteos</option>
-          <option name="bebidas" value={formDataProduct.categoryId}>Bebidas</option>
-          <option name="limpieza" value={formDataProduct.categoryId}>Limpieza</option>
+        <label htmlFor="rubro">Seleccione Rubro:</label>
+        {/* <select name= "category" id="category" value={selectedCategory} onChange={handleRubroChange} >
+          <option value=''>Rubro</option>
+          {category.map((category) => (
+                  <option key={category.id} value={category.id}>
+                    {category.nombre}
+                  </option>
+                ))}
+        </select> */}
+        <select
+          name="category"
+          id="category"
+          // value={selectedCategory}
+          onChange={handleRubroChange}
+        >
+          <option value="" >Rubro</option>
+          <option value="1" >Almacen</option>
+          <option value="2">Bebidas</option>
+          <option value="3">Frescos</option>
+          <option value="4">Limpieza</option>
         </select>
       </div>
       <div className="form-group">

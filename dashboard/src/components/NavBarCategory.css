@@ -14,3 +14,8 @@
 .category-label input {
   margin-right: 5px;
 }
+.div-seleccion{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

@@ -1,0 +1,60 @@
+.card {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    margin: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+  }
+  
+  .card-image {
+    width: 300px;
+    height: 150px;
+    object-fit: cover;
+  }
+  
+  .card-content {
+    padding: 10px;
+  }
+  
+  .card-name {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  .card-description {
+    margin-bottom: 10px;
+  }
+  
+  .card-details {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .card-commerce-name {
+    font-size: 14px;
+    color: #666;
+  }
+  
+  .card-location {
+    font-size: 14px;
+    color: #666;
+  }
+  .grid{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
+  @media (max-width: 768px) {
+    .card {
+      width: 250px;
+    }
+  }
+  
+  @media (max-width: 576px) {
+    .card {
+      width: 100%;
+    }
+  }
