@@ -4,62 +4,8 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 
 function FormAddProduct({commerceID}) {
-  // const [success, setSuccess] = useState(false);
-  // const url = "http://localhost:8000/category";
-  // const [formDataProduct, setFormDataProduct] = useState({
-  //   commerceID,
-  //   name: "",
-  //   description: "",
-  //   company: "",
-  //   price: "",
-  //   image: "",
-  //   categoryId:"",
-  // });
-
-  // useEffect(() => {
-  //   populateSelect();
-  // }, []);
-
-
-  // const [selectedCategory, setSelectedCategory]= useState("")
-  // const fetchData = async () => {
-  //   const response = await fetch(url);
-  //   const data = await response.json();
-  //   return data;
-  // };
-  // const populateSelect = async () => {
-  //   const data = await fetchData();
-  //   const options = data.map((category) => {
-  //     return `<option value="${category.id}">${category.name}</option>`;
-  //   });
-  //   const selectElement = document.getElementById("select");
-  //   selectElement.innerHTML = options.join("");
-  // };
-  
-  // // populateSelect();
-  // const handleRubroChange = async (e) => {
-  //   // const category = e.target.value;
-  //   const { name, value } = e.target;
-  //   setFormDataProduct({ ...formDataProduct, [name]: value });
-
-    // setSelectedCategory(category);
-
-    // try {
-    //   const response = await fetch(
-    //     `http://localhost:8000/category`
-    //     // `https://apis.datos.gob.ar/georef/api/localidades?provincia=${provincia}&orden=id&aplanar=true&campos=estandar&max=530`
-    //   );
-    //   if (!response.ok) {
-    //     throw new Error("Error al obtener las categorias");
-    //   }
-    //   const data = await response.json();
-    //   setSelectedCategory(data.category);
-    //   setFormDataProduct({ ...formDataProduct, categoryId: category });
-    // } catch (error) {
-    //   console.log("Error al obtener las categorias:", error);
-    // }
-  // };
-
+ 
+    const [oferta, setOferta] = useState(false);
     const [success, setSuccess] = useState(false);
     const url = "http://localhost:8000/category/categories";
     const [formDataProduct, setFormDataProduct] = useState({
@@ -70,61 +16,29 @@ function FormAddProduct({commerceID}) {
       price: "",
       image: "",
       categoryId: "",
+      offers:false,
     });
     const [selectedCategory, setSelectedCategory] = useState("");
-    const [categories, setCategories] = useState([]); // Store fetched categories
+    const [categories, setCategories] = useState([]); 
   
-    // useEffect(() => {
+    
+    useEffect(() => {
 
-    //   const getProducts = async () => {
-    //     await axios
-    //       .get(url)
-    //       .then((response) => {
-    //         setCategories(response.data);
-    //         populateSelect();
-    //       })
-    //       .catch((error) => {
-    //         console.log(error);
-    //       });
-    //   };
-    //   console.log(setCategories);
-    //   getProducts();
-      // async function fetchData() {
-      //   try {
-      //     const response = await fetch(url);
-      //     if (!response.ok) {
-      //       throw new Error("Failed to fetch categories");
-      //     }
-      //     const data = await response.json();
-      //     setCategories(data);
-      //     populateSelect();
-      //   } catch (error) {
-      //     console.error("Error fetching categories:", error);
-      //     // Handle the error appropriately (e.g., display an error message to the user)
-      //   }
-      // }
-      
-
-
-      // const fetchData = async () => {
-      //   const response = await fetch(url);
-      //   const data = await response.json();
-      //   setCategories(data); // Store categories in state
-      //   populateSelect(); // Call populateSelect after categories are fetched
-      // };
-      // fetchData();
-    // }, []);
+      const getProducts = async () => {
+        await axios
+          .get(url)
+          .then((response) => {
+            setCategories(response.data);
+            // populateSelect();
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      };
+      getProducts();
+    }, []);
   
-    // const populateSelect = () => {
-    //   const options = categories.map((category) => (
-    //     <option key={category.id} value={category.id}>
-    //       {category.nombre}
-    //     </option>
-    //   ));
-    //   // Use the correct ID for the select element
-    //   const selectElement = document.getElementById("category");
-    //   selectElement.innerHTML = options.join("");
-    // };
+    
 
     const handleRubroChange = async (e) => {
       console.log(e.target.value);
@@ -132,7 +46,11 @@ function FormAddProduct({commerceID}) {
       setFormDataProduct({ ...formDataProduct, categoryId: e.target.value });
     };
 
-
+    const handleChanegeOferta=() =>{
+      // if (!oferta){setOferta(true)}else{setOferta(false)}
+      (!oferta)? setOferta(true): setOferta(false);
+      setFormDataProduct({ ...formDataProduct, offers: oferta });
+    }
 
 
   const handleChange = (e) => {
@@ -142,6 +60,10 @@ function FormAddProduct({commerceID}) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setSuccess(false);
+    if(formDataProduct.categoryId === "Rubro" || formDataProduct.categoryId === "" ){
+      alert("Debe seleccionar un Rubro");
+      return;
+    }
     try {
       const response = await fetch("http://localhost:8000/products/create", {
         method: "POST",
@@ -152,16 +74,16 @@ function FormAddProduct({commerceID}) {
       });
 
       if (!response.ok) {
-        throw new Error("Error al registrar el comercio");
+        throw new Error("Error al registrar el producto");
       }
       setSuccess(true);
     } catch (error) {
-      console.error("Error al registrar el comercio:", error);
+      console.error("Error al registrar el producto", error);
     }
     setFormDataProduct({ ...formDataProduct, commerceId: {commerceID}});
     
     console.log(formDataProduct)
-
+    setOferta(false);
     resetForm();
   };
   const resetForm = () => {
@@ -173,32 +95,29 @@ function FormAddProduct({commerceID}) {
       price: "",
       image: "",
       categoryId: "Rubro",
+      offers: false,
     });
+    setOferta(false);
   };
+ 
   return (
     <form className="form-container-producto" onSubmit={handleSubmit}>
       <h3 className="h3">Alta de Producto</h3>
       <div className="form-group">
         <label htmlFor="rubro">Seleccione Rubro:</label>
-        {/* <select name= "category" id="category" value={selectedCategory} onChange={handleRubroChange} >
-          <option value=''>Rubro</option>
-          {category.map((category) => (
-                  <option key={category.id} value={category.id}>
-                    {category.nombre}
-                  </option>
-                ))}
-        </select> */}
+       
         <select
           name="category"
           id="category"
-          // value={selectedCategory}
           onChange={handleRubroChange}
         >
-          <option value="" >Rubro</option>
-          <option value="1" >Almacen</option>
-          <option value="2">Bebidas</option>
-          <option value="3">Frescos</option>
-          <option value="4">Limpieza</option>
+          <option value= "0"> Rubro </option>
+          {categories.map((category) => (
+            <option key={category.id} value={category.id}>
+              {category.name}
+            </option>
+          ))}
+         
         </select>
       </div>
       <div className="form-group">
@@ -266,6 +185,19 @@ function FormAddProduct({commerceID}) {
           />
         </label>
       </div>
+      <div className="form">
+        <label>
+          Producto en oferta
+          <input
+            className="input-ofer"
+            type="checkbox"
+            name="oferta"
+            value={oferta}
+            checked={oferta}
+            onChange={handleChanegeOferta} 
+          />
+        </label>
+      </div>
       <div className="form-group">
         <button type="submit">Agregar Producto</button>
         <button type="button" onClick={resetForm}>
@@ -283,7 +215,19 @@ const logout = () => {
   // setLoggedIn(false); // actualizo loggedIn state
   navigate("/"); 
 };
-
+const getProducts = async () => {
+  (await axios
+     .get(url)
+     .then((response) => {
+       setProductsList(response.data);
+       console.log(response.data);
+       filterProducts(response.data);
+     })
+     .catch((error) => {
+       console.log(error);
+     }));
+    
+ };
 
 function FormDeleteProduct() {
   return (
