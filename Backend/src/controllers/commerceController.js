@@ -37,8 +37,8 @@ else res.status(400).json({message: 'Sorry, the information came empty'});
       try {
         const {id} = req.params;
 
-        if(id != null && typeof id == 'number'){
-          const searchById = await db.Commerce.findByPk(id);
+        if(id != null){
+          const searchById = await db.Commerce.findByPk(+id);
 
           if(searchById != null) res.status(200).json(searchById)
           else res.status(400).json({message: 'Theres no commerce with that id in the DB'})
@@ -51,10 +51,11 @@ else res.status(400).json({message: 'Sorry, the information came empty'});
     softDelete: async function(req, res){
       try {
         const {id} =req.params;
-
-        if(id!= null && typeof id == 'number'){
+const checkOne = await db.Commerce.findByPk(+id);
+        if(id!= null){
            await db.Commerce.destroy({where: {id: id}});
           const checking = await db.Commerce.findByPk(id);
+          console.log(checking)
 
           if(checking == null) res.status(200).json({message: `The commerce with the id ${id} was sucessfully deleted/banned`})
           else res.status(400).json({message: 'Something went wrong deleting this. Try later please'})

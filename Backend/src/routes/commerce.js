@@ -22,7 +22,7 @@ const commerceController = require('../controllers/commerceController')
  *               address:
  *                 type: string
  *               phoneNumber:
- *                 type: integer
+ *                 type: string
  *               email:
  *                 type: string
  *               location:
