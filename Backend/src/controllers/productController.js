@@ -33,7 +33,7 @@ const controller = {
           .json({ message: "No product data has been sent." });
       }
 
-      const { name, company, description, offers, price } = req.body;
+      const { name, company, description, offers, price, categoryId, commerceId } = req.body;
 
       if (!req.file) {
         return res.status(400).json({ message: "No image has been sent." });
@@ -55,7 +55,9 @@ const controller = {
         offers,
         price,
         image: imagePath,
-      });
+        categoryId,
+        commerceId
+      });      
       if (newProduct) {
         return res.status(200).json({
           message: "Successfully created product.",
@@ -179,6 +181,26 @@ const controller = {
       res.status(200).json(filterThis);
     } catch (error) {
       res.status(404).json(error.message)
+    }
+  },
+  filterByCategory: async function(req, res){
+    try {
+      const {categoryValue} = req.query;
+
+      if(categoryValue){
+        const searching = await db.Product.findAll({
+          include:[
+            {model: db.Commerce},
+            {model: db.Category, where: {
+              name: categoryValue
+            }}
+          ]
+        })
+
+        searching.length > 0 ? res.status(200).json(searching) : res.status(404).json({message: 'There was no results about this search.'}) 
+      }
+    } catch (error) {
+      res.status(500).json(error.message)
     }
   }
   //filter: async function (req, res) {
