@@ -17,15 +17,20 @@ module.exports = {
            updatedAt: new Date(),
          },
          {
-           name: "Frescos",
+           name: "Limpieza",
            createdAt: new Date(),
            updatedAt: new Date(),
          },
          {
-           name: "Congelados",
+           name: "Perfumeria",
            createdAt: new Date(),
            updatedAt: new Date(),
          },
+         {
+          name: "Mascotas",
+          createdAt: new Date(),
+          updatedAt: new Date(),
+        },
        ],
        {}
      );
