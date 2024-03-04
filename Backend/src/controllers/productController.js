@@ -15,7 +15,7 @@ const controller = {
           },
         ],
       });
-      // console.log(productsList);
+      console.log(productsList);
       if (productsList.length > 0) res.status(200).json(productsList);
       else
         res
@@ -26,21 +26,34 @@ const controller = {
     }
   },
   create: async function (req, res) {
-
     try {
       if (!req.body) {
-        console.log("entro al try body")
         return res
           .status(400)
           .json({ message: "No product data has been sent." });
       }
+<<<<<<< HEAD
 
       const { name, company, description, offers, price, categoryId, commerceId } = req.body;
 
       console.log(req.file);
+=======
+      
+>>>>>>> 442d68a4ca69056c4b631373f7a4b67247cf411d
       if (!req.file) {
         return res.status(400).json({ message: "No image has been sent." });
       }
+
+      const {
+        name,
+        company,
+        description,
+        offers,
+        price,
+        categoryId,
+        commerceId,
+      } = req.body;
+
 
       const verifying = await db.Product.findOne({ where: { name } });
       if (verifying) {
@@ -48,18 +61,20 @@ const controller = {
           .status(400)
           .json({ message: "There is already a product with this name." });
       }
-
+      
       const imagePath = req.file.path;
-      const newProduct = await db.Product.create(req.body);
-      // const newProduct = await db.Product.create({
 
-      //   name,
-      //   company,
-      //   description,
-      //   offers,
-      //   price,
-      //   image: imagePath,
-      // });
+      const newProduct = await db.Product.create({
+        name,
+        company,
+        description,
+        offers,
+        price,
+        image: imagePath,
+        categoryId,
+        commerceId,
+      });
+
       if (newProduct) {
         return res.status(200).json({
           message: "Successfully created product.",
@@ -71,7 +86,6 @@ const controller = {
           .json({ message: "There was an error creating the product." });
       }
     } catch (error) {
-      console.log(error.message);
       res.status(400).json(error.message);
     }
   },
@@ -134,7 +148,15 @@ const controller = {
         return res.status(404).json({ message: "Product not found" });
       }
 
-      const { name, company, description, price } = req.body;
+      const {
+        name,
+        company,
+        description,
+        offers,
+        price,
+        categoryId,
+        commerceId,
+      } = req.body;
 
       let imagePath = checking.image;
       if (req.file) {
@@ -145,8 +167,11 @@ const controller = {
         name: name ? name : checking.name,
         company: company ? company : checking.company,
         description: description ? description : checking.description,
+        offers: offers ? offers : checking.offers,
         image: imagePath,
         price: price ? price : checking.price,
+        categoryId: categoryId ? categoryId : checking.categoryId,
+        commerceId: commerceId ? commerceId : checking.commerceId,
       };
 
       const updatedProduct = await checking.update(updatedFields);
@@ -174,18 +199,28 @@ const controller = {
         res.status(400).json("Still empty strings... why is this happening?");
 
       const filterThis = await db.Product.findAll({
-        include: [{ model: db.Commerce, where: {
-          location: location,
-          province: province
-        } }, {model: db.Category, attributes: ["name"]}],
+        include: [
+          {
+            model: db.Commerce,
+            where: {
+              location: location,
+              province: province,
+            },
+          },
+          { model: db.Category, attributes: ["name"] },
+        ],
       });
 
-      if(filterThis.length < 0) res.status(404).json('Sorry, there was nothing that matches the search.')
+      if (filterThis.length < 0)
+        res
+          .status(404)
+          .json("Sorry, there was nothing that matches the search.");
       res.status(200).json(filterThis);
     } catch (error) {
-      res.status(404).json(error.message)
+      res.status(404).json(error.message);
     }
   },
+<<<<<<< HEAD
   filterByCategory: async function(req, res){
     try {
       const {categoryValue} = req.query;
@@ -206,6 +241,8 @@ const controller = {
       res.status(500).json(error.message)
     }
   }
+=======
+>>>>>>> 442d68a4ca69056c4b631373f7a4b67247cf411d
   //filter: async function (req, res) {
   //  try {
   //    const { amount } = req.body;
