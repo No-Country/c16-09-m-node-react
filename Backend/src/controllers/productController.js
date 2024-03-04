@@ -32,12 +32,21 @@ const controller = {
           .status(400)
           .json({ message: "No product data has been sent." });
       }
-
-      const { name, company, description, offers, price } = req.body;
-
+      
       if (!req.file) {
         return res.status(400).json({ message: "No image has been sent." });
       }
+
+      const {
+        name,
+        company,
+        description,
+        offers,
+        price,
+        categoryId,
+        commerceId,
+      } = req.body;
+
 
       const verifying = await db.Product.findOne({ where: { name } });
       if (verifying) {
@@ -45,7 +54,7 @@ const controller = {
           .status(400)
           .json({ message: "There is already a product with this name." });
       }
-
+      
       const imagePath = req.file.path;
 
       const newProduct = await db.Product.create({
@@ -55,7 +64,10 @@ const controller = {
         offers,
         price,
         image: imagePath,
+        categoryId,
+        commerceId,
       });
+
       if (newProduct) {
         return res.status(200).json({
           message: "Successfully created product.",
@@ -129,7 +141,15 @@ const controller = {
         return res.status(404).json({ message: "Product not found" });
       }
 
-      const { name, company, description, price } = req.body;
+      const {
+        name,
+        company,
+        description,
+        offers,
+        price,
+        categoryId,
+        commerceId,
+      } = req.body;
 
       let imagePath = checking.image;
       if (req.file) {
@@ -140,8 +160,11 @@ const controller = {
         name: name ? name : checking.name,
         company: company ? company : checking.company,
         description: description ? description : checking.description,
+        offers: offers ? offers : checking.offers,
         image: imagePath,
         price: price ? price : checking.price,
+        categoryId: categoryId ? categoryId : checking.categoryId,
+        commerceId: commerceId ? commerceId : checking.commerceId,
       };
 
       const updatedProduct = await checking.update(updatedFields);
