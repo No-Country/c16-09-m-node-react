@@ -2,14 +2,16 @@ import { useState, useEffect } from "react";
 import "./Commerceview.css";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import CargarProdCom from "./CargarProdCom";
 
 function FormAddProduct({commerceID}) {
  
     const [oferta, setOferta] = useState(false);
     const [success, setSuccess] = useState(false);
     const url = "http://localhost:8000/category/categories";
+    const url2="http://localhost:8000/products/create";
     const [formDataProduct, setFormDataProduct] = useState({
-      commerceID,
+      commerceId:commerceID,
       name: "",
       description: "",
       company: "",
@@ -43,7 +45,7 @@ function FormAddProduct({commerceID}) {
     const handleRubroChange = async (e) => {
       console.log(e.target.value);
       // const { name, value } = e.target.value;
-      setFormDataProduct({ ...formDataProduct, categoryId: e.target.value });
+      setFormDataProduct({ ...formDataProduct, categoryId: parseInt(e.target.value) });
     };
 
     const handleChanegeOferta=() =>{
@@ -51,38 +53,90 @@ function FormAddProduct({commerceID}) {
       (!oferta)? setOferta(true): setOferta(false);
       setFormDataProduct({ ...formDataProduct, offers: oferta });
     }
-
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormDataProduct({ ...formDataProduct, [name]: value });
-  };
+    const handleChange = (e) => {
+      try {
+        if (e.target.name === "image") {
+          const file = e.target.files[0];
+          setFormDataProduct({ ...formDataProduct, image: file });
+        } else {
+          const { name, value } = e.target;
+          setFormDataProduct({ ...formDataProduct, [name]: value });
+        }
+      } catch (error) {
+        console.error("Error handling file input:", error);
+        // Handle the error gracefully, e.g., display a user-friendly message
+      }
+    };
+   
+  // const handleChange = (e) => {
+  //   if (e.target.name === "image") {
+  //     console.log(e.target.files[0])
+  //     setFormDataProduct({ ...formDataProduct, image: e.target.files[0]});
+  //   } else {
+      
+  //     const { name, value } = e.target;
+  //     setFormDataProduct({ ...formDataProduct, [name]: value });
+  //   }
+  //   // const { name, value } = e.target;
+  //   // setFormDataProduct({ ...formDataProduct, [name]: value });
+  // };
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    let prueba = new FormData();
+        // formDataProduct.map((product)=> console.log(product))
+      // console.log(formDataProduct.name);
+      // console.log(formDataProduct.commerceID);
+      // console.log(formDataProduct.categoryId);
+        prueba.append("commerceId", formDataProduct.commerceID);
+        prueba.append("categoryId", formDataProduct.categoryId);
+        prueba.append("name", formDataProduct.name);
+        prueba.append("description", formDataProduct.description);
+        prueba.append("company", formDataProduct.company);
+        prueba.append("price", formDataProduct.price);
+        prueba.append("image", formDataProduct.image);
+        prueba.append("offers", formDataProduct.offers);
+        console.log(prueba.getAll("name"));
+
+
+
+
     setSuccess(false);
     if(formDataProduct.categoryId === "Rubro" || formDataProduct.categoryId === "" ){
       alert("Debe seleccionar un Rubro");
       return;
     }
+    
     try {
-      const response = await fetch("http://localhost:8000/products/create", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formDataProduct),
-      });
+        let resultado = await axios.post("http://localhost:8000/products/create", formDataProduct)
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+        // console.log(resultado)
+        // console.log("resultado")
+      // const response = await fetch("http://localhost:8000/products/create", {
+      //   method: "POST",
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //   },
+      //   body: JSON.stringify(formDataProduct),
 
+      // });
+      // console.log(JSON.stringify(response));
+      // console.log(body);
       if (!response.ok) {
-        throw new Error("Error al registrar el producto");
+        throw new Error("Error bad response");
       }
       setSuccess(true);
     } catch (error) {
-      console.error("Error al registrar el producto", error);
+      console.error("Error al registrar el producto", error.message);
     }
     setFormDataProduct({ ...formDataProduct, commerceId: {commerceID}});
     
-    console.log(formDataProduct)
+    // console.log(formDataProduct)
     setOferta(false);
     resetForm();
   };
@@ -179,7 +233,7 @@ function FormAddProduct({commerceID}) {
             className="input-producto"
             type="file"
             name="image"
-            value={formDataProduct.image}
+            defaultValue={formDataProduct.image}
             onChange={handleChange}
             required
           />
@@ -204,6 +258,7 @@ function FormAddProduct({commerceID}) {
           Borrar
         </button>
       </div>
+      {/* {(success) <message>} */}
     </form>
   );
 }
@@ -212,71 +267,9 @@ const logout = () => {
   console.log("logout")
   localStorage.removeItem("loggedIn");
   localStorage.removeItem("commerceData"); // limpio local storage
-  // setLoggedIn(false); // actualizo loggedIn state
   navigate("/"); 
 };
-const getProducts = async () => {
-  (await axios
-     .get(url)
-     .then((response) => {
-       setProductsList(response.data);
-       console.log(response.data);
-       filterProducts(response.data);
-     })
-     .catch((error) => {
-       console.log(error);
-     }));
-    
- };
 
-function FormDeleteProduct() {
-  return (
-    <>
-      <table>
-        <thead>
-          <tr>
-            <th>Rubro</th>
-            <th>Nombre</th>
-            <th>Presentación</th>
-            <th>Marca</th>
-            <th>Precio</th>
-            <th>Borrar</th>
-            <th>Editar</th>
-          </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>Lacteo</td>
-                <td>Leche larga vida</td>
-                <td>Litro</td>
-                <td>La Lacteo</td>
-                <td>850</td>
-                <td><button className="btn-borrar" onClick={() => handleEliminarProducto(producto.id)}>
-                    <label>❌</label>
-                </button></td>
-                <td><button className="btn-borrar" onClick={() => handleEditarProducto(producto.id)}>
-                    <label>✏️</label>
-                </button></td>
-          {/* {productos.map((producto) => (
-            <tr key={producto.id}>
-              <td>{producto.rubro}</td>
-              <td>{producto.nombre}</td>
-              <td>{producto.presentacion}</td>
-              <td>{producto.company}</td>
-              <td>
-                <button onClick={() => handleEliminarProducto(producto.id)}>
-                  <i className="fa fa-trash"></i>
-                </button>
-                
-              </td> */}
-            </tr>
-          {/* ))}{" "} */}
-          
-        </tbody>
-      </table>
-    </>
-  );
-}
 
 //funcion principal
 function CommerceView() {
@@ -291,8 +284,9 @@ function CommerceView() {
         return <FormAddProduct commerceID = {commerceID}/>;
     
       case "delete":
-        return <FormDeleteProduct />;
-      
+        return <CargarProdCom commerceId={commerceID}/>;
+
+       
       default:
         return <p>Aguardando seleccione opcion</p>;
     }
