@@ -2,166 +2,142 @@ import { useState, useEffect } from "react";
 import "./Commerceview.css";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import CargarProdCom from "./CargarProdCom";
 
 function FormAddProduct({commerceID}) {
-  // const [success, setSuccess] = useState(false);
-  // const url = "http://localhost:8000/category";
-  // const [formDataProduct, setFormDataProduct] = useState({
-  //   commerceID,
-  //   name: "",
-  //   description: "",
-  //   company: "",
-  //   price: "",
-  //   image: "",
-  //   categoryId:"",
-  // });
-
-  // useEffect(() => {
-  //   populateSelect();
-  // }, []);
-
-
-  // const [selectedCategory, setSelectedCategory]= useState("")
-  // const fetchData = async () => {
-  //   const response = await fetch(url);
-  //   const data = await response.json();
-  //   return data;
-  // };
-  // const populateSelect = async () => {
-  //   const data = await fetchData();
-  //   const options = data.map((category) => {
-  //     return `<option value="${category.id}">${category.name}</option>`;
-  //   });
-  //   const selectElement = document.getElementById("select");
-  //   selectElement.innerHTML = options.join("");
-  // };
-  
-  // // populateSelect();
-  // const handleRubroChange = async (e) => {
-  //   // const category = e.target.value;
-  //   const { name, value } = e.target;
-  //   setFormDataProduct({ ...formDataProduct, [name]: value });
-
-    // setSelectedCategory(category);
-
-    // try {
-    //   const response = await fetch(
-    //     `http://localhost:8000/category`
-    //     // `https://apis.datos.gob.ar/georef/api/localidades?provincia=${provincia}&orden=id&aplanar=true&campos=estandar&max=530`
-    //   );
-    //   if (!response.ok) {
-    //     throw new Error("Error al obtener las categorias");
-    //   }
-    //   const data = await response.json();
-    //   setSelectedCategory(data.category);
-    //   setFormDataProduct({ ...formDataProduct, categoryId: category });
-    // } catch (error) {
-    //   console.log("Error al obtener las categorias:", error);
-    // }
-  // };
-
+ 
+    const [oferta, setOferta] = useState(false);
     const [success, setSuccess] = useState(false);
     const url = "http://localhost:8000/category/categories";
+    const url2="http://localhost:8000/products/create";
     const [formDataProduct, setFormDataProduct] = useState({
-      commerceID,
+      commerceId:commerceID,
       name: "",
       description: "",
       company: "",
       price: "",
       image: "",
       categoryId: "",
+      offers:false,
     });
     const [selectedCategory, setSelectedCategory] = useState("");
-    const [categories, setCategories] = useState([]); // Store fetched categories
+    const [categories, setCategories] = useState([]); 
   
-    // useEffect(() => {
+    
+    useEffect(() => {
 
-    //   const getProducts = async () => {
-    //     await axios
-    //       .get(url)
-    //       .then((response) => {
-    //         setCategories(response.data);
-    //         populateSelect();
-    //       })
-    //       .catch((error) => {
-    //         console.log(error);
-    //       });
-    //   };
-    //   console.log(setCategories);
-    //   getProducts();
-      // async function fetchData() {
-      //   try {
-      //     const response = await fetch(url);
-      //     if (!response.ok) {
-      //       throw new Error("Failed to fetch categories");
-      //     }
-      //     const data = await response.json();
-      //     setCategories(data);
-      //     populateSelect();
-      //   } catch (error) {
-      //     console.error("Error fetching categories:", error);
-      //     // Handle the error appropriately (e.g., display an error message to the user)
-      //   }
-      // }
-      
-
-
-      // const fetchData = async () => {
-      //   const response = await fetch(url);
-      //   const data = await response.json();
-      //   setCategories(data); // Store categories in state
-      //   populateSelect(); // Call populateSelect after categories are fetched
-      // };
-      // fetchData();
-    // }, []);
+      const getProducts = async () => {
+        await axios
+          .get(url)
+          .then((response) => {
+            setCategories(response.data);
+            // populateSelect();
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      };
+      getProducts();
+    }, []);
   
-    // const populateSelect = () => {
-    //   const options = categories.map((category) => (
-    //     <option key={category.id} value={category.id}>
-    //       {category.nombre}
-    //     </option>
-    //   ));
-    //   // Use the correct ID for the select element
-    //   const selectElement = document.getElementById("category");
-    //   selectElement.innerHTML = options.join("");
-    // };
+    
 
     const handleRubroChange = async (e) => {
       console.log(e.target.value);
       // const { name, value } = e.target.value;
-      setFormDataProduct({ ...formDataProduct, categoryId: e.target.value });
+      setFormDataProduct({ ...formDataProduct, categoryId: parseInt(e.target.value) });
     };
 
-
-
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormDataProduct({ ...formDataProduct, [name]: value });
-  };
+    const handleChanegeOferta=() =>{
+      // if (!oferta){setOferta(true)}else{setOferta(false)}
+      (!oferta)? setOferta(true): setOferta(false);
+      setFormDataProduct({ ...formDataProduct, offers: oferta });
+    }
+    const handleChange = (e) => {
+      try {
+        if (e.target.name === "image") {
+          const file = e.target.files[0];
+          setFormDataProduct({ ...formDataProduct, image: file });
+        } else {
+          const { name, value } = e.target;
+          setFormDataProduct({ ...formDataProduct, [name]: value });
+        }
+      } catch (error) {
+        console.error("Error handling file input:", error);
+        // Handle the error gracefully, e.g., display a user-friendly message
+      }
+    };
+   
+  // const handleChange = (e) => {
+  //   if (e.target.name === "image") {
+  //     console.log(e.target.files[0])
+  //     setFormDataProduct({ ...formDataProduct, image: e.target.files[0]});
+  //   } else {
+      
+  //     const { name, value } = e.target;
+  //     setFormDataProduct({ ...formDataProduct, [name]: value });
+  //   }
+  //   // const { name, value } = e.target;
+  //   // setFormDataProduct({ ...formDataProduct, [name]: value });
+  // };
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setSuccess(false);
-    try {
-      const response = await fetch("http://localhost:8000/products/create", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formDataProduct),
-      });
 
+    let prueba = new FormData();
+        // formDataProduct.map((product)=> console.log(product))
+      // console.log(formDataProduct.name);
+      // console.log(formDataProduct.commerceID);
+      // console.log(formDataProduct.categoryId);
+        prueba.append("commerceId", formDataProduct.commerceID);
+        prueba.append("categoryId", formDataProduct.categoryId);
+        prueba.append("name", formDataProduct.name);
+        prueba.append("description", formDataProduct.description);
+        prueba.append("company", formDataProduct.company);
+        prueba.append("price", formDataProduct.price);
+        prueba.append("image", formDataProduct.image);
+        prueba.append("offers", formDataProduct.offers);
+        console.log(prueba.getAll("name"));
+
+
+
+
+    setSuccess(false);
+    if(formDataProduct.categoryId === "Rubro" || formDataProduct.categoryId === "" ){
+      alert("Debe seleccionar un Rubro");
+      return;
+    }
+    
+    try {
+        let resultado = await axios.post("http://localhost:8000/products/create", formDataProduct)
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+        // console.log(resultado)
+        // console.log("resultado")
+      // const response = await fetch("http://localhost:8000/products/create", {
+      //   method: "POST",
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //   },
+      //   body: JSON.stringify(formDataProduct),
+
+      // });
+      // console.log(JSON.stringify(response));
+      // console.log(body);
       if (!response.ok) {
-        throw new Error("Error al registrar el comercio");
+        throw new Error("Error bad response");
       }
       setSuccess(true);
     } catch (error) {
-      console.error("Error al registrar el comercio:", error);
+      console.error("Error al registrar el producto", error.message);
     }
     setFormDataProduct({ ...formDataProduct, commerceId: {commerceID}});
     
-    console.log(formDataProduct)
-
+    // console.log(formDataProduct)
+    setOferta(false);
     resetForm();
   };
   const resetForm = () => {
@@ -173,32 +149,29 @@ function FormAddProduct({commerceID}) {
       price: "",
       image: "",
       categoryId: "Rubro",
+      offers: false,
     });
+    setOferta(false);
   };
+ 
   return (
     <form className="form-container-producto" onSubmit={handleSubmit}>
       <h3 className="h3">Alta de Producto</h3>
       <div className="form-group">
         <label htmlFor="rubro">Seleccione Rubro:</label>
-        {/* <select name= "category" id="category" value={selectedCategory} onChange={handleRubroChange} >
-          <option value=''>Rubro</option>
-          {category.map((category) => (
-                  <option key={category.id} value={category.id}>
-                    {category.nombre}
-                  </option>
-                ))}
-        </select> */}
+       
         <select
           name="category"
           id="category"
-          // value={selectedCategory}
           onChange={handleRubroChange}
         >
-          <option value="" >Rubro</option>
-          <option value="1" >Almacen</option>
-          <option value="2">Bebidas</option>
-          <option value="3">Frescos</option>
-          <option value="4">Limpieza</option>
+          <option value= "0"> Rubro </option>
+          {categories.map((category) => (
+            <option key={category.id} value={category.id}>
+              {category.name}
+            </option>
+          ))}
+         
         </select>
       </div>
       <div className="form-group">
@@ -260,9 +233,22 @@ function FormAddProduct({commerceID}) {
             className="input-producto"
             type="file"
             name="image"
-            value={formDataProduct.image}
+            defaultValue={formDataProduct.image}
             onChange={handleChange}
             required
+          />
+        </label>
+      </div>
+      <div className="form">
+        <label>
+          Producto en oferta
+          <input
+            className="input-ofer"
+            type="checkbox"
+            name="oferta"
+            value={oferta}
+            checked={oferta}
+            onChange={handleChanegeOferta} 
           />
         </label>
       </div>
@@ -272,6 +258,7 @@ function FormAddProduct({commerceID}) {
           Borrar
         </button>
       </div>
+      {/* {(success) <message>} */}
     </form>
   );
 }
@@ -280,59 +267,9 @@ const logout = () => {
   console.log("logout")
   localStorage.removeItem("loggedIn");
   localStorage.removeItem("commerceData"); // limpio local storage
-  // setLoggedIn(false); // actualizo loggedIn state
   navigate("/"); 
 };
 
-
-function FormDeleteProduct() {
-  return (
-    <>
-      <table>
-        <thead>
-          <tr>
-            <th>Rubro</th>
-            <th>Nombre</th>
-            <th>Presentación</th>
-            <th>Marca</th>
-            <th>Precio</th>
-            <th>Borrar</th>
-            <th>Editar</th>
-          </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>Lacteo</td>
-                <td>Leche larga vida</td>
-                <td>Litro</td>
-                <td>La Lacteo</td>
-                <td>850</td>
-                <td><button className="btn-borrar" onClick={() => handleEliminarProducto(producto.id)}>
-                    <label>❌</label>
-                </button></td>
-                <td><button className="btn-borrar" onClick={() => handleEditarProducto(producto.id)}>
-                    <label>✏️</label>
-                </button></td>
-          {/* {productos.map((producto) => (
-            <tr key={producto.id}>
-              <td>{producto.rubro}</td>
-              <td>{producto.nombre}</td>
-              <td>{producto.presentacion}</td>
-              <td>{producto.company}</td>
-              <td>
-                <button onClick={() => handleEliminarProducto(producto.id)}>
-                  <i className="fa fa-trash"></i>
-                </button>
-                
-              </td> */}
-            </tr>
-          {/* ))}{" "} */}
-          
-        </tbody>
-      </table>
-    </>
-  );
-}
 
 //funcion principal
 function CommerceView() {
@@ -347,8 +284,9 @@ function CommerceView() {
         return <FormAddProduct commerceID = {commerceID}/>;
     
       case "delete":
-        return <FormDeleteProduct />;
-      
+        return <CargarProdCom commerceId={commerceID}/>;
+
+       
       default:
         return <p>Aguardando seleccione opcion</p>;
     }

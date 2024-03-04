@@ -15,7 +15,7 @@ const controller = {
           },
         ],
       });
-      console.log(productsList);
+      // console.log(productsList);
       if (productsList.length > 0) res.status(200).json(productsList);
       else
         res
@@ -26,15 +26,18 @@ const controller = {
     }
   },
   create: async function (req, res) {
+
     try {
       if (!req.body) {
+        console.log("entro al try body")
         return res
           .status(400)
           .json({ message: "No product data has been sent." });
       }
-
+      // console.log([req.body]);
       const { name, company, description, offers, price } = req.body;
 
+      console.log(req.file);
       if (!req.file) {
         return res.status(400).json({ message: "No image has been sent." });
       }
@@ -47,15 +50,16 @@ const controller = {
       }
 
       const imagePath = req.file.path;
+      const newProduct = await db.Product.create(req.body);
+      // const newProduct = await db.Product.create({
 
-      const newProduct = await db.Product.create({
-        name,
-        company,
-        description,
-        offers,
-        price,
-        image: imagePath,
-      });
+      //   name,
+      //   company,
+      //   description,
+      //   offers,
+      //   price,
+      //   image: imagePath,
+      // });
       if (newProduct) {
         return res.status(200).json({
           message: "Successfully created product.",
@@ -67,6 +71,7 @@ const controller = {
           .json({ message: "There was an error creating the product." });
       }
     } catch (error) {
+      console.log(error.message);
       res.status(400).json(error.message);
     }
   },
