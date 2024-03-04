@@ -1,17 +1,25 @@
 import "./ProductCard.css";
-import defaultProductImage from "../assets/images/products/defaul-product-image.jpeg";
 
-const ProductCard = () => {
+const ProductCard = ({ product }) => {
+  const {
+    name,
+    Category: { name: categoryName },
+    price,
+    company,
+    description,
+  } = product;
+
   return (
     <div className='product-card'>
       <div className='product-image'>
-        <img src={defaultProductImage} alt='ImagenDefault' />
+        <img src={product.image} alt='ImagenDefault' />
       </div>
       <div className='product-details'>
-        <h3 className='product-name'>Harina</h3>
-        <p className='product-info'>Rubro: Almacén</p>
-        <p className='product-info'>Precio: $990</p>
-        <p className='product-info'>Comercio: La Anónima</p>
+        <h3 className='product-name'>{name}</h3>
+        <p className='product-info'>Rubro: {categoryName}</p>
+        <p className='product-info'>Precio: ${price}</p>
+        <p className='product-info'>Comercio: {company}</p>
+        <p className='product-info'>Descripcion: {description}</p>
       </div>
     </div>
   );

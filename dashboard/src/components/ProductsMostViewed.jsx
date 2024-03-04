@@ -5,7 +5,7 @@ export default function MostViewedProducts() {
   return (
     <div>
       <h1> Sector Productos mas Buscados</h1>
-      <div className='product-card-container'>
+      {/* <div className='product-card-container'>
         <div className='product-card'>
           <ProductCard />
         </div>
@@ -15,7 +15,7 @@ export default function MostViewedProducts() {
         <div className='product-card'>
           <ProductCard />
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }
