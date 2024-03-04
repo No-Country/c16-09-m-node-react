@@ -1,5 +1,5 @@
 import ProductCard from "./ProductCard";
-import "./ProductsMostViewed.css";
+import "./ProductsRecent.css";
 import { useEffect, useState } from "react";
 
 export default function ProductsOnSale() {
@@ -11,7 +11,7 @@ export default function ProductsOnSale() {
     const fetchData = async () => {
       const response = await fetch(url);
       const result = await response.json();
-      const onSale = result.filter((product) => product.offers === true);
+      const onSale = result.filter((product) => product.offers === true).slice(0, 6);
       setproductsOnSale(onSale);
     };
     fetchData();

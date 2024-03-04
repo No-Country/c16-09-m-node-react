@@ -1,6 +1,6 @@
 import NavBarCategory from "./NavBarCategory";
 import ProductsOnSale from "./ProductsOnSale";
-import ProductsMostViewed from "./ProductsMostViewed";
+import ProductsRecent from "./ProductsRecent";
 import NavBarButtonsMain from "./NavBarButtonsMain";
 import LoginWelcome from "./LoginWelcome";
 import NavBarSearch from "./NavBarSearch";
@@ -28,7 +28,7 @@ function Dashboard() {
       </div>
 
       <ProductsOnSale />
-      <ProductsMostViewed />
+      <ProductsRecent />
     </>
   );
 }
