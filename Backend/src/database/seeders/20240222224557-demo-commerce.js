@@ -47,6 +47,28 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date(),
       },
+      {
+        name: "Inversiones La Pradera",
+        address: "Av con transversal a la Quinta, local Número 43",
+        phoneNumber: "+54 911 7636286",
+        email: "laPradera@example.com",
+        location: "Bahía Blanca",
+        province: "Buenos Aires",
+        password: "12trello",
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        name: "El Narciso",
+        address: "Quinta Eduardo, Transversal 2, calle La Quemada",
+        phoneNumber: "+54 7729 39827498",
+        email: "narciso27@example.com",
+        location: "Córdoba",
+        province: "Santa Rosa",
+        password: "Patatas",
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
     ]);
   },
 

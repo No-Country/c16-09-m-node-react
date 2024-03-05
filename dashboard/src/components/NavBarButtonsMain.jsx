@@ -19,6 +19,9 @@ export default function NavBarButtonsMain() {
       <button>
         <Link to='/panelcontrol'>Panel de Control Admin</Link>
       </button>
+      <button>
+        <Link to='/acercade'>Acerca de</Link>
+      </button>
     </div>
   );
 }
