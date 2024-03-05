@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import "./Commerceview.css";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import CargarProdCom from "./CargarProdCom";
 
 function FormAddProduct({commerceID}) {
   // const [success, setSuccess] = useState(false);
@@ -74,57 +75,7 @@ function FormAddProduct({commerceID}) {
     const [selectedCategory, setSelectedCategory] = useState("");
     const [categories, setCategories] = useState([]); // Store fetched categories
   
-    // useEffect(() => {
-
-    //   const getProducts = async () => {
-    //     await axios
-    //       .get(url)
-    //       .then((response) => {
-    //         setCategories(response.data);
-    //         populateSelect();
-    //       })
-    //       .catch((error) => {
-    //         console.log(error);
-    //       });
-    //   };
-    //   console.log(setCategories);
-    //   getProducts();
-      // async function fetchData() {
-      //   try {
-      //     const response = await fetch(url);
-      //     if (!response.ok) {
-      //       throw new Error("Failed to fetch categories");
-      //     }
-      //     const data = await response.json();
-      //     setCategories(data);
-      //     populateSelect();
-      //   } catch (error) {
-      //     console.error("Error fetching categories:", error);
-      //     // Handle the error appropriately (e.g., display an error message to the user)
-      //   }
-      // }
-      
-
-
-      // const fetchData = async () => {
-      //   const response = await fetch(url);
-      //   const data = await response.json();
-      //   setCategories(data); // Store categories in state
-      //   populateSelect(); // Call populateSelect after categories are fetched
-      // };
-      // fetchData();
-    // }, []);
-  
-    // const populateSelect = () => {
-    //   const options = categories.map((category) => (
-    //     <option key={category.id} value={category.id}>
-    //       {category.nombre}
-    //     </option>
-    //   ));
-    //   // Use the correct ID for the select element
-    //   const selectElement = document.getElementById("category");
-    //   selectElement.innerHTML = options.join("");
-    // };
+    
 
     const handleRubroChange = async (e) => {
       console.log(e.target.value);
@@ -347,7 +298,7 @@ function CommerceView() {
         return <FormAddProduct commerceID = {commerceID}/>;
     
       case "delete":
-        return <FormDeleteProduct />;
+        return <CargarProdCom commerceId={commerceID} />;
       
       default:
         return <p>Aguardando seleccione opcion</p>;
