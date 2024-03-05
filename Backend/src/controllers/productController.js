@@ -32,14 +32,7 @@ const controller = {
           .status(400)
           .json({ message: "No product data has been sent." });
       }
-<<<<<<< HEAD
-
-      const { name, company, description, offers, price, categoryId, commerceId } = req.body;
-
-      console.log(req.file);
-=======
       
->>>>>>> 442d68a4ca69056c4b631373f7a4b67247cf411d
       if (!req.file) {
         return res.status(400).json({ message: "No image has been sent." });
       }
@@ -220,7 +213,6 @@ const controller = {
       res.status(404).json(error.message);
     }
   },
-<<<<<<< HEAD
   filterByCategory: async function(req, res){
     try {
       const {categoryValue} = req.query;
@@ -241,8 +233,6 @@ const controller = {
       res.status(500).json(error.message)
     }
   }
-=======
->>>>>>> 442d68a4ca69056c4b631373f7a4b67247cf411d
   //filter: async function (req, res) {
   //  try {
   //    const { amount } = req.body;
