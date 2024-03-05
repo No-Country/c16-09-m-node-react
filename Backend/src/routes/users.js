@@ -92,5 +92,7 @@ const userCreateController = require("../controllers/userCreateController");
 router.get("/users", userController.index);
 router.post("/login", userController.login);
 router.post("/register", userCreateController);
+router.delete("/delete/:id", userController.delete)
+router.get("/restore/:id", userController.restore)
 
 module.exports = router;

@@ -213,27 +213,65 @@ const controller = {
       res.status(404).json(error.message);
     }
   },
-  //filter: async function (req, res) {
-  //  try {
-  //    const { amount } = req.body;
-  //    if (amount != null) {
-  //      const filtered = await db.Product.findAll({
-  //        where: {
-  //          price: amount,
-  //        },
-  //      });
-  //      filtered.length > 0
-  //        ? res.status(200).json(filtered)
-  //        : res
-  //            .status(400)
-  //            .json({
-  //              message: `There isn't any product with that price, apprently. `,
-  //            });
-  //    }
-  //  } catch (error) {
-  //    res.status(400).json(error.message);
-  //  }
-  //},
+  filterByCategory: async function(req, res){
+    try {
+      const {categoryValue} = req.query;
+
+      if(categoryValue){
+        const searching = await db.Product.findAll({
+          include:[
+            {model: db.Commerce},
+            {model: db.Category, where: {
+              name: categoryValue
+            }}
+          ]
+        })
+
+        searching.length > 0 ? res.status(200).json(searching) : res.status(404).json({message: 'There was no results about this search.'}) 
+      }
+    } catch (error) {
+      res.status(500).json(error.message)
+    }
+  },
+  filter: async function (req, res) {
+    try {
+      const { amount } = req.body;
+      const {order}= req.query;
+      let theFilter;
+      if (amount != null) {
+        if(order!= null){
+          if(order == 'lesser'){
+            theFilter= await db.Product.findAll({
+              where:{
+                price: {[Op.lte]: amount}
+              }
+            })
+          } else if (order== 'greater') {
+            theFilter = await db.Product.findAll({
+              where:{
+                price:{[Op.gte]: amount}
+              }
+            })
+          }
+        }
+        theFilter = await db.Product.findAll({
+          where: {
+            price: amount,
+          },
+        });
+
+        theFilter.length > 0
+          ? res.status(200).json(filtered)
+          : res
+              .status(400)
+              .json({
+                message: `There isn't any product with that price, apprently. `,
+              });
+      }
+    } catch (error) {
+      res.status(400).json(error.message);
+    }
+  },
 };
 
 module.exports = controller;

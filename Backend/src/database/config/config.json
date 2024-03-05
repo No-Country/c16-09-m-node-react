@@ -1,23 +1,23 @@
 {
   "development": {
     "username": "root",
-    "password": "nico3103",
+    "password": null,
     "database": "data_base_V1",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
   "test": {
     "username": "root",
-    "password": "nico3103",
+    "password": null,
     "database": "data_base_V1",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
   "production": {
     "username": "root",
-    "password": "nico3103",
-    "database": "data_base_V1",
-    "host": "127.0.0.1",
+    "password": "2cbC612ggaCd1a53EaG5hC15bcfeh4bd",
+    "database": "railway",
+    "host": "roundhouse.proxy.rlwy.net",
     "dialect": "mysql"
   }
 }
