@@ -7,6 +7,7 @@ import CommerceRegister from "./components/CommerceRegister";
 import AdminPanel from "./components/AdminPanel";
 import "./App.css";
 import CommerceView from "./components/CommerceView";
+import AcercaDe from "./components/AcercaDe";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path='/registrousuario' element={<UserRegister />} />
           <Route path='/registrocomercio' element={<CommerceRegister />} />
           <Route path='/panelcontrol' element={<AdminPanel />} />
+          <Route path='/acercade' element={<AcercaDe />} />
         </Routes>
       </BrowserRouter>
     </div>

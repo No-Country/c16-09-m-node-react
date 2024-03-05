@@ -2,7 +2,7 @@ import React from "react";
 import "./Card.css";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import EditarProductos from "./EditarProductos";
+// import EditarProductos from "./EditarProductos";
 
 const CargarProdCom = ({ commerceId }) => {
   const url = "http://localhost:8000/products/List";
@@ -42,10 +42,10 @@ const CargarProdCom = ({ commerceId }) => {
 
   const handleEditarProducto = ({product}) => {
     console.log(product.id);
-    return(
+    // return(
 
-      <EditarProductos />
-    )
+    //   // <EditarProductos />
+    // )
   };
   const handleEliminarProducto = ({product}) => {
     
