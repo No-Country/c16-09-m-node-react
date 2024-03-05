@@ -154,4 +154,5 @@ router.get("/restore/:id", productController.restore);
 router.put("/update/:id", upload.single("image"), productController.update);
 router.post("/filterByLocation", productController.filterByLocation)
 router.get("/filterCategory", productController.filterByCategory)
+router.post("/filterPrice", productController.filter)
 module.exports = router;

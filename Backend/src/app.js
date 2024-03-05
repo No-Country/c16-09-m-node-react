@@ -69,9 +69,15 @@ server.use((err, req, res, next) => {
   console.error(err);
   res.status(status).send(message);
 });
+if(process.env.DEPLOYMENT_ON == 'YES'){
+  server.listen(process.env.DEPlOY_PORT || 8000, () => {
+    console.log(`Listening on port ${process.env.DEPlOY_PORT || 8000}`);
+  });  
+} else{
+  server.listen(process.env.PORT || 8000, () => {
+    console.log(`Listening on port ${process.env.PORT || 8000}`);
+  });
+}
 
-server.listen(process.env.PORT || 8000, () => {
-  console.log(`Listening on port ${process.env.PORT || 8000}`);
-});
 
 module.exports = server;
