@@ -26,6 +26,10 @@ Santiago Soto
 https://github.com/SH-ur
 https://www.linkedin.com/in/santiago-soto-43ab99260/
 
+Beatriz Londero
+https://github.com/beatrizlondero
+https://www.linkedin.com/in/beatriz-londero
+
 ---
 
 DB
