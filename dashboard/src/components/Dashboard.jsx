@@ -8,20 +8,18 @@ import NavBarSearch from "./NavBarSearch";
 function Dashboard() {
   return (
     <>
-      <h1 className='title'>encuentraprecio.com</h1>
+      <div className="header"></div>
+      <h1 className="title">encuentraprecio.com</h1>
       <LoginWelcome />
-      <h2>Las mejores ofertas están a solo un clic de distancia!</h2>
+      <div className="div-subtitulo">
+        <h2 className="subtitulo">
+          Las mejores ofertas están a solo un clic de distancia!
+        </h2>
+      </div>
       <header>
         <NavBarButtonsMain />
       </header>
-      <div className='dashboard'>
-        <div className='parrafo'>
-          <p>
-            Únete a nosotros en encuentraprecio.com para una revolución en las compras localizadas. Pequeños negocios,
-            grandes minoristas y compradores astutos se reúnen aquí, donde los productos son listados por todos, ¡y las
-            mejores ofertas están a solo un clic de distancia!
-          </p>
-        </div>
+      <div className="dashboard">
         <NavBarCategory />
 
         <NavBarSearch />
@@ -29,6 +27,11 @@ function Dashboard() {
 
       <ProductsOnSale />
       <ProductsRecent />
+      <footer>
+        <span>Proyecto No-Country</span>
+        <br />
+        <span>Marzo de 2024</span>
+      </footer>
     </>
   );
 }

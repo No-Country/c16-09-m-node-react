@@ -3,24 +3,7 @@ import React from "react";
 import "./Card.css";
 import axios from "axios";
 import { useEffect, useState } from "react";
-
-const Card = ({ image, name, description, commerce, location,price, province }) => {
-    return (
-      <div className="card" >
-        <img src={image} alt={name} className="card-image" />
-        <div className="card-content">
-          <h3 className="card-name">{name}</h3>
-          <p className="card-description">{description}</p>
-          <h3 className="card-name">Precio: {price}</h3>
-          <div className="card-details">
-            <label className="card-commerce-name">Comercio: {commerce}</label>
-            <label className="card-location">Localidad: {location}</label>
-            <label className="card-location">Provincia: {province}</label>
-          </div>
-        </div>
-      </div>
-    );
-  };
+import ProductCard from "./ProductCard";
 
 
 const FilterProducts = ({category}) => {
@@ -35,6 +18,7 @@ const FilterProducts = ({category}) => {
   }, []); // Fetch products only once on component mount
 
   useEffect(() => {
+        console.log(productsList);
        filterProducts(productsList);
   }, [category]); 
   
@@ -44,7 +28,7 @@ const FilterProducts = ({category}) => {
       .get(url)
       .then((response) => {
         setProductsList(response.data);
-        console.log(response.data);
+        // console.log(response.data);
         filterProducts(response.data);
       })
       .catch((error) => {
@@ -79,16 +63,8 @@ const FilterProducts = ({category}) => {
       { 
        (products) &&
         products.map((product) => (
-          <Card
-            key={product.name}
-            image={product.image}
-            name={product.name}
-            description={product.description}
-            commerce={product.Commerce.name}
-            location={product.Commerce.location}
-            province={product.Commerce.province}
-            price={product.price}
-          />
+            <ProductCard product={product}/>
+        
         ))}
     </div>
   );

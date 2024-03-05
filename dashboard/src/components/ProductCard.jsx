@@ -17,9 +17,11 @@ const ProductCard = ({ product }) => {
       <div className='product-details'>
         <h3 className='product-name'>{name}</h3>
         <p className='product-info'>Rubro: {categoryName}</p>
-        <p className='product-info'>Precio: ${price}</p>
-        <p className='product-info'>Comercio: {company}</p>
         <p className='product-info'>Descripcion: {description}</p>
+        <p className='product-info'>Precio: ${price}</p>
+        <p className='product-info'>Comercio: {product.Commerce.name}</p>
+        <p className='product-info'>Localidad: {product.Commerce.location}</p>
+        <p className='product-info'>Provincia: {product.Commerce.province}</p>
       </div>
     </div>
   );
