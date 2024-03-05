@@ -154,10 +154,7 @@ select {
   background-size: cover; 
   background-position: center center; 
   background-repeat: no-repeat;
-  /* background-;
-  background-image: url("../src/assets/images/imagesPages/shop-4527402_1280.jpg");
-  background-position: center center;
-  background-size: cover; */
+  
 }
 .form-group {
   display: flex;
@@ -192,6 +189,46 @@ header {
   display: flex;
   flex-direction: row;
   height: 15%;
+}
+span{
+  text-align: center;
+  font-size: 25px;
+}
+footer{
+  text-align: center;
+}
+.tx-footer{
+  text-align: center;
+}
+.div-footer{
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+}
+.imagen-footer{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  width: 80%;
+  height: 50%;
+  
+}
+.miembros{
+  grid-column: 2 / 4;
+  width: 50vw;
+  border: 2px white solid;
+  margin: 2%;
+  height: 90%;
+}
+.image{
+  grid-column: 1;
+  width: 40vw;
+  height: 90%;
+  margin: 2%;
+  border: 2px white solid;
+  background-position: center center;
+  background-image: url("../src/assets/images/imagesPages/shopping-venture-1269166_1280.jpg");
+  background-size: cover;
+
 }
 .dashboard {
   display: grid;
