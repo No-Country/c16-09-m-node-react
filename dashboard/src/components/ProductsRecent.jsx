@@ -1,27 +1,28 @@
+import { useEffect, useState } from "react";
 import ProductCard from "./ProductCard";
 import "./ProductsRecent.css";
-import { useEffect, useState } from "react";
 
-export default function ProductsOnSale() {
+export default function ProductsRecent() {
   const url = "http://localhost:8000/products/List";
 
-  const [productsOnSale, setproductsOnSale] = useState([]);
+  const [recentProducts, setRecentProducts] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       const response = await fetch(url);
       const result = await response.json();
-      const onSale = result.filter((product) => product.offers === true).slice(0, 6);
-      setproductsOnSale(onSale);
+      const recentAdd = result.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+      const showRecentAdd = recentAdd.slice(0, 6);
+      setRecentProducts(showRecentAdd);
     };
     fetchData();
   }, []);
 
   return (
     <div>
-      <h1>Productos en Oferta</h1>
+      <h1>Productos Recien agregados</h1>
       <div className='product-card-container'>
-        {productsOnSale.map((product) => {
+        {recentProducts.map((product) => {
           return (
             <div key={product.id} className='product-card'>
               <ProductCard product={product} />
