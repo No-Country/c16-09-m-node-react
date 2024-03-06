@@ -71,7 +71,7 @@ server.use((err, req, res, next) => {
 });
 if(process.env.DEPLOYMENT_ON == 'YES'){
   server.listen(process.env.DEPLOY_PORT || 8000, () => {
-    console.log(`Listening on port ${process.env.DEPlOY_PORT || 8000}`);
+    console.log(`Listening on port ${process.env.DEPLOY_PORT || 8000}`);
   });  
 } else{
   server.listen(process.env.PORT || 8000, () => {
