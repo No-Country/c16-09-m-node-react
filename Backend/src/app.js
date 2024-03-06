@@ -70,7 +70,7 @@ server.use((err, req, res, next) => {
   res.status(status).send(message);
 });
 if(process.env.DEPLOYMENT_ON == 'YES'){
-  server.listen(process.env.DEPlOY_PORT || 8000, () => {
+  server.listen(process.env.DEPLOY_PORT || 8000, () => {
     console.log(`Listening on port ${process.env.DEPlOY_PORT || 8000}`);
   });  
 } else{
