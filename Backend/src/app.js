@@ -4,9 +4,12 @@ const morgan = require("morgan");
 const cors = require("cors");
 const swaggerUi = require("swagger-ui-express");
 const swaggerJSDoc = require("swagger-jsdoc");
+const userRoutes = require("../routes/users");
+const commerceRoutes = require("../routes/commerce");
+const productsRoutes = require('../routes/products');
+const categoryRoutes = require('../routes/category')
 
 const server = express();
-
 server.use(express.urlencoded({ extended: true, limit: "50mb" }));
 server.use(express.json({ limit: "50mb" }));
 server.use(morgan("dev"));
@@ -23,10 +26,6 @@ server.use((req, res, next) => {
   next();
 });
 
-const userRoutes = require("./routes/users");
-const commerceRoutes = require("./routes/commerce");
-const productsRoutes = require('./routes/products');
-const categoryRoutes = require('./routes/category')
 
 server.use("/user", userRoutes);
 server.use("/commerce", commerceRoutes);
@@ -60,6 +59,7 @@ const swaggerOptions = {
     "./routes/products.js",
     "./controllers/productController.js",
     "./routes/category.js",
+    "./handlingRoutes/index"
   ],
 };
 const swaggerSpec = swaggerJSDoc(swaggerOptions);
@@ -73,8 +73,8 @@ server.use((err, req, res, next) => {
   res.status(status).send(message);
 });
 if(process.env.DEPLOYMENT_ON == 'YES'){
-  server.listen(process.env.DEPLOY_PORT || 8000, () => {
-    console.log(`Listening on port ${process.env.DEPLOY_PORT || 8000}`);
+  server.listen(process.env.MYSQLPORT || 8000, () => {
+    console.log(`Listening on port ${process.env.MYSQLPORT || 8000}`);
   });  
 } else{
   server.listen(process.env.PORT || 8000, () => {
