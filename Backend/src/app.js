@@ -7,7 +7,6 @@ const swaggerJSDoc = require("swagger-jsdoc");
 const routes = require('./handlingRoutes/index')
 
 const server = express();
-// comentario
 server.use(express.urlencoded({ extended: true, limit: "50mb" }));
 server.use(express.json({ limit: "50mb" }));
 server.use(morgan("dev"));
