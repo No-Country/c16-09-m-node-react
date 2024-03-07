@@ -4,10 +4,10 @@ const morgan = require("morgan");
 const cors = require("cors");
 const swaggerUi = require("swagger-ui-express");
 const swaggerJSDoc = require("swagger-jsdoc");
-const userRoutes = require("../routes/users");
-const commerceRoutes = require("../routes/commerce");
-const productsRoutes = require('../routes/products');
-const categoryRoutes = require('../routes/category')
+const userRoutes = require("./routes/users");
+const commerceRoutes = require("./routes/commerce");
+const productsRoutes = require('./routes/products');
+const categoryRoutes = require('./routes/category')
 
 const server = express();
 server.use(express.urlencoded({ extended: true, limit: "50mb" }));
