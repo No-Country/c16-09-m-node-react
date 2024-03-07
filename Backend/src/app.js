@@ -47,6 +47,10 @@ const swaggerOptions = {
         url: "http://localhost:8000/",
         description: "Servidor de desarrollo",
       },
+      {
+        url: "https://encuentratuprecio.onrender.com/",
+        description: "Servidor de Despliegue"
+      }
     ],
   },
   apis: [
