@@ -3,7 +3,7 @@
     "username": "root",
     "password": "SQLrules!",
     "database": "data_base_V1",
-    "host": "localhost",
+    "host": "0.0.0.0",
     "dialect": "mysql"
   },
   "test": {
