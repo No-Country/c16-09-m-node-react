@@ -32,6 +32,9 @@ server.use("/user", userRoutes);
 server.use("/commerce", commerceRoutes);
 server.use("/products", productsRoutes);
 server.use("/category", categoryRoutes);
+server.use("/", async(req, res)=>{
+  res.send("Hola el server está levantado!!!")
+})
 
 // Configurar Swagger
 const swaggerOptions = {
