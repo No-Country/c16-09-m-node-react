@@ -4,10 +4,12 @@ const morgan = require("morgan");
 const cors = require("cors");
 const swaggerUi = require("swagger-ui-express");
 const swaggerJSDoc = require("swagger-jsdoc");
-const routes = require('./handlingRoutes/index')
+const userRoutes = require("./routes/users");
+const commerceRoutes = require("./routes/commerce");
+const productsRoutes = require('./routes/products');
+const categoryRoutes = require('./routes/category')
 
 const server = express();
-
 server.use(express.urlencoded({ extended: true, limit: "50mb" }));
 server.use(express.json({ limit: "50mb" }));
 server.use(morgan("dev"));
@@ -25,7 +27,13 @@ server.use((req, res, next) => {
 });
 
 
-server.use('/', routes);
+server.use("/user", userRoutes);
+server.use("/commerce", commerceRoutes);
+server.use("/products", productsRoutes);
+server.use("/category", categoryRoutes);
+server.use("/", async(req, res)=>{
+  res.send("Hola el server está levantado!!!")
+})
 
 // Configurar Swagger
 const swaggerOptions = {
@@ -73,6 +81,7 @@ if(process.env.DEPLOYMENT_ON == 'YES'){
     console.log(`Listening on port ${process.env.MYSQLPORT || 8000}`);
   });  
 } else{
+  console.log("hola estamos en el port " + process.env.PORT)
   server.listen(process.env.PORT || 8000, () => {
     console.log(`Listening on port ${process.env.PORT || 8000}`);
   });
