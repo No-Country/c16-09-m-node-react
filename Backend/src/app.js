@@ -9,7 +9,7 @@ const routes = require('./handlingRoutes/index')
 //const commerceRoutes = require("./routes/commerce");
 //const productsRoutes = require('./routes/products');
 //const categoryRoutes = require('./routes/category')
-
+require('./database/models/index')
 const server = express();
 server.use(express.urlencoded({ extended: true, limit: "50mb" }));
 server.use(express.json({ limit: "50mb" }));
