@@ -4,10 +4,11 @@ const morgan = require("morgan");
 const cors = require("cors");
 const swaggerUi = require("swagger-ui-express");
 const swaggerJSDoc = require("swagger-jsdoc");
-const userRoutes = require("./routes/users");
-const commerceRoutes = require("./routes/commerce");
-const productsRoutes = require('./routes/products');
-const categoryRoutes = require('./routes/category')
+const routes = require('./handlingRoutes/index')
+//const userRoutes = require("./routes/users");
+//const commerceRoutes = require("./routes/commerce");
+//const productsRoutes = require('./routes/products');
+//const categoryRoutes = require('./routes/category')
 
 const server = express();
 server.use(express.urlencoded({ extended: true, limit: "50mb" }));
@@ -17,7 +18,7 @@ server.use(cors());
 
 server.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Origin", "https://encuentratuprecio.onrender.com/products/List");
+  res.header("Access-Control-Allow-Origin", "https://encuentratuprecio.onrender.com/");
   res.header("Access-Control-Allow-Credentials", "true");
   res.header(
     "Access-Control-Allow-Headers",
@@ -28,12 +29,14 @@ server.use((req, res, next) => {
 });
 
 
-server.use("/user", userRoutes);
-server.use("/commerce", commerceRoutes);
-server.use("/products", productsRoutes);
-server.use("/category", categoryRoutes);
-server.use("/", async(req, res)=>{
-  res.send("Hola el server está levantado!!!")
+//server.use("/user", userRoutes);
+//server.use("/commerce", commerceRoutes);
+//server.use("/products", productsRoutes);
+//server.use("/category", categoryRoutes);
+
+server.use("/", routes)
+server.use("*", async(req, res)=>{
+  res.status(404).json({error: 'Esto no entra a ningún lado!'})
 })
 
 // Configurar Swagger
