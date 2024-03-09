@@ -17,6 +17,7 @@ server.use(cors());
 
 server.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Origin", "https://encuentratuprecio.onrender.com/");
   res.header("Access-Control-Allow-Credentials", "true");
   res.header(
     "Access-Control-Allow-Headers",
@@ -49,6 +50,10 @@ const swaggerOptions = {
         url: "http://localhost:8000/",
         description: "Servidor de desarrollo",
       },
+      {
+        url: "https://encuentratuprecio.onrender.com/",
+        description: "Servidor de Despliegue"
+      }
     ],
   },
   apis: [
