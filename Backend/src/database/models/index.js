@@ -16,7 +16,7 @@ if (config.use_env_variable) {
   sequelize = new Sequelize(process.env[config.use_env_variable], config);
 } else if(env == 'production'){
   console.log('We are using the production url from Railway')
-  sequelize = new Sequelize(`${process.env.MYSQL_PRIVATE_URL}`);
+  sequelize = new Sequelize(`${process.env.MYSQL_URL}`);
 } else {
   console.log('You are using the regular method with the information of config.js')
   sequelize = new Sequelize(config.database, config.username, config.password, config)
