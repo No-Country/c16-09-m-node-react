@@ -1,7 +1,7 @@
 const server = require("./src/app");
 const db = require("./src/database/models/index");
 
-db.sequelize.sync().then(() => {
+db.sequelize.sync({ alter: true }).then(() => {
   if (process.env.DEPLOYMENT_ON == "YES") {
     server.listen(process.env.MYSQLPORT || 8000, () => {
       console.log(`Listening on port ${process.env.MYSQLPORT || 8000}`);
